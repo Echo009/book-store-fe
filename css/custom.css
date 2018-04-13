@@ -302,18 +302,12 @@ pre {
 }
 
 
-/*todo*/
-
 /*模态框背景*/
 .swal-overlay {
     background-color: rgba(43, 165, 137, 0.45);
 }
-/*模态框*/
-.swal-modal {
-    width: 300px;
-    height: 200px;
-    border: 3px solid white;
-}
+
+
 /*模态框正文*/
 .swal-text {
     font-size: medium;
@@ -322,4 +316,12 @@ pre {
     margin: auto;
     text-align: center;
     color: #1b1e21;
+}
+/*模态框*/
+@media screen and (max-width: 780px) {
+    .swal-modal {
+        width: 300px;
+        height: 200px;
+        border: 3px solid white;
+    }
 }
