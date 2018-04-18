@@ -13,13 +13,21 @@ function simpleSuccessInfo(content) {
     });
     return true;
 }
-
 function simpleErrorInfo(content) {
     swal({
         icon:"error",
         text:content,
         button:false,
         timer:500,
+    });
+    return true;
+}
+function simpleWarningInfo(content) {
+    swal({
+        icon:"warning",
+        text:content,
+        button:false,
+        timer:1000,
     });
     return true;
 }

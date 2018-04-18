@@ -20,8 +20,8 @@
     <!--todo modify-->
     <link rel="stylesheet" href="../css/custom.css">
     <script src="../js/common.js"></script>
+    <script src="../js/animation.js"></script>
     <style>
-
         body {
             background-image: url("../img/background/book.jpg");
             background-size: cover;
@@ -39,43 +39,43 @@
             <p>欢迎来到 Lan-store <a href=""></a></p>
         </div>
 
-        <div class="form-group  ">
+        <div class="form-group  mb-2">
             <label class="form-control-label" for="username">昵称</label>
             <!-- is-valid   is-invalid -->
             <input type="text" class="form-control " id="username" onkeyup="checkUserName()">
             <div class="valid-feedback">恭喜，您可以使用该昵称 ~</div>
             <div class="invalid-feedback">对不起，该昵称已经被使用 QAQ ~</div>
         </div>
-        <div class="form-group ">
+        <div class="form-group mb-2">
             <label class="form-control-label" for="phone">手机号码</label>
             <!-- is-valid   is-invalid -->
             <input type="number" class="form-control " id="phone" onblur="checkPhone()">
             <div class="valid-feedback ">当前手机号可以使用 ~</div>
             <div id="phoneTip" class="invalid-feedback "></div>
         </div>
-        <div class="form-group">
-            <label for="email">Email address</label>
+        <div class="form-group mb-2">
+            <label for="email">邮箱地址</label>
             <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
             <small id="emailHelp" class="form-text text-muted">请放心填写，我们不会向任何人泄露您的邮箱信息 ~</small>
         </div>
-        <div class="form-group ">
+        <div class="form-group mb-2">
             <label class="form-control-label" for="password">密码 </label>
             <input type="password" class="form-control " id="password" onkeyup="checkPassword()">
             <div class="invalid-feedback ">密码长度要大于8位哦~~</div>
         </div>
-        <div class="form-group ">
+        <div class="form-group mb-2">
             <label class="form-control-label" for="password-repeat">请再次输入密码 </label>
             <input type="password" class="form-control " id="password-repeat">
             <div class="invalid-feedback ">两次输入的密码不一致，请重新输入哦~</div>
         </div>
         <a style="cursor: pointer" class="float-right btn-link" onclick="showSigninPanel()">登录>></a>
-        <div  class="btn btn-lg btn-primary clearfix btn-block mt-5"  onclick="register()">注册</div>
+        <div class="btn btn-lg btn-primary clearfix btn-block mt-5" onclick="register()">注册</div>
         <p class="mt-5 mb-3 text-muted text-center">&copy; 2018 Lan-store &nbsp;
             Power by <a href="http://lan.echo0.cn "> lan.echo0.cn </a>
         </p>
     </form>
     <!--signin-panel-->
-    <form id="signin-panel" class="form-signin rounded" >
+    <form id="signin-panel" class="form-signin rounded">
         <div class="text-center mb-4">
 
             <h4 class=" mb-3 font-weight-normal">喵 ，ο(=•ω＜=)ρ⌒☆</h4>
@@ -132,20 +132,32 @@
 
     var $registerPanel = $("#register-panel");
     var $signinPanel = $("#signin-panel");
+    // init
+    $(function () {
+        var option = window.location.hash;
+        if (option.length == 0) {
+            return ;
+        }else if(option.charAt(1) == 1) {
+            showSigninPanel();
+        }else {
+            showRegisterPanel();
+        }
+    });
 
     function showRegisterPanel() {
         $signinPanel.fadeOut(500);
         setTimeout(function () {
-            $registerPanel.fadeToggle(500);
-        },500);
+            $registerPanel.fadeIn(500);
+        }, 500);
     };
 
     function showSigninPanel() {
         $registerPanel.fadeOut(500);
         setTimeout(function () {
             $signinPanel.slideDown(500);
-        },500);
+        }, 500);
     };
+
     function login() {
         var username = $("#uname").val();
         var password = $("#upassword").val();
@@ -185,21 +197,25 @@
                             success: function (data, status, xhr) {
                                 if (data.code == 0) {
                                     // is valid
-                                    $("#password").removeClass("is-invalid");
+                                    $("#upassword").removeClass("is-invalid");
 //                                    todo
                                     simpleSuccessInfo("登录成功");
 
+                                } else if (data.code == 113) {
+                                    // 重复登录
+                                    simpleWarningInfo("请注销后再尝试登录当前账号 ！");
+//                                    todo jump to main page
                                 } else {
-                                    $("#password").addClass("is-invalid");
-                                    $("#password").focus();
+                                    $("#upassword").addClass("is-invalid");
+                                    $("#upassword").focus();
                                     return;
                                 }
                             }
                         })
 
                     } else {
-                        $("#username").addClass("is-invalid");
-                        $("#username").focus();
+                        $("#uname").addClass("is-invalid");
+                        $("#uname").focus();
                         return;
                     }
                 }
@@ -239,19 +255,25 @@
                             success: function (data, status, xhr) {
                                 if (data.code == 0) {
                                     // is valid
-                                    $("#password").removeClass("is-invalid");
+                                    $("#upassword").removeClass("is-invalid");
+//                                    todo
                                     simpleSuccessInfo("登录成功");
+
+                                } else if (data.code == 113) {
+                                    // 重复登录
+                                    simpleWarningInfo("请注销后再尝试登录当前账号 ！");
+//                                    todo jump to main page
                                 } else {
-                                    $("#password").addClass("is-invalid");
-                                    $("#password").focus();
+                                    $("#upassword").addClass("is-invalid");
+                                    $("#upassword").focus();
                                     return;
                                 }
                             }
                         })
 
                     } else {
-                        $("#username").addClass("is-invalid");
-                        $("#username").focus();
+                        $("#uname").addClass("is-invalid");
+                        $("#uname").focus();
                         return;
                     }
                 }
@@ -318,20 +340,21 @@
                     }
                 }
             })
-        }else {
+        } else {
             $("#phone").removeClass("is-valid");
             $("#phoneTip").text("请输入正确的手机号码哦~");
             $("#phone").addClass("is-invalid");
             $("#phone").focus();
         }
     };
+
     function checkPassword() {
         var password = $("#password").val();
-        if (password.length<8) {
+        if (password.length < 8) {
             $("#password").addClass("is-invalid");
             $("#password").focus();
             return false;
-        }else {
+        } else {
             $("#password").removeClass("is-invalid");
             return true;
         }
@@ -352,7 +375,7 @@
                 $("#password-repeat").addClass("is-invalid");
                 $("#password-repeat").focus();
                 return false;
-            }else {
+            } else {
                 $("#password-repeat").removeClass("is-invalid");
             }
             var userName = $("#username").val();
@@ -381,7 +404,7 @@
                         simpleSuccessInfo("注册成功");
                         setTimeout(function () {
                             showSigninPanel();
-                        },500);
+                        }, 500);
                     }
                     else {
                         simpleErrorInfo(data.desc);
