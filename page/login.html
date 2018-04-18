@@ -31,7 +31,51 @@
 <body>
 
 <div class="container">
-    <form class="form-signin rounded" id="signin-panel">
+    <!--register-panel-->
+    <form id="register-panel" class="form-register rounded " style="display: none">
+        <div class="text-center mb-4">
+
+            <h4 class=" mb-3 font-weight-normal">喵 ，ο(=•ω＜=)ρ⌒☆</h4>
+            <p>欢迎来到 Lan-store <a href=""></a></p>
+        </div>
+
+        <div class="form-group  ">
+            <label class="form-control-label" for="username">昵称</label>
+            <!-- is-valid   is-invalid -->
+            <input type="text" class="form-control " id="username" onkeyup="checkUserName()">
+            <div class="valid-feedback">恭喜，您可以使用该昵称 ~</div>
+            <div class="invalid-feedback">对不起，该昵称已经被使用 QAQ ~</div>
+        </div>
+        <div class="form-group ">
+            <label class="form-control-label" for="phone">手机号码</label>
+            <!-- is-valid   is-invalid -->
+            <input type="number" class="form-control " id="phone" onblur="checkPhone()">
+            <div class="valid-feedback ">当前手机号可以使用 ~</div>
+            <div id="phoneTip" class="invalid-feedback "></div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+            <small id="emailHelp" class="form-text text-muted">请放心填写，我们不会向任何人泄露您的邮箱信息 ~</small>
+        </div>
+        <div class="form-group ">
+            <label class="form-control-label" for="password">密码 </label>
+            <input type="password" class="form-control " id="password" onkeyup="checkPassword()">
+            <div class="invalid-feedback ">密码长度要大于8位哦~~</div>
+        </div>
+        <div class="form-group ">
+            <label class="form-control-label" for="password-repeat">请再次输入密码 </label>
+            <input type="password" class="form-control " id="password-repeat">
+            <div class="invalid-feedback ">两次输入的密码不一致，请重新输入哦~</div>
+        </div>
+        <a style="cursor: pointer" class="float-right btn-link" onclick="showSigninPanel()">登录>></a>
+        <div  class="btn btn-lg btn-primary clearfix btn-block mt-5"  onclick="register()">注册</div>
+        <p class="mt-5 mb-3 text-muted text-center">&copy; 2018 Lan-store &nbsp;
+            Power by <a href="http://lan.echo0.cn "> lan.echo0.cn </a>
+        </p>
+    </form>
+    <!--signin-panel-->
+    <form id="signin-panel" class="form-signin rounded" >
         <div class="text-center mb-4">
 
             <h4 class=" mb-3 font-weight-normal">喵 ，ο(=•ω＜=)ρ⌒☆</h4>
@@ -39,14 +83,14 @@
         </div>
 
         <div class="form-label-group">
-            <input type="text" id="username" class="form-control " placeholder="手机号 or 用户名" required autofocus>
-            <label for="username"> 手机号 or 昵称 ~</label>
+            <input type="text" id="uname" class="form-control " placeholder="手机号 or 用户名" required autofocus>
+            <label for="uname"> 手机号 or 昵称 ~</label>
             <div class="invalid-feedback">该昵称或手机号码不存在 QAQ ~</div>
         </div>
 
         <div class="form-label-group">
-            <input type="password" id="password" class="form-control" placeholder="Password" required>
-            <label for="password"> 您的密码 ~ </label>
+            <input type="password" id="upassword" class="form-control" placeholder="Password" required>
+            <label for="upassword"> 您的密码 ~ </label>
             <div class="invalid-feedback">密码错误 ， QAQ ~</div>
         </div>
 
@@ -55,7 +99,7 @@
                 <input type="checkbox" value="remember-me"> 记住密码
             </label>
         </div>
-        <a href="./register.html" class="float-right">注册>></a>
+        <a style="cursor: pointer" class="float-right btn-link" onclick="showRegisterPanel()">注册>></a>
 
         <div class="btn btn-lg btn-primary clearfix w-100  text-center" onclick="login()">登录</div>
         <p class="mt-5 mb-3 text-muted text-center">&copy; 2018 Lan-store &nbsp;
@@ -85,9 +129,26 @@
 
 </body>
 <script>
+
+    var $registerPanel = $("#register-panel");
+    var $signinPanel = $("#signin-panel");
+
+    function showRegisterPanel() {
+        $signinPanel.fadeOut(500);
+        setTimeout(function () {
+            $registerPanel.fadeToggle(500);
+        },500);
+    };
+
+    function showSigninPanel() {
+        $registerPanel.fadeOut(500);
+        setTimeout(function () {
+            $signinPanel.slideDown(500);
+        },500);
+    };
     function login() {
-        var username = $("#username").val();
-        var password = $("#password").val();
+        var username = $("#uname").val();
+        var password = $("#upassword").val();
         // use phone?
         var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
         if (myreg.test(username)) {
@@ -196,8 +257,140 @@
                 }
 
             });
-
         }
     };
+
+    // 校验用户名
+    function checkUserName() {
+        var userName = $("#username").val();
+        $.ajax("http://localhost/book-store/userInfo/checkUserName", {
+            //提交数据的类型 POST GET
+            type: "POST",
+            async: true,
+            data: {
+                userName: userName
+            },
+            crossDomain: true,
+            datatype: "json",
+            // 携带认证信息 如cookie
+            xhrFields: {withCredentials: true},
+            //成功返回之后调用的函数
+            success: function (data, status, xhr) {
+                if (data.code != 1) {
+                    // has exist
+                    $("#username").removeClass("is-valid");
+                    $("#username").addClass("is-invalid");
+                } else {
+                    $("#username").removeClass("is-invalid");
+                    $("#username").addClass("is-valid");
+                }
+            }
+        })
+    };
+
+    // 校验手机号码
+    function checkPhone() {
+        var phone = $("#phone").val();
+        var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+        if (myreg.test(phone)) {
+            $.ajax("http://localhost/book-store/userInfo/checkUserPhone", {
+                //提交数据的类型 POST GET
+                type: "POST",
+                async: true,
+                data: {
+                    phone: phone
+                },
+                crossDomain: true,
+                datatype: "json",
+                // 携带认证信息 如cookie
+                xhrFields: {withCredentials: true},
+                //成功返回之后调用的函数
+                success: function (data, status, xhr) {
+                    if (data.code != 1) {
+                        // has exist
+                        $("#phone").removeClass("is-valid");
+                        $("#phoneTip").text("对不起，该手机号已经被使用，请更换~");
+                        $("#phone").addClass("is-invalid");
+                        $("#phone").focus();
+                    } else {
+                        $("#phone").removeClass("is-invalid");
+                        $("#phone").addClass("is-valid");
+                    }
+                }
+            })
+        }else {
+            $("#phone").removeClass("is-valid");
+            $("#phoneTip").text("请输入正确的手机号码哦~");
+            $("#phone").addClass("is-invalid");
+            $("#phone").focus();
+        }
+    };
+    function checkPassword() {
+        var password = $("#password").val();
+        if (password.length<8) {
+            $("#password").addClass("is-invalid");
+            $("#password").focus();
+            return false;
+        }else {
+            $("#password").removeClass("is-invalid");
+            return true;
+        }
+
+    }
+
+    function register() {
+        if ($("#username").hasClass("is-invalid")) {
+            $("#username").focus();
+        }
+        else if ($("#phone").hasClass("is-invalid")) {
+            $("#phone").focus();
+        } else {
+
+            var password1 = $("#password").val();
+            var password2 = $("#password-repeat").val();
+            if (password1 != password2) {
+                $("#password-repeat").addClass("is-invalid");
+                $("#password-repeat").focus();
+                return false;
+            }else {
+                $("#password-repeat").removeClass("is-invalid");
+            }
+            var userName = $("#username").val();
+            var phone = $("#phone").val();
+            var email = $("#email").val();
+
+            $.ajax("http://localhost/book-store/common/register", {
+                //提交数据的类型 POST GET
+                type: "POST",
+                async: true,
+                data: {
+                    userName: userName,
+                    phone: phone,
+                    password: password2,
+                    email: email
+                },
+                crossDomain: true,
+                datatype: "json",
+                // 携带认证信息 如cookie
+                xhrFields: {withCredentials: true},
+                //成功返回之后调用的函数
+                success: function (data, status, xhr) {
+
+                    if (data.code == 0) {
+                        // success
+                        simpleSuccessInfo("注册成功");
+                        setTimeout(function () {
+                            showSigninPanel();
+                        },500);
+                    }
+                    else {
+                        simpleErrorInfo(data.desc);
+                    }
+
+                }
+            })
+        }
+        return false;
+    }
 </script>
 </html>

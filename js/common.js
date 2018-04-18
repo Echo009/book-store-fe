@@ -9,7 +9,17 @@ function simpleSuccessInfo(content) {
         icon:"success",
         text:content,
         button:false,
-        timer:1000,
+        timer:500,
+    });
+    return true;
+}
+
+function simpleErrorInfo(content) {
+    swal({
+        icon:"error",
+        text:content,
+        button:false,
+        timer:500,
     });
     return true;
 }
