@@ -300,3 +300,26 @@ pre {
     border: 1px solid #78C2A0;
     text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
 }
+
+
+/*todo*/
+
+/*模态框背景*/
+.swal-overlay {
+    background-color: rgba(43, 165, 137, 0.45);
+}
+/*模态框*/
+.swal-modal {
+    width: 300px;
+    height: 200px;
+    border: 3px solid white;
+}
+/*模态框正文*/
+.swal-text {
+    font-size: medium;
+    padding: auto;
+    display: block;
+    margin: auto;
+    text-align: center;
+    color: #1b1e21;
+}

@@ -136,10 +136,10 @@
     $(function () {
         var option = window.location.hash;
         if (option.length == 0) {
-            return ;
-        }else if(option.charAt(1) == 1) {
+            return;
+        } else if (option.charAt(1) == 1) {
             showSigninPanel();
-        }else {
+        } else {
             showRegisterPanel();
         }
     });
@@ -367,6 +367,8 @@
         }
         else if ($("#phone").hasClass("is-invalid")) {
             $("#phone").focus();
+        } else if ($("#password").hasClass("is-invalid")) {
+            $("#password").focus();
         } else {
 
             var password1 = $("#password").val();
@@ -405,6 +407,7 @@
                         setTimeout(function () {
                             showSigninPanel();
                         }, 500);
+                        return true;
                     }
                     else {
                         simpleErrorInfo(data.desc);
