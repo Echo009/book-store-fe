@@ -31,10 +31,11 @@
 <body>
 
 <div class="container">
+    <img src="../img/header/ll.jpg"
+         style="z-index:-1; position:fixed ; width: 150px; height: 200px; border-radius: 50px ; right: 10% ; top: 10% ; opacity: 0.6;">
     <!--register-panel-->
     <form id="register-panel" class="form-register rounded " style="display: none">
         <div class="text-center mb-4">
-
             <h4 class=" mb-3 font-weight-normal">喵 ，ο(=•ω＜=)ρ⌒☆</h4>
             <p>欢迎来到 Lan-store <a href=""></a></p>
         </div>
@@ -106,25 +107,6 @@
             Power by <a href="http://lan.echo0.cn "> lan.echo0.cn </a>
         </p>
     </form>
-    <div class="modal" id="modal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Modal body text goes here.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 </body>
@@ -167,7 +149,7 @@
             $.ajax("http://localhost/book-store/userInfo/checkUserPhone", {
                 //提交数据的类型 POST GET
                 type: "POST",
-                async: false,
+                async: true,
                 data: {
                     phone: username
                 },
@@ -184,7 +166,7 @@
                         $.ajax("http://localhost/book-store/common/login", {
                             //提交数据的类型 POST GET
                             type: "POST",
-                            async: false,
+                            async: true,
                             data: {
                                 phone: username,
                                 password: password
@@ -225,7 +207,7 @@
             $.ajax("http://localhost/book-store/userInfo/checkUserName", {
                 //提交数据的类型 POST GET
                 type: "POST",
-                async: false,
+                async: true,
                 data: {
                     userName: username
                 },
