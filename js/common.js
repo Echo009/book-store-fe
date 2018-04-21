@@ -37,3 +37,16 @@ var instance = axios.create({
     timeout: 500,
     withCredentials:true
 });
+function logout() {
+    instance.get('/common/logout')
+        .then(function (response) {
+            console.log(response);
+            simpleSuccessInfo("注销成功 ！")
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    store.remove(CURRENT_USER);
+    //refresh page
+    setTimeout("window.location.href='index.html'",MIDDLE_DELAY);
+}

@@ -330,3 +330,28 @@ pre {
     width: 32px;
     height: 27px;
 }
+.icon{
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right:0.5rem;
+}
+
+
+/*卖家模块*/
+.seller-module {
+
+}
+/*买家模块*/
+
+.buyer-module{
+
+}
+/*变更面板链接*/
+.panel-link{
+
+}
+/*大头像*/
+.head-img-l{
+    width: 6rem;
+    height: 6rem;
+}
