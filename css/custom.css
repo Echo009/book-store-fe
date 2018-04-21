@@ -325,3 +325,8 @@ pre {
         border: 3px solid white;
     }
 }
+
+.btn-img{
+    width: 32px;
+    height: 27px;
+}

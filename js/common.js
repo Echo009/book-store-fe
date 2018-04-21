@@ -3,13 +3,13 @@
  * Email  : ech0.extreme@foxmail.com
  * Time   : 04/18/2018 08:59 AM
  */
-// it depends on jQuery , sweetalert.js
+// it depends on jQuery , sweetalert.js , axios.js
 function simpleSuccessInfo(content) {
     swal({
         icon:"success",
         text:content,
         button:false,
-        timer:500,
+        timer:MIDDLE_DELAY,
     });
     return true;
 }
@@ -18,7 +18,7 @@ function simpleErrorInfo(content) {
         icon:"error",
         text:content,
         button:false,
-        timer:500,
+        timer:MIDDLE_DELAY,
     });
     return true;
 }
@@ -27,7 +27,13 @@ function simpleWarningInfo(content) {
         icon:"warning",
         text:content,
         button:false,
-        timer:1000,
+        timer:LONG_DELAY,
     });
     return true;
 }
+// xhr config
+var instance = axios.create({
+    baseURL: 'http://localhost/book-store/',
+    timeout: 500,
+    withCredentials:true
+});
