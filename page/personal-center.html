@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+* Author : Ech0
+* Email  : ech0.extreme@foxmail.com
+* Time   : 04/22/2018 12:55 AM
+*-->
+    <meta charset="UTF-8">
+    <title>L-Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--lib-->
+    <script src="../lib/jquery/jquery.js"></script>
+    <link rel="stylesheet" href="../lib/bootstrap/bootstrap.css">
+    <script src="../lib/bootstrap/popper.js"></script>
+    <script src="../lib/bootstrap/bootstrap.js"></script>
+    <!--sweetalert-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.bootcss.com/store.js/1.3.20/store.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.18.0/axios.js"></script>
+    <script src="../js/constant.js"></script>
+    <script src="../js/common.js"></script>
+    <!--todo modify-->
+    <link rel="stylesheet" href="../css/custom.css">
+</head>
+<body>
+<div class="container">
+
+    <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary ">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">L-store</a>
+            <!--菜单按钮-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="" navbarResponsive aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!--菜单-->
+            <div class="collapse navbar-collapse text-center" id="navbarResponsive">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">帮助</a>
+                    </li>
+                    <!--分类下拉框-->
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download">所有分类 <span
+                                class="caret"></span></a>
+                        <div class="dropdown-menu " aria-labelledby="download">
+                            <!--fixed category -->
+                            <a class="dropdown-item" href="#">小说</a>
+                            <a class="dropdown-item" href="#">文学</a>
+                            <a class="dropdown-item" href="#">艺术</a>
+                            <a class="dropdown-item" href="#">卡通</a>
+                            <a class="dropdown-item" href="#">教育</a>
+                            <a class="dropdown-item" href="#">科学</a>
+                            <a class="dropdown-item" href="#">历史</a>
+                            <a class="dropdown-item" href="#">科技</a>
+                        </div>
+                    </li>
+                    <li class="nav-item ml-3 text-center">
+                        <!--搜索框-->
+                        <form class="form-inline mt-2 mt-md-0 ">
+                            <input class="form-control mr-sm-2" type="text" placeholder="">
+                            <input type="button" class="btn btn-secondary  my-2 my-sm-0" value="搜索"></input>
+                        </form>
+                    </li>
+
+                </ul>
+                <div id="login-links" class="text-center">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="./login.html#1" target="_top">登录</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./login.html#2" target="_top">注册</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--已经登录-->
+                <div id="personal-links" class="d-none text-center">
+                    <div class="nav navbar-nav mr-auto ">
+                        <div class="nav-item mr-3">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="button" class="panel-link btn btn-primary"
+                                        onclick="window.location.href='#cart-info'">购物车
+                                </button>
+                                <button type="button" class="panel-link btn btn-primary"
+                                        onclick="window.location.href='#personal-info'">个人中心
+                                </button>
+                                <div class="btn-group" role="group">
+                                    <button id="btnGroupDrop2" type="button" class="btn btn-success dropdown-toggle"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop2">
+                                        <a class="dropdown-item" href="#">我的订单</a>
+                                        <a class="dropdown-item" href="#">商品收藏</a>
+                                        <a class="dropdown-item" href="#">店铺收藏</a>
+                                        <a class="dropdown-item" href="#">个人信息</a>
+                                        <a class="dropdown-item" href="#">地址管理</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-link btn" onclick="logout()">退出</div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 pt-2   text-center ">
+
+            <div class="card mb-3 ">
+                <h3 id="ranking-list" class="card-header ranking-title pb-1 pt-1">
+                    <img class="icon mb-1" src="../img/common/personal-center.png">
+                    我的Lan-Store
+                </h3>
+                <ul class="list-group list-group-flush text-omit ">
+                    <!--seller-->
+                    <div class="seller-module d-none">
+                        <li data-target="#seller-options" data-toggle="collapse"
+                            class="list-group-item list-group-item-light text-left "><b>· &nbsp;</b> 店铺管理
+                        </li>
+                        <div id="seller-options" class="collapse show">
+                            <a href="#store-info" id="store-info"
+                               class="panel-link list-group-item list-group-item-light border-0"> 店铺信息 </a>
+                            <a href="#product-manage" id="product-manage"
+                               class=" panel-link list-group-item list-group-item-light border-0"> 商品管理 </a>
+                            <a href="#order-manage" id="order-manage"
+                               class="panel-link list-group-item list-group-item-light border-0"> 订单管理 </a>
+                        </div>
+                    </div>
+                    <li data-target="#personal-options" data-toggle="collapse"
+                        class="list-group-item list-group-item-light text-left "><b>· &nbsp;</b> 个人中心
+                    </li>
+                    <div id="personal-options" class="collapse show">
+                        <a id="personal-info" href="#personal-info"
+                           class="list-group-item list-group-item-light border-0 panel-link"> 个人信息 </a>
+                        <a id="cart-info" href="#cart-info"
+                           class="list-group-item list-group-item-light border-0 panel-link"> 我的购物车 </a>
+                        <a id="addr" href="#addr" class="panel-link list-group-item list-group-item-light border-0">
+                            收货地址 </a>
+                        <a id="applay-store" href="#applay-store" class="buyer-module list-group-item list-group-item-light border-0 panel-link d-none">成为卖家</a>
+                    </div>
+                    <li data-target="#trade-options" data-toggle="collapse"
+                        class="list-group-item list-group-item-light text-left "><b>· &nbsp;</b> 我的交易
+                    </li>
+                    <div id="trade-options" class="collapse show ">
+                        <a href="#my-order" id="my-order"
+                           class=" panel-link list-group-item list-group-item-light border-0"> 我的订单 </a>
+                        <a href="#my-bill" id="my-bill"
+                           class="panel-link list-group-item list-group-item-light border-0"> 我的账单 </a>
+                    </div>
+                    <li data-target="#favorite-options" data-toggle="collapse"
+                        class="list-group-item list-group-item-light text-left"><b>· &nbsp;</b> 我的收藏
+                    </li>
+                    <div id="favorite-options" class="collapse">
+                        <a href="#product-favorite" id="product-favorite"
+                           class="panel-link list-group-item list-group-item-light border-0"> 商品收藏 </a>
+                        <a href="#store-favorite" id="store-favorite"
+                           class="panel-link list-group-item list-group-item-light border-0"> 店铺收藏 </a>
+                    </div>
+                    <li data-target="#gift-options" data-toggle="collapse"
+                        class="list-group-item list-group-item-light text-left"><b>· &nbsp;</b> 我的钱包
+                    </li>
+                    <div id="gift-options" class="collapse">
+                        <a href="#" class="list-group-item list-group-item-light border-0"> 我的礼券 </a>
+                        <a href="#" class="list-group-item list-group-item-light border-0"> 我的账单 </a>
+                        <a href="#" class="list-group-item list-group-item-light border-0"> 我的余额 </a>
+                    </div>
+                    <li data-target="#after-sell-options" data-toggle="collapse"
+                        class="list-group-item list-group-item-light text-left"><b>· &nbsp;</b> 售后服务
+                    </li>
+                    <div class="collapse" id="after-sell-options">
+                        <a href="#" class="list-group-item list-group-item-light border-0"> 申请/查询退货 </a>
+                        <a href="#" class="list-group-item list-group-item-light border-0"> 补开发票 </a>
+                    </div>
+                </ul>
+            </div>
+        </div>
+        <div class="col-9">
+            <!--个人中心-->
+            <div id="personal-info-panel " class="w-100 border border-warning rounded mt-2">
+                <!--base info-->
+                <div class="row border border-success rounded">
+                    <!--头像-->
+                    <div class="col-2 pl-2 mt-2 pr-1 border border-info rounded">
+                        <img id="head-img" class="head-img-l rounded-circle  border border-success" src="http://p7f7rr200.bkt.clouddn.com/b6463e9a-e8e2-44a6-909b-332887e5d995" alt="">
+                    </div>
+                    <!--简要信息-->
+                    <div class="col-7 mt-2 border border-warning rounded">
+                        <!--username-->
+                        <div id="personal-info-username" class=" badge badge-pill badge-primary"> Echo009</div>
+                        <div></div>
+                        <!--phone-->
+                        <div id="personal-info-phone" class="h6 d-inline-block pr-2 mt-2">17673207341</div>
+                        <!--sex-->
+                        <div  id="personal-info-sex" class=" badge badge-pill badge-secondary "> ♀ </div>
+                        <div></div>
+                        <!--email-->
+                        <div id="personal-info-email" class="text-muted text-info mt-1">extreme.lll@echo0.cn</div>
+                        <!--addr-->
+                        <div  id="personal-info-addr" class="mt-1">
+                            湖南 <span class="text-muted  "> 省</span> 湘潭<span class="text-muted  "> 市</span>
+                        </div>
+                    </div>
+                    <!--修改按钮-->
+                    <div class="col-3 mt-2 pl-4 border  border-success rounded text-right  ">
+                        <img  src="../img/common/modify.png" class="icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="修改个人信息">
+                        </img>
+                    </div>
+                </div>
+                <!--order-->
+                <div class="row border border-success rounded mt-1">
+                    <div class="w-100 col">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs nav-justified" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#home">全部订单</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#menu1">待付款</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#menu2">待收货</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#menu3">待评价</a>
+                            </li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div id="home" class="container tab-pane active"><br>
+                                <h3>HOME</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                            <div id="menu1" class="container tab-pane fade"><br>
+                                <h3>Menu 1</h3>
+                                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            </div>
+                            <div id="menu2" class="container tab-pane fade"><br>
+                                <h3>Menu 2</h3>
+                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                            </div>
+                            <div id="menu3" class="container tab-pane fade"><br>
+                                <h3>Menu 2</h3>
+                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <footer class="text-muted text-center">
+        Copyright © 2018 Lan-store Powered by <a href="http://lan.echo0.cn">lan.echo0.cn</a>
+    </footer>
+</div>
+</body>
+<script>
+
+    var perPanel = "#personal-info";
+    $(function () {
+        //  bind
+        $("[data-toggle='tooltip']").tooltip();
+        // 检查登录状态
+        var currentUser = store.get(CURRENT_USER);
+        var temp = window.location.hash;
+        if (temp.length > 0) {
+            perPanel = temp;
+        }
+        $(perPanel).addClass("text-primary");
+        // bind click event
+        $(".panel-link").on("click", function () {
+            changePanel();
+        });
+
+
+        try {
+            if (currentUser.userName) {
+                console.log("current user : " + currentUser.userName);
+                $("#login-links").addClass("d-none");
+                $("#personal-links").removeClass("d-none");
+            }
+            if (currentUser.roleCode == SELLER) {
+                // 显示卖家模块
+                $(".seller-module").removeClass("d-none");
+            } else {
+                // 显示申请成为卖家相关菜单
+                $(".buyer-module").removeClass("d-none");
+            }
+        } catch (e) {
+            // jump to index
+            simpleWarningInfo("请登录！");
+            setTimeout("window.location.href = \"./index.html\";", MIDDLE_DELAY);
+        }
+
+
+    });
+
+    function changePanel() {
+
+        setTimeout(function () {
+            var currentPanel = window.location.hash;
+            console.log("currentPanel is " + currentPanel);
+            console.log("perPanel is " + perPanel);
+            $(perPanel).removeClass("text-primary");
+            $(currentPanel).addClass("text-primary");
+            perPanel = currentPanel;
+        }, MICRO_DELAY);
+
+//        todo
+
+
+    }
+
+</script>
+</html>

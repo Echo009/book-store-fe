@@ -81,8 +81,8 @@
                     <div class="nav navbar-nav mr-auto ">
                         <div class="nav-item mr-3">
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-primary">购物车</button>
-                                <button type="button" class="btn btn-primary">个人中心</button>
+                                <button type="button" class="btn btn-primary" onclick="window.location.href='./personal-center.html#cart-info'">购物车</button>
+                                <button type="button" class="btn btn-primary" onclick="window.location.href='./personal-center.html#personal-info'">个人中心</button>
                                 <div class="btn-group" role="group">
                                     <button id="btnGroupDrop2" type="button" class="btn btn-success dropdown-toggle"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
@@ -405,7 +405,7 @@
         </div>
     </div>
     <div class="row w-100 border  mb-3"></div>
-    <footer class="text-muted text-center">
+    <footer class="text-muted text-center ">
         Copyright © 2018 Lan-store Powered by <a href="http://lan.echo0.cn">lan.echo0.cn</a>
     </footer>
 </div>
@@ -420,29 +420,8 @@
             $("#login-links").addClass("d-none");
             $("#personal-links").removeClass("d-none");
         }
-
-
-
-
-
-
-
-
     });
 
-    function logout() {
-        instance.get('/common/logout')
-            .then(function (response) {
-                console.log(response);
-                simpleSuccessInfo("注销成功 ！")
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-        store.remove(CURRENT_USER);
-        //refresh page
-        setTimeout("window.location.href='index.html'",MIDDLE_DELAY);
-    }
 
 </script>
 </html>
