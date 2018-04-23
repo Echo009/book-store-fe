@@ -236,6 +236,7 @@
                                 } else if (data.code == 113) {
                                     // 重复登录
                                     simpleWarningInfo("请注销后再尝试登录当前账号 ！");
+                                    updateUserInfo();
                                     setTimeout(function () {
                                         window.location.href = "index.html";
                                     }, MIDDLE_DELAY);

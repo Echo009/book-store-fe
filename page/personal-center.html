@@ -20,12 +20,51 @@
     <script src="https://cdn.bootcss.com/axios/0.18.0/axios.js"></script>
     <script src="../js/constant.js"></script>
     <script src="../js/common.js"></script>
+    <!--distpicker-->
+    <script src="../lib/distpicker/distpicker.common.js"></script>
+    <script src="../lib/distpicker/distpicker.esm.js"></script>
+    <script src="../lib/distpicker/distpicker.js"></script>
+    <!--awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+          integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <!--file-input-->
+    <link rel="stylesheet" href="../lib/fileinput/fileinput.css">
+    <link rel="stylesheet" href="../lib/fileinput/theme.css">
+    <script src="../lib/fileinput/piexif.js"></script>
+    <script src="../lib/fileinput/fileinput.js"></script>
+    <script src="../lib/fileinput/zh.js"></script>
+    <script src="../lib/fileinput/theme.js"></script>
+
+
     <!--todo modify-->
     <link rel="stylesheet" href="../css/custom.css">
 </head>
 <body>
 <div class="container">
-
+    <!--upload-img-modal-->
+    <div class="modal fade" id="uploadImgModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">上传图片</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="file-loading">
+                        <input id="fileInputBtn" name="image-file" multiple type="file">
+                    </div>
+                    <div id="kartik-file-errors"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary ">
         <div class="container">
             <a href="index.html" class="navbar-brand">L-store</a>
@@ -80,11 +119,13 @@
                     <div class="nav navbar-nav mr-auto ">
                         <div class="nav-item mr-3">
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="panel-link btn btn-primary"
-                                        onclick="window.location.href='#cart-info'">购物车
+                                <button type="button" class="btn btn-primary"
+                                        onclick="window.location.href='./personal-center.html?target-panel=cart-info'">
+                                    购物车
                                 </button>
-                                <button type="button" class="panel-link btn btn-primary"
-                                        onclick="window.location.href='#personal-info'">个人中心
+                                <button type="button" class="btn btn-primary"
+                                        onclick="window.location.href='./personal-center.html?target-panel=personal-info'">
+                                    个人中心
                                 </button>
                                 <div class="btn-group" role="group">
                                     <button id="btnGroupDrop2" type="button" class="btn btn-success dropdown-toggle"
@@ -110,7 +151,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-3 pt-2   text-center ">
+        <div class="col-sm-12 col-md-3 pt-2   text-center ">
 
             <div class="card mb-3 ">
                 <h3 id="ranking-list" class="card-header ranking-title pb-1 pt-1">
@@ -121,49 +162,50 @@
                     <!--seller-->
                     <div class="seller-module d-none">
                         <li data-target="#seller-options" data-toggle="collapse"
-                            class="list-group-item list-group-item-light text-left "><b>· &nbsp;</b> 店铺管理
+                            class="list-group-item list-group-item-light text-left "><b>• &nbsp;</b> 店铺管理
                         </li>
                         <div id="seller-options" class="collapse show">
-                            <a href="#store-info" id="store-info"
+                            <a href="#" id="store-info"
                                class="panel-link list-group-item list-group-item-light border-0"> 店铺信息 </a>
-                            <a href="#product-manage" id="product-manage"
+                            <a href="#" id="product-manage"
                                class=" panel-link list-group-item list-group-item-light border-0"> 商品管理 </a>
-                            <a href="#order-manage" id="order-manage"
+                            <a href="#" id="order-manage"
                                class="panel-link list-group-item list-group-item-light border-0"> 订单管理 </a>
                         </div>
                     </div>
                     <li data-target="#personal-options" data-toggle="collapse"
-                        class="list-group-item list-group-item-light text-left "><b>· &nbsp;</b> 个人中心
+                        class="list-group-item list-group-item-light text-left "><b>• &nbsp;</b> 个人中心
                     </li>
-                    <div id="personal-options" class="collapse show">
-                        <a id="personal-info" href="#personal-info"
-                           class="list-group-item list-group-item-light border-0 panel-link"> 个人信息 </a>
-                        <a id="cart-info" href="#cart-info"
+                    <div id="personal-options" class=" show">
+                        <a id="personal-info" href="#" data-target-panel="personal-info-panel"
+                           class="list-group-item list-group-item-light border-0 panel-link "> 个人信息 </a>
+                        <a id="cart-info" href="#"
                            class="list-group-item list-group-item-light border-0 panel-link"> 我的购物车 </a>
-                        <a id="addr" href="#addr" class="panel-link list-group-item list-group-item-light border-0">
+                        <a id="addr" href="#" class="panel-link list-group-item list-group-item-light border-0">
                             收货地址 </a>
-                        <a id="applay-store" href="#applay-store" class="buyer-module list-group-item list-group-item-light border-0 panel-link d-none">成为卖家</a>
+                        <a id="apply-store" href="#" data-target-panel="apply-store-panel"
+                           class="buyer-module list-group-item list-group-item-light border-0 panel-link d-none">我要开店</a>
                     </div>
                     <li data-target="#trade-options" data-toggle="collapse"
-                        class="list-group-item list-group-item-light text-left "><b>· &nbsp;</b> 我的交易
+                        class="list-group-item list-group-item-light text-left "><b>• &nbsp;</b> 我的交易
                     </li>
-                    <div id="trade-options" class="collapse show ">
-                        <a href="#my-order" id="my-order"
+                    <div id="trade-options" class=" show ">
+                        <a href="#" id="my-order"
                            class=" panel-link list-group-item list-group-item-light border-0"> 我的订单 </a>
-                        <a href="#my-bill" id="my-bill"
+                        <a href="#" id="my-bill"
                            class="panel-link list-group-item list-group-item-light border-0"> 我的账单 </a>
                     </div>
                     <li data-target="#favorite-options" data-toggle="collapse"
-                        class="list-group-item list-group-item-light text-left"><b>· &nbsp;</b> 我的收藏
+                        class="list-group-item list-group-item-light text-left"><b>• &nbsp;</b> 我的收藏
                     </li>
-                    <div id="favorite-options" class="collapse">
-                        <a href="#product-favorite" id="product-favorite"
+                    <div id="favorite-options" class=" show">
+                        <a href="#" id="product-favorite"
                            class="panel-link list-group-item list-group-item-light border-0"> 商品收藏 </a>
-                        <a href="#store-favorite" id="store-favorite"
+                        <a href="#" id="store-favorite"
                            class="panel-link list-group-item list-group-item-light border-0"> 店铺收藏 </a>
                     </div>
                     <li data-target="#gift-options" data-toggle="collapse"
-                        class="list-group-item list-group-item-light text-left"><b>· &nbsp;</b> 我的钱包
+                        class="list-group-item list-group-item-light text-left"><b>• &nbsp;</b> 我的钱包
                     </li>
                     <div id="gift-options" class="collapse">
                         <a href="#" class="list-group-item list-group-item-light border-0"> 我的礼券 </a>
@@ -171,7 +213,7 @@
                         <a href="#" class="list-group-item list-group-item-light border-0"> 我的余额 </a>
                     </div>
                     <li data-target="#after-sell-options" data-toggle="collapse"
-                        class="list-group-item list-group-item-light text-left"><b>· &nbsp;</b> 售后服务
+                        class="list-group-item list-group-item-light text-left"><b>• &nbsp;</b> 售后服务
                     </li>
                     <div class="collapse" id="after-sell-options">
                         <a href="#" class="list-group-item list-group-item-light border-0"> 申请/查询退货 </a>
@@ -180,14 +222,15 @@
                 </ul>
             </div>
         </div>
-        <div class="col-9">
-            <!--个人中心-->
-            <div id="personal-info-panel " class="w-100 border border-warning rounded mt-2">
-                <!--base info-->
+        <div class="col-sm-12 col-md-9">
+            <!--个人信息-->
+            <div id="personal-info-panel" class="panel collapse w-100 border border-warning rounded mt-2">
+                <!--base-info-->
                 <div class="row border border-success rounded">
                     <!--头像-->
                     <div class="col-2 pl-2 mt-2 pr-1 border border-info rounded">
-                        <img id="head-img" class="head-img-l rounded-circle  border border-success" src="http://p7f7rr200.bkt.clouddn.com/b6463e9a-e8e2-44a6-909b-332887e5d995" alt="">
+                        <img id="head-img" class="head-img-l rounded-circle  border border-success"
+                             src="http://p7f7rr200.bkt.clouddn.com/b6463e9a-e8e2-44a6-909b-332887e5d995" alt="">
                     </div>
                     <!--简要信息-->
                     <div class="col-7 mt-2 border border-warning rounded">
@@ -197,18 +240,19 @@
                         <!--phone-->
                         <div id="personal-info-phone" class="h6 d-inline-block pr-2 mt-2">17673207341</div>
                         <!--sex-->
-                        <div  id="personal-info-sex" class=" badge badge-pill badge-secondary "> ♀ </div>
+                        <div id="personal-info-sex" class=" badge badge-pill badge-secondary "> ♀</div>
                         <div></div>
                         <!--email-->
                         <div id="personal-info-email" class="text-muted text-info mt-1">extreme.lll@echo0.cn</div>
                         <!--addr-->
-                        <div  id="personal-info-addr" class="mt-1">
+                        <div id="personal-info-addr" class="mt-1">
                             湖南 <span class="text-muted  "> 省</span> 湘潭<span class="text-muted  "> 市</span>
                         </div>
                     </div>
                     <!--修改按钮-->
                     <div class="col-3 mt-2 pl-4 border  border-success rounded text-right  ">
-                        <img  src="../img/common/modify.png" class="icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="修改个人信息">
+                        <img src="../img/common/modify.png" class="icon" data-toggle="tooltip" data-placement="top"
+                             title="" data-original-title="修改个人信息">
                         </img>
                     </div>
                 </div>
@@ -234,59 +278,231 @@
                         <div class="tab-content">
                             <div id="home" class="container tab-pane active"><br>
                                 <h3>HOME</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua.</p>
                             </div>
                             <div id="menu1" class="container tab-pane fade"><br>
                                 <h3>Menu 1</h3>
-                                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                                    ea commodo consequat.</p>
                             </div>
                             <div id="menu2" class="container tab-pane fade"><br>
                                 <h3>Menu 2</h3>
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                                    laudantium, totam rem aperiam.</p>
                             </div>
                             <div id="menu3" class="container tab-pane fade"><br>
                                 <h3>Menu 2</h3>
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                                    laudantium, totam rem aperiam.</p>
                             </div>
                         </div>
                     </div>
-                    </div>
+                </div>
+                <!--cart-->
+                <div class="row border border-success rounded mt-1">
+                    <div class="w-100 col">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs " role="tablist">
+                            <li class="nav-item w-25 text-center">
+                                <a class="nav-link active" data-toggle="tab" href="#cart">我的购物车</a>
+                            </li>
 
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div id="cart" class="container tab-pane active"><br>
+                                <h3>HOME</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--申请成为卖家-->
+            <div id="apply-store-panel" class="panel collapse w-100 border border-info rounded mt-2">
+                <div class="row pt-1 pl-3 pr-3 pb-3">
+                    <div class="col w-100 order-md-1 ">
+                        <h5 class="mb-3">完善店铺信息</h5>
+                        <hr class="mb-4">
+                        <form class="needs-validation was-validated" novalidate="">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label for="storeName">店铺名称</label>
+                                    <input type="text" class="form-control" id="storeName" name="storeName"
+                                           placeholder="" value=""
+                                           required="">
+                                    <div class="invalid-feedback">
+                                        店铺名称不能为空 ！
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <!--头像-->
+                                <div class="col-sm-12 col-md-8 mb-3   ">
+                                    <input id="storeCoverImg" type="hidden"
+                                           value="http://p7f7rr200.bkt.clouddn.com/f660f8df-2adc-4310-ba02-cb302bbbc8ca">
+                                    <div class="row align-items-end">
+                                        <div class="col-4 mr-0">
+                                            <img id="preview-store-cover-img"
+                                                 class="d-inline-block head-img-l mr-3 rounded-circle border border-light"
+                                                 src="http://p7f7rr200.bkt.clouddn.com/f660f8df-2adc-4310-ba02-cb302bbbc8ca"
+                                                 alt="">
+                                        </div>
+                                        <div class="col-4">
+                                            <div id="uploadImgBtn"
+                                                 class="d-inline-block btn btn-primary border-success border"
+                                                 data-toggle="modal"
+                                                 data-target="#uploadImgModal"> 更改店铺图标
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label for="email">联系邮箱 <span class="text-muted">(选填)</span></label>
+                                    <input type="email" class="form-control" id="email" placeholder="xxx@example.com">
+                                    <div class="invalid-feedback">
+                                        请输入有效的邮箱地址 ！
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label for="email">联系电话 *</label>
+                                    <input type="tel" class="form-control" id="registerPhone" required>
+                                    <div class="invalid-feedback">
+                                        请输入有效的联系电话 ！
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-3 mb-3">
+                                    <label for="realName">申请人姓名 *</label>
+                                    <input type="text" class="form-control" id="realName" placeholder="" value=""
+                                           required="">
+                                    <div class="invalid-feedback">
+                                        申请人姓名不能为空 ！
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-9 mb-3">
+                                    <label for="idNumber">身份证号码 *</label>
+                                    <input type="text" class="form-control" id="idNumber" placeholder="" value=""
+                                           required="">
+                                    <div class="invalid-feedback">
+                                        申请人身份证号码不能为空 ！
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-9 mb-3">
+                                    <label for="bankNum">银行卡号 *</label>
+                                    <input type="number" class="form-control" id="bankNum" required>
+                                    <div class="invalid-feedback">
+                                        请输入有效银行卡号 ！
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-10 mb-3">
+                                    <label for="dist-selector">地址 *</label>
+                                    <div id="dist-selector" data-toggle="distpicker">
+                                        <select id="province-selector" data-province="省"
+                                                class="custom-select d-inline-block w-25"></select>
+                                        <select id="city-selector" data-city="市"
+                                                class="custom-select d-inline-block w-25"></select>
+                                        <select id="district-selector" data-district="区"
+                                                class="custom-select d-inline-block w-25"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="user-protocol">
+                                <label class="custom-control-label" for="user-protocol">我已阅读并同意lan-store用户使用协议</label>
+                            </div>
+                            <hr class="mb-4">
+                            <div class="row">
+                                <div class="col-9">
+                                    <div class="btn btn-primary btn-block" onclick="applyStore()">提交申请</div>
+                                </div>
+                                <div class="col-3">
+                                    <input type="reset" class="btn btn-danger btn-block" value="重置">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
 
-
         </div>
     </div>
-    <footer class="text-muted text-center">
-        Copyright © 2018 Lan-store Powered by <a href="http://lan.echo0.cn">lan.echo0.cn</a>
-    </footer>
+</div>
+<footer class="text-muted text-center">
+    Copyright © 2018 Lan-store Powered by <a href="http://lan.echo0.cn">lan.echo0.cn</a>
+</footer>
 </div>
 </body>
 <script>
 
-    var perPanel = "#personal-info";
+
     $(function () {
         //  bind
         $("[data-toggle='tooltip']").tooltip();
-        // 检查登录状态
-        var currentUser = store.get(CURRENT_USER);
-        var temp = window.location.hash;
-        if (temp.length > 0) {
-            perPanel = temp;
-        }
-        $(perPanel).addClass("text-primary");
         // bind click event
         $(".panel-link").on("click", function () {
-            changePanel();
+            var $currentElement = $("#" + this.id);
+            console.log(this.id);
+            //  current link is active ?
+            if ($currentElement.hasClass("text-primary")) {
+                return false;
+            }
+            $(".panel-link").removeClass("text-primary");
+            $currentElement.addClass("text-primary");
+            var targetPanelSelector = "#" + $currentElement.attr("data-target-panel");
+            console.log("target panel is " + targetPanelSelector);
+            // hidden all panel
+            $(".panel").slideUp(MICRO_DELAY);
+            $(targetPanelSelector).slideDown(MICRO_DELAY);
+        });
+        // fileinput
+        $("#fileInputBtn").fileinput({
+            theme: "explorer-fas",
+            language: "zh",
+            resizeImage: true,
+            maxImageWidth: 300,
+            maxImageHeight: 300,
+            resizePreference: 'width',
+            resizeIfSizeMoreThan: 512,
+            showPreview: true,
+            showUpload: true,
+            uploadUrl: "http://localhost/book-store/image/upload",
+            elErrorContainer: '#kartik-file-errors',
+            allowedFileExtensions: ["jpg", "png", "gif"]
+        });
+        $('#fileInputBtn').on('fileuploaded', function (event, data, previewId, index) {
+            response = data.response, reader = data.reader;
+            // data desc code
+            // set preview img
+            $("#preview-store-cover-img").attr("src", response.data);
+            // set hidden input value
+            $("#storeCoverImg").val(response.data);
+            console.log(response.data);
         });
 
-
+        // 检查登录状态
+        var currentUser = store.get(CURRENT_USER);
         try {
             if (currentUser.userName) {
                 console.log("current user : " + currentUser.userName);
                 $("#login-links").addClass("d-none");
                 $("#personal-links").removeClass("d-none");
+            }else {
+                simpleWarningInfo("请登录！");
+                setTimeout("window.location.href = \"./index.html\";", MIDDLE_DELAY);
             }
             if (currentUser.roleCode == SELLER) {
                 // 显示卖家模块
@@ -300,25 +516,56 @@
             simpleWarningInfo("请登录！");
             setTimeout("window.location.href = \"./index.html\";", MIDDLE_DELAY);
         }
+        // init panel
+        var targetPanelLinkId = getQueryVariable("target-panel");
+        if (targetPanelLinkId != false) {
+            var $currentElement = $("#" + targetPanelLinkId);
+            $(".panel-link").removeClass("text-primary");
+            $currentElement.addClass("text-primary");
+            var targetPanelSelector = "#" + $currentElement.attr("data-target-panel");
+            console.log("target panel is " + targetPanelSelector);
+            // hidden all panel
+            $(targetPanelSelector).slideDown(MIDDLE_DELAY);
+        }
 
 
     });
 
-    function changePanel() {
+    function applyStore() {
+        var storeName = $("#storeName").val();
+        var storeCoverImg = $("#storeCoverImg").val();
+        var email = $("#email").val();
+        var registerPhone = $("#registerPhone").val();
+        var realName = $("#realName").val();
+        var idNumber = $("#idNumber").val();
+        var bankNum = $("#bankNum").val();
+        var addr = $("#province-selector").val() + '-' + $("#city-selector").val();
+        const params = new URLSearchParams();
+        params.append("storeName", storeName);
+        params.append("storeCoverImg", storeCoverImg);
+        params.append("email", email);
+        params.append("registerPhone", registerPhone);
+        params.append("realName", realName);
+        params.append("idNumber", idNumber);
+        params.append("bankNum", bankNum);
+        params.append("addr", addr);
+        instance.post("/store/create", params).then(function (response) {
+            console.log(response.data.desc);
+            if(response.data.code == 0){
+                updateUserInfo();
+                simpleSuccessInfo("申请成功 ！");
+                setTimeout(function () {
+                    window.location.href = "./personal-center.html";
+                }, MIDDLE_DELAY);
+            }else{
+                simpleErrorInfo(response.data.desc);
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
 
-        setTimeout(function () {
-            var currentPanel = window.location.hash;
-            console.log("currentPanel is " + currentPanel);
-            console.log("perPanel is " + perPanel);
-            $(perPanel).removeClass("text-primary");
-            $(currentPanel).addClass("text-primary");
-            perPanel = currentPanel;
-        }, MICRO_DELAY);
+    };
 
-//        todo
-
-
-    }
 
 </script>
 </html>
