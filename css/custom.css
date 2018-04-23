@@ -359,3 +359,9 @@ pre {
     width: 6rem;
     height: 6rem;
 }
+
+#ele-container {
+    position: fixed;
+    right: 20%;
+    top: 60%;
+}
