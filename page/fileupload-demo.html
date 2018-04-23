@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+* Author : Ech0
+* Email  : ech0.extreme@foxmail.com
+* Time   : 04/22/2018 12:55 AM
+*-->
+    <meta charset="UTF-8">
+    <title>L-Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--lib-->
+    <script src="../lib/jquery/jquery.js"></script>
+    <link rel="stylesheet" href="../lib/bootstrap/bootstrap.css">
+    <script src="../lib/bootstrap/popper.js"></script>
+    <script src="../lib/bootstrap/bootstrap.js"></script>
+    <!--sweetalert-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.bootcss.com/store.js/1.3.20/store.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.18.0/axios.js"></script>
+    <script src="../js/constant.js"></script>
+    <script src="../js/common.js"></script>
+    <!--distpicker-->
+    <script src="../lib/distpicker/distpicker.common.js"></script>
+    <script src="../lib/distpicker/distpicker.esm.js"></script>
+    <script src="../lib/distpicker/distpicker.js"></script>
+    <!--awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+          integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <!--file-input-->
+    <link rel="stylesheet" href="../lib/fileinput/fileinput.css">
+    <link rel="stylesheet" href="../lib/fileinput/theme.css">
+    <script src="../lib/fileinput/piexif.js"></script>
+    <script src="../lib/fileinput/fileinput.js"></script>
+    <script src="../lib/fileinput/zh.js"></script>
+    <script src="../lib/fileinput/theme.js"></script>
+
+
+    <!--todo modify-->
+    <link rel="stylesheet" href="../css/custom.css">
+</head>
+<body>
+<div class="container">
+    <div class="row text-center">
+        <div class="col-12 ">
+            <div class="modal fade" id="uploadImgModal" tabindex="-1" role="dialog" aria-labelledby="uploadImgModal"
+                 aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">上传图片</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="file-loading">
+                                <input id="uploadImgBtn" name="image-file" multiple type="file">
+                            </div>
+                            <div id="kartik-file-errors"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary" title="Your custom upload logic">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploadImgModal">
+                Launch Modal
+            </button>
+        </div>
+    </div>
+    <hr>
+    <div class="row text-center">
+        <div class="col-12 ">
+            <div class="file-loading">
+                <input id="input-ke-1" name="image-file" type="file" multiple accept="image">
+            </div>
+        </div>
+    </div>
+
+</div>
+<footer class="text-muted text-center">
+    Copyright © 2018 Lan-store Powered by <a href="http://lan.echo0.cn">lan.echo0.cn</a>
+</footer>
+</body>
+<script>
+    $(function () {
+        $("#uploadImgBtn").fileinput({
+            theme: "explorer-fas",
+            language: "zh",
+            resizeImage: true,
+            maxImageWidth: 200,
+            maxImageHeight: 200,
+            resizePreference: 'width',
+            resizeIfSizeMoreThan:512,
+            showPreview: true,
+            showUpload: true,
+            uploadUrl: "http://localhost/book-store/image/upload",
+            elErrorContainer: '#kartik-file-errors',
+            allowedFileExtensions: ["jpg", "png", "gif"]
+            //uploadUrl: '/site/file-upload-single'
+        });
+        $('#input-b9').on('fileuploaded', function (event, data, previewId, index) {
+            response = data.response, reader = data.reader;
+            // data desc code
+            console.log(response.data);
+        });
+
+        $("#input-ke-1").fileinput({
+            theme: "explorer-fas",
+            uploadUrl: "/file-upload-batch/2",
+            allowedFileExtensions: ['jpg', 'png', 'gif'],
+            overwriteInitial: true,
+            initialPreviewAsData: true,
+            initialPreview: [
+                "https://picsum.photos/1920/1080?image=101",
+                "https://picsum.photos/1920/1080?image=102",
+                "https://picsum.photos/1920/1080?image=103"
+            ],
+            initialPreviewConfig: [
+                {caption: "picture-1.jpg", size: 329892, width: "120px", url: "/site/file-delete", key: 101},
+                {caption: "picture-2.jpg", size: 872378, width: "120px", url: "/site/file-delete", key: 102},
+                {caption: "picture-3.jpg", size: 632762, width: "120px", url: "/site/file-delete", key: 103}
+            ],
+            initialPreviewDownloadUrl: 'https://picsum.photos/1920/1080?image={key}' // the key will be dynamically replaced
+        });
+
+
+    });
+
+</script>
+</html>
