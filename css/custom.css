@@ -359,9 +359,12 @@ pre {
     width: 6rem;
     height: 6rem;
 }
-
+/*大象动画*/
 #ele-container {
     position: fixed;
     right: 20%;
     top: 60%;
+}
+.badge{
+    margin-left: 0.2rem !important;
 }

@@ -15,3 +15,6 @@ const LONG_DELAY = 1000;
 const SELLER = 2;
 const BUYER = 1;
 const ADMIN = 0;
+const DEFALUT_BOOK_COVER_IMG = "http://img3m3.ddimg.cn/9/15/25254513-1_l_5.jpg";
+const DEFALUT_HEAD_IMG = "http://p7f7rr200.bkt.clouddn.com/b6463e9a-e8e2-44a6-909b-332887e5d995";
+const DEFALUT_STORE_COVER_IMG = "http://p7f7rr200.bkt.clouddn.com/b6463e9a-e8e2-44a6-909b-332887e5d995";

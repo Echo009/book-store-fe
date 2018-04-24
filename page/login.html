@@ -165,12 +165,16 @@
         } else {
             showRegisterPanel();
         }
-
-        if (store.get(USER_NAME)) {
-            $("#remember-me").prop("checked", true);
-            $("#uname").val(store.get(USER_NAME));
-            $("#upassword").val(store.get(PASSWORD));
+        try {
+            if (store.get(USER_NAME)) {
+                $("#remember-me").prop("checked", true);
+                $("#uname").val(store.get(USER_NAME));
+                $("#upassword").val(store.get(PASSWORD));
+            }
+        }catch (e){
+            console.log("empty user info !");
         }
+
     });
 
     /*我加的*/

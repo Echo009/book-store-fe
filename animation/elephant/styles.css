@@ -1,77 +1,17 @@
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font: inherit;
-  font-size: 100%;
-  vertical-align: baseline;
-}
 
-html {
-  line-height: 1;
-}
 
-ol, ul {
-  list-style: none;
-}
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-caption, th, td {
-  text-align: left;
-  font-weight: normal;
-  vertical-align: middle;
-}
-
-q, blockquote {
-  quotes: none;
-}
-q:before, q:after, blockquote:before, blockquote:after {
-  content: "";
-  content: none;
-}
-
-a img {
-  border: none;
-}
-
-article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
-  display: block;
-}
-
-/***********VARIABLES***********/
-/*Movement*/
-/*Colors*/
-/***********STYLES***********/
-body {
-  background-color: #d4e7ba;
-}
-
-/*.ele-container {
+.ele-container {
   background: -webkit-linear-gradient(top, rgba(0, 141, 210, 0.63) 0%, transparent 100%);
   background: linear-gradient(to bottom, rgba(0, 141, 210, 0.63) 0%, transparent 100%);
   height: 500px;
   overflow: hidden;
   position: relative;
   width: 100%;
-}*/
+}
 
 .ele-wrapper {
+  z-index: -999;
   -webkit-animation: ele-movement 1s infinite linear;
           animation: ele-movement 1s infinite linear;
   left: 50%;

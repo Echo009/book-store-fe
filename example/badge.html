@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+* Author : Ech0
+* Email  : ech0.extreme@foxmail.com
+* Time   : 04/22/2018 12:55 AM
+*-->
+    <meta charset="UTF-8">
+    <title>L-Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--lib-->
+    <script src="../lib/jquery/jquery.js"></script>
+    <link rel="stylesheet" href="../lib/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="../css/floating-label.css">
+    <script src="../lib/bootstrap/popper.js"></script>
+    <script src="../lib/bootstrap/bootstrap.js"></script>
+    <!--sweetalert-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.bootcss.com/store.js/1.3.20/store.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.18.0/axios.js"></script>
+    <script src="../js/constant.js"></script>
+    <script src="../js/common.js"></script>
+    <!--distpicker-->
+    <script src="../lib/distpicker/distpicker.common.js"></script>
+    <script src="../lib/distpicker/distpicker.esm.js"></script>
+    <script src="../lib/distpicker/distpicker.js"></script>
+    <!--awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+          integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <!--file-input-->
+    <link rel="stylesheet" href="../lib/fileinput/fileinput.css">
+    <link rel="stylesheet" href="../lib/fileinput/theme.css">
+    <script src="../lib/fileinput/piexif.js"></script>
+    <script src="../lib/fileinput/fileinput.js"></script>
+    <script src="../lib/fileinput/zh.js"></script>
+    <script src="../lib/fileinput/theme.js"></script>
+
+
+    <!--todo modify-->
+    <link rel="stylesheet" href="../css/custom.css">
+    <style>
+        #logo {
+            position: fixed;
+            right: 0.75rem;
+            bottom: 0.65rem;
+            cursor: pointer;
+            text-decoration: none;
+            color: #5DAC81;
+            font-size: 2rem;
+            z-index: 9999;
+            letter-spacing: 0.025em;
+        }
+
+        #logoDot {
+            color: #d74580;
+        }
+
+        .dot {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            border-radius: 30px;
+            background-color: #FFFFFF;
+        }
+
+    </style>
+</head>
+<body>
+
+
+<div class="container text-center  ">
+
+    <div id="tagContainer" class="d-block form-control " style="min-height: 2rem ">
+        <span class="tag badge badge-primary ">Primary</span>
+        <span class="tag badge badge-secondary">Secondary</span>
+        <span class="tag badge badge-success">Success</span>
+        <span class="tag badge badge-danger">Danger</span>
+        <span class="tag badge badge-warning">Warning</span>
+        <span class="tag badge badge-info">Info</span>
+        <span class="tag badge badge-light">Light</span>
+        <span class="tag badge badge-dark">Dark</span>
+    </div>
+    <div id="tagInput" class="d-block form-control align-middle justify-content-center  mt-3"
+         style="min-height: 2rem    ">
+    </div>
+
+
+</div>
+<a id="logo" href="http://echo0.cn">Echo0<span id="logoDot">.</span>cn</a>
+
+</body>
+
+<script>
+
+
+    $(document).on("click", ".tag", function () {
+        var $this = $(this);
+        console.log($this.parent().attr("id"));
+        console.log($this);
+        if ($this.parent().attr("id") == "tagContainer") {
+            $this.appendTo($("#tagInput"));
+        } else {
+            $this.appendTo($("#tagContainer"));
+        }
+    });
+
+</script>
+
+</html>

@@ -56,11 +56,7 @@
                     <div class="file-loading">
                         <input id="fileInputBtn" name="image-file" multiple type="file">
                     </div>
-                    <div id="kartik-file-errors"></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">保存</button>
+                    <div id="kartik-file-errors">上传失败，请重试！</div>
                 </div>
             </div>
         </div>
@@ -90,7 +86,6 @@
                             <a class="dropdown-item" href="#">艺术</a>
                             <a class="dropdown-item" href="#">卡通</a>
                             <a class="dropdown-item" href="#">教育</a>
-                            <a class="dropdown-item" href="#">科学</a>
                             <a class="dropdown-item" href="#">历史</a>
                             <a class="dropdown-item" href="#">科技</a>
                         </div>
@@ -151,8 +146,8 @@
         </div>
     </div>
     <div class="row">
+        <!--侧边导航栏-->
         <div class="col-sm-12 col-md-3 pt-2   text-center ">
-
             <div class="card mb-3 ">
                 <h3 id="ranking-list" class="card-header ranking-title pb-1 pt-1">
                     <img class="icon mb-1" src="../img/common/personal-center.png">
@@ -166,9 +161,13 @@
                         </li>
                         <div id="seller-options" class="collapse show">
                             <a href="#" id="store-info"
-                               class="panel-link list-group-item list-group-item-light border-0"> 店铺信息 </a>
+                               class="panel-link list-group-item list-group-item-light border-0"
+                               data-target-panel="store-info-panel"> 店铺信息 </a>
                             <a href="#" id="product-manage"
                                class=" panel-link list-group-item list-group-item-light border-0"> 商品管理 </a>
+                            <a href="#" id="add-product"
+                               class=" panel-link list-group-item list-group-item-light border-0"
+                               data-target-panel="add-product-panel"> 添加商品 </a>
                             <a href="#" id="order-manage"
                                class="panel-link list-group-item list-group-item-light border-0"> 订单管理 </a>
                         </div>
@@ -229,7 +228,7 @@
                 <div class="row border border-success rounded">
                     <!--头像-->
                     <div class="col-2 pl-2 mt-2 pr-1 border border-info rounded">
-                        <img id="head-img" class="head-img-l rounded-circle  border border-success"
+                        <img id="personal-info-head-img" class="head-img-l rounded-circle  border border-success"
                              src="http://p7f7rr200.bkt.clouddn.com/b6463e9a-e8e2-44a6-909b-332887e5d995" alt="">
                     </div>
                     <!--简要信息-->
@@ -243,7 +242,7 @@
                         <div id="personal-info-sex" class=" badge badge-pill badge-secondary "> ♀</div>
                         <div></div>
                         <!--email-->
-                        <div id="personal-info-email" class="text-muted text-info mt-1">extreme.lll@echo0.cn</div>
+                        <div id="personal-info-email" class="text-muted text-info mt-1"></div>
                         <!--addr-->
                         <div id="personal-info-addr" class="mt-1">
                             湖南 <span class="text-muted  "> 省</span> 湘潭<span class="text-muted  "> 市</span>
@@ -322,7 +321,7 @@
             </div>
             <!--申请成为卖家-->
             <div id="apply-store-panel" class="panel collapse w-100 border border-info rounded mt-2">
-                <div class="row pt-1 pl-3 pr-3 pb-3">
+                <div lass="row pt-1 pl-3 pr-3 pb-3">
                     <div class="col w-100 order-md-1 ">
                         <h5 class="mb-3">完善店铺信息</h5>
                         <hr class="mb-4">
@@ -341,8 +340,7 @@
                             <div class="row ">
                                 <!--头像-->
                                 <div class="col-sm-12 col-md-8 mb-3   ">
-                                    <input id="storeCoverImg" type="hidden"
-                                           value="http://p7f7rr200.bkt.clouddn.com/f660f8df-2adc-4310-ba02-cb302bbbc8ca">
+                                    <input id="storeCoverImg" type="hidden">
                                     <div class="row align-items-end">
                                         <div class="col-4 mr-0">
                                             <img id="preview-store-cover-img"
@@ -352,7 +350,7 @@
                                         </div>
                                         <div class="col-4">
                                             <div id="uploadImgBtn"
-                                                 class="d-inline-block btn btn-primary border-success border"
+                                                 class="d-inline-block btn btn-info border-success border"
                                                  data-toggle="modal"
                                                  data-target="#uploadImgModal"> 更改店铺图标
                                             </div>
@@ -437,7 +435,220 @@
                     </div>
                 </div>
             </div>
+            <!--店铺信息-->
+            <div id="store-info-panel" class="panel collapse w-100 border border-info rounded mt-2">
+                <div class="row pt-1 pl-3 pr-3 pb-3">
+                    <div class="col w-100 order-md-1 ">
+                        <div class="row">
+                            <div class="col mt-2 pt-2">
+                                <h5 class="mb-3 d-inline-block">我的店铺信息</h5>
+                                <img src="../img/common/modify.png" class="icon d-inline-block float-right"
+                                     data-toggle="tooltip" data-placement="top"
+                                     data-original-title="修改店铺信息">
+                                </img>
+                            </div>
+                        </div>
+                        <hr class="mb-4">
+                        <form>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label for="storeName">店铺名称</label>
+                                    <input type="text" class="form-control" id="info-storeName" name="storeName"
+                                           placeholder="" value="" disabled
+                                           required="">
+                                </div>
+                            </div>
 
+                            <div class="row ">
+                                <!--头像-->
+                                <div class="col-sm-12 col-md-8 mb-3   ">
+                                    <input id="info-storeCoverImg" type="hidden"
+                                           value="http://p7f7rr200.bkt.clouddn.com/f660f8df-2adc-4310-ba02-cb302bbbc8ca">
+                                    <div class="row align-items-end">
+                                        <div class="col-4 mr-0">
+                                            <img id="info-preview-store-cover-img"
+                                                 class="d-inline-block head-img-l mr-3 rounded-circle border border-light"
+                                                 src="http://p7f7rr200.bkt.clouddn.com/f660f8df-2adc-4310-ba02-cb302bbbc8ca"
+                                                 alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label for="email">联系邮箱 <span class="text-muted"></span></label>
+                                    <input type="email" class="form-control" id="info-email" disabled>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label for="email">联系电话 </label>
+                                    <input type="tel" class="form-control" id="info-registerPhone" disabled>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label for="dist-selector">店铺地址 </label>
+                                    <input type="text" class="form-control" id="info-addr" disabled>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-3 mb-3">
+                                    <label for="realName">申请人姓名 </label>
+                                    <input type="text" class="form-control" id="info-realName" disabled>
+                                </div>
+
+                                <div class="col-sm-12 col-md-9 mb-3">
+                                    <label for="idNumber">身份证号码 </label>
+                                    <input type="text" class="form-control" id="info-idNumber" disabled>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-9 mb-3">
+                                    <label for="bankNum">银行卡号 </label>
+                                    <input type="number" class="form-control" id="info-bankNum" disabled>
+                                </div>
+                            </div>
+
+                            <hr class="mb-4">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--添加商品-->
+            <div id="add-product-panel" class="panel collapse w-100 border border-info rounded mt-2">
+                <div class="row pt-1 pl-3 pr-3 pb-3">
+                    <div class="col w-100 order-md-1 ">
+                        <h5 class="mb-3">完善商品信息</h5>
+                        <hr class="mb-4">
+                        <form class="needs-validation was-validated" novalidate="">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label for="bookName">书籍名称 *</label>
+                                    <input type="text" class="form-control" id="bookName" name="name" required>
+                                    <div class="invalid-feedback">
+                                        店铺名称不能为空 ！
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-4 mb-3">
+                                    <label for="authorName">作者 *</label>
+                                    <input type="text" class="form-control" id="authorName" required>
+                                    <div class="invalid-feedback">
+                                        请输入有效的作者姓名 ！
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 mb-3">
+                                    <label for="category">书籍分类 *</label>
+                                    <div class="form-group">
+                                        <select class="form-control w-50" id="category" required>
+                                            <option></option>
+                                            <option>小说</option>
+                                            <option>文学</option>
+                                            <option>艺术</option>
+                                            <option>卡通</option>
+                                            <option>教育</option>
+                                            <option>历史</option>
+                                            <option>科技</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            请选择书籍分类 ！
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-10 mb-3">
+                                    <label for="recommendation">推荐语 <span class="text-muted">(选填)</span></label>
+                                    <input type="text" class="form-control" id="recommendation">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-8 mb-3">
+                                    <label for="publisher">出版社名称 *</label>
+                                    <input type="text" class="form-control" id="publisher" placeholder="" value=""
+                                           required="">
+                                    <div class="invalid-feedback">
+                                        出版社名称不能为空 ！
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-4 mb-3">
+                                    <label for="publishDate">出版日期 *</label>
+                                    <input type="date" class="form-control " id="publishDate" placeholder="" value=""
+                                           required="">
+                                    <div class="invalid-feedback">
+                                        出版日期不能为空 ！
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-5 col-md-4 mb-3">
+                                    <label for="pricing">定价 *</label>
+                                    <input type="text" class="form-control" id="pricing" required>
+                                    <div class="invalid-feedback">
+                                        请输入有效的书本定价 ！
+                                    </div>
+                                </div>
+                                <div class="col-sm-5 col-md-4 mb-3">
+                                    <label for="currentPrice">售价 *</label>
+                                    <input type="text" class="form-control" id="currentPrice" required>
+                                    <div class="invalid-feedback">
+                                        请输入有效的书本售价 ！
+                                    </div>
+                                </div>
+                                <div class="col-sm-5 col-md-4 mb-3">
+                                    <label for="stock">库存 *</label>
+                                    <input type="number" class="form-control" id="stock" required>
+                                    <div class="invalid-feedback">
+                                        请输入有效的库存量 ！
+                                    </div>
+                                </div>
+                            </div>
+                            <!--封面图-->
+                            <hr>
+                            <p class="pl-3"> 封面图 *</p>
+                            <hr>
+                            <div class="row align-items-end mt-3 mb-3 ">
+
+                                <input type="hidden" id="coverImg">
+                                <div class="col-sm-12 col-md-6 mr-0 ">
+                                    <img id="preview-book-cover-img"
+                                         class="d-inline-block small-cover-img mr-1  border border-light"
+                                         src="http://p7f7rr200.bkt.clouddn.com/165e804d-507c-4d49-a6d3-410cec791ffc">
+                                </div>
+                                <div class="col-sm-12 col-md-4 mt-2">
+                                    <div id="uploadBookCoverImgBtn"
+                                         class="d-inline-block btn btn-info border-success border "
+                                         data-toggle="modal"
+                                         data-target="#uploadImgModal"> 上传封面图
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row pl-3">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" checked class="custom-control-input" id="product-protocol">
+                                    <label class="custom-control-label" for="user-protocol">我已阅读并同意lan-商品协议</label>
+                                </div>
+                            </div>
+
+                            <hr class="mb-4">
+                            <div class="row">
+                                <div class="col-9">
+                                    <div class="btn btn-primary btn-block" onclick="addProduct()">添加</div>
+                                </div>
+                                <div class="col-3">
+                                    <input type="reset" class="btn btn-danger btn-block" value="重置">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -453,8 +664,8 @@
         //  bind
         $("[data-toggle='tooltip']").tooltip();
         // bind click event
-        $(".panel-link").on("click", function () {
-            var $currentElement = $("#" + this.id);
+        $(document).on("click", ".panel-link", function () {
+            var $currentElement = $(this);
             console.log(this.id);
             //  current link is active ?
             if ($currentElement.hasClass("text-primary")) {
@@ -462,11 +673,7 @@
             }
             $(".panel-link").removeClass("text-primary");
             $currentElement.addClass("text-primary");
-            var targetPanelSelector = "#" + $currentElement.attr("data-target-panel");
-            console.log("target panel is " + targetPanelSelector);
-            // hidden all panel
-            $(".panel").slideUp(MICRO_DELAY);
-            $(targetPanelSelector).slideDown(MICRO_DELAY);
+            updateAndShowPanel(this.id);
         });
         // fileinput
         $("#fileInputBtn").fileinput({
@@ -481,15 +688,26 @@
             showUpload: true,
             uploadUrl: "http://localhost/book-store/image/upload",
             elErrorContainer: '#kartik-file-errors',
-            allowedFileExtensions: ["jpg", "png", "gif"]
+            allowedFileExtensions: ["jpg", "png", "gif"],
+            maxFileCount: 1
         });
         $('#fileInputBtn').on('fileuploaded', function (event, data, previewId, index) {
-            response = data.response, reader = data.reader;
+            response = data.response;
             // data desc code
-            // set preview img
-            $("#preview-store-cover-img").attr("src", response.data);
-            // set hidden input value
-            $("#storeCoverImg").val(response.data);
+            // judge current panel
+            if ($("#add-product").hasClass("text-primary")) {
+                // set preview img
+                $("#preview-book-cover-img").attr("src", response.data);
+                // set hidden input value
+                $("#coverImg").val(response.data);
+            }
+            else if ($("#apply-store").hasClass("text-primary")) {
+                // set preview img
+                $("#preview-store-cover-img").attr("src", response.data);
+                // set hidden input value
+                $("#storeCoverImg").val(response.data);
+            }
+            $("#uploadImgModal").modal('hide');
             console.log(response.data);
         });
 
@@ -500,7 +718,7 @@
                 console.log("current user : " + currentUser.userName);
                 $("#login-links").addClass("d-none");
                 $("#personal-links").removeClass("d-none");
-            }else {
+            } else {
                 simpleWarningInfo("请登录！");
                 setTimeout("window.location.href = \"./index.html\";", MIDDLE_DELAY);
             }
@@ -519,18 +737,75 @@
         // init panel
         var targetPanelLinkId = getQueryVariable("target-panel");
         if (targetPanelLinkId != false) {
-            var $currentElement = $("#" + targetPanelLinkId);
-            $(".panel-link").removeClass("text-primary");
-            $currentElement.addClass("text-primary");
-            var targetPanelSelector = "#" + $currentElement.attr("data-target-panel");
-            console.log("target panel is " + targetPanelSelector);
-            // hidden all panel
-            $(targetPanelSelector).slideDown(MIDDLE_DELAY);
+            updateAndShowPanel(targetPanelLinkId);
+        } else {
+            // 默认显示个人信息面板
+            $("#personal-info-panel").show();
+            updatePersonalInfoPanel();
         }
 
-
+        //set default value
+        $("#coverImg").val(DEFALUT_BOOK_COVER_IMG);
+        $("#storeCoverImg").val(DEFALUT_STORE_COVER_IMG);
     });
 
+    // 添加商品
+    function addProduct() {
+        var bookName = $("#bookName").val();
+        var authorName = $("#authorName").val();
+        var category = $("#category").val();
+        var recommendation = $("#recommendation").val();
+        var publisher = $("#publisher").val();
+        var publishDate = $("#publishDate").val();
+        var pricing = $("#pricing").val();
+        var currentPrice = $("#currentPrice").val();
+        var stock = $("#stock").val();
+        var coverImg = $("#coverImg").val();
+        const params = new URLSearchParams();
+        params.append("bookName", bookName);
+        params.append("authorName", authorName);
+        params.append("category", category);
+        params.append("recommendation", recommendation);
+        params.append("publisher", publisher);
+        params.append("publishDate", publishDate);
+        params.append("pricing", pricing);
+        params.append("currentPrice", currentPrice);
+        params.append("stock", stock);
+        params.append("coverImg", coverImg);
+        instance.post("/book/add", params).then(function (response) {
+            console.log(response.data.desc);
+            if (response.data.code == 0) {
+                console.log(response.data.data);
+                swal({
+                    title: "添加商品成功！",
+                    text: "是否继续补充商品详情信息 ?",
+                    icon: "success",
+                    buttons: {
+                        cancel: "暂时不添加",
+                        add: {
+                            text: "现在去补充",
+                            value: "add",
+                        }
+                    },
+                }).then((value) => {
+                    switch (value) {
+//                        todo
+                        case "add":
+                            swal("去添加！");
+                            break;
+                        default:
+                            swal("不添加！");
+                    }
+                });
+            } else {
+                simpleErrorInfo(response.data.desc);
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+
+    // 申请店铺
     function applyStore() {
         var storeName = $("#storeName").val();
         var storeCoverImg = $("#storeCoverImg").val();
@@ -551,21 +826,74 @@
         params.append("addr", addr);
         instance.post("/store/create", params).then(function (response) {
             console.log(response.data.desc);
-            if(response.data.code == 0){
+            if (response.data.code == 0) {
                 updateUserInfo();
                 simpleSuccessInfo("申请成功 ！");
                 setTimeout(function () {
                     window.location.href = "./personal-center.html";
                 }, MIDDLE_DELAY);
-            }else{
+            } else {
                 simpleErrorInfo(response.data.desc);
             }
         }).catch(function (error) {
             console.log(error);
         });
-
     };
 
+    // 更新个人面板
+    function updatePersonalInfoPanel() {
+        var curentUserInfo = store.get(CURRENT_USER);
+        $("#personal-info-head-img").text(curentUserInfo.headImg);
+        $("#personal-info-username").text(curentUserInfo.userName);
+        $("#personal-info-phone").text(curentUserInfo.phone);
+        $("#personal-info-email").text(curentUserInfo.email);
+    }
 
+    function updateStoreInfoPanel() {
+        instance.get("/store/info").then(function (response) {
+            console.log(response.data.desc);
+            var returnData = response.data.data;
+            if (response.data.code == 0) {
+                $("#info-storeName").val(returnData.storeName);
+                $("#info-realName").val(returnData.realName);
+                $("#info-idNumber").val(returnData.idNumber);
+                $("#info-email").val(returnData.email);
+                $("#info-registerPhone").val(returnData.registerPhone);
+                $("#info-bankNum").val(returnData.bankNum);
+                $("#info-addr").val(returnData.addr);
+                $("#info-storeCoverImg").attr("src", returnData.storeCoverImg);
+            } else {
+                simpleErrorInfo(response.data.desc);
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+
+    // 更新面板信息
+    function updateAndShowPanel(targetPanelLinkId) {
+        if (targetPanelLinkId != null) {
+            var $currentElement = $("#" + targetPanelLinkId);
+            $(".panel-link").removeClass("text-primary");
+            $currentElement.addClass("text-primary");
+            var targetPanelSelector = "#" + $currentElement.attr("data-target-panel");
+            console.log("target panel is " + targetPanelSelector);
+            // hidden all panel
+            $(".panel").slideUp(MICRO_DELAY);
+            $(targetPanelSelector).slideDown(MIDDLE_DELAY);
+
+            switch (targetPanelSelector) {
+                case "#personal-info-panel" : {
+                    updatePersonalInfoPanel();
+                    break;
+                }
+                case "#store-info-panel" : {
+                    updateStoreInfoPanel();
+                    break;
+                }
+
+            }
+        }
+    }
 </script>
 </html>

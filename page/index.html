@@ -46,15 +46,14 @@
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download">所有分类 <span
                                 class="caret"></span></a>
                         <div class="dropdown-menu " aria-labelledby="download">
-                                <!--fixed category -->
-                                <a class="dropdown-item" href="#">小说</a>
-                                <a class="dropdown-item" href="#">文学</a>
-                                <a class="dropdown-item" href="#">艺术</a>
-                                <a class="dropdown-item" href="#">卡通</a>
-                                <a class="dropdown-item" href="#">教育</a>
-                                <a class="dropdown-item" href="#">科学</a>
-                                <a class="dropdown-item" href="#">历史</a>
-                                <a class="dropdown-item" href="#">科技</a>
+                            <!--fixed category -->
+                            <a class="dropdown-item" href="#">小说</a>
+                            <a class="dropdown-item" href="#">文学</a>
+                            <a class="dropdown-item" href="#">艺术</a>
+                            <a class="dropdown-item" href="#">卡通</a>
+                            <a class="dropdown-item" href="#">教育</a>
+                            <a class="dropdown-item" href="#">历史</a>
+                            <a class="dropdown-item" href="#">科技</a>
                         </div>
                     </li>
                     <li class="nav-item ml-3 text-center">
@@ -81,8 +80,14 @@
                     <div class="nav navbar-nav mr-auto ">
                         <div class="nav-item mr-3">
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-primary" onclick="window.location.href='./personal-center.html?target-panel=cart-info'">购物车</button>
-                                <button type="button" class="btn btn-primary" onclick="window.location.href='./personal-center.html?target-panel=personal-info'">个人中心</button>
+                                <button type="button" class="btn btn-primary"
+                                        onclick="window.location.href='./personal-center.html?target-panel=cart-info'">
+                                    购物车
+                                </button>
+                                <button type="button" class="btn btn-primary"
+                                        onclick="window.location.href='./personal-center.html?target-panel=personal-info'">
+                                    个人中心
+                                </button>
                                 <div class="btn-group" role="group">
                                     <button id="btnGroupDrop2" type="button" class="btn btn-success dropdown-toggle"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
@@ -415,10 +420,14 @@
     $(function () {
         // 检查登录状态
         var currentUser = store.get(CURRENT_USER);
-        if (currentUser.userName) {
-            console.log("current user : " + currentUser.userName);
-            $("#login-links").addClass("d-none");
-            $("#personal-links").removeClass("d-none");
+        try {
+            if (currentUser.userName) {
+                console.log("current user : " + currentUser.userName);
+                $("#login-links").addClass("d-none");
+                $("#personal-links").removeClass("d-none");
+            }
+        } catch (e) {
+            console.log("not login !");
         }
     });
 
