@@ -269,7 +269,9 @@ pre {
 
 /*modify by echo009*/
 .small-cover-img {
-    max-width: 200px;
+    max-width: 200px !important;
+    max-height: 150px !important;
+    margin: auto;
 }
 
 .ranking-title {
@@ -282,7 +284,7 @@ pre {
 }
 
 .text-omit {
-    text-overflow: ellipsis!important;
+    text-overflow: ellipsis !important;
 }
 
 .form-register {
@@ -301,12 +303,10 @@ pre {
     text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
 }
 
-
 /*模态框背景*/
 .swal-overlay {
     background-color: rgba(43, 165, 137, 0.45);
 }
-
 
 /*模态框正文*/
 .swal-text {
@@ -317,6 +317,7 @@ pre {
     text-align: center;
     color: #1b1e21;
 }
+
 /*模态框*/
 @media screen and (max-width: 780px) {
     .swal-modal {
@@ -326,45 +327,63 @@ pre {
     }
 }
 
-.btn-img{
+.btn-img {
     width: 32px;
     height: 27px;
 }
-.icon{
+
+.icon {
     width: 1.5rem;
     height: 1.5rem;
-    margin-right:0.5rem;
+    margin-right: 0.5rem;
 }
-
 
 /*卖家模块*/
 .seller-module {
 
 }
+
 /*买家模块*/
 
-.buyer-module{
+.buyer-module {
 
 }
+
 /*变更面板链接*/
-.panel-link{
+.panel-link {
 
 }
+
 /*面板*/
-.panel{
+.panel {
 
 }
+
 /*大头像*/
-.head-img-l{
+.head-img-l {
     width: 6rem;
     height: 6rem;
 }
+
 /*大象动画*/
 #ele-container {
     position: fixed;
     right: 20%;
     top: 60%;
 }
-.badge{
+
+.badge {
     margin-left: 0.2rem !important;
+}
+
+/**
+搜索选项，导航栏下拉菜单
+ */
+.search-option {
+}
+
+@media (min-width: 768px){
+    .h-md-180 {
+        height: 180px;
+    }
 }

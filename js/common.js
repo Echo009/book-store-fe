@@ -72,3 +72,7 @@ function updateUserInfo() {
             console.log(error);
         });
 };
+
+$(function () {
+
+});

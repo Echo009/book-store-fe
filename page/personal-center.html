@@ -61,6 +61,7 @@
             </div>
         </div>
     </div>
+    <!--顶部导航-->
     <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary ">
         <div class="container">
             <a href="index.html" class="navbar-brand">L-store</a>
@@ -77,27 +78,28 @@
                     </li>
                     <!--分类下拉框-->
                     <li class="nav-item dropdown ">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download">所有分类 <span
-                                class="caret"></span></a>
-                        <div class="dropdown-menu " aria-labelledby="download">
+                        <div class="nav-link dropdown-toggle btn btn-primary" data-toggle="dropdown"><span
+                                id="searchOption" class="pl-2">所有分类</span> <span class="caret"></span></div>
+                        <div class="dropdown-menu ">
                             <!--fixed category -->
-                            <a class="dropdown-item" href="#">小说</a>
-                            <a class="dropdown-item" href="#">文学</a>
-                            <a class="dropdown-item" href="#">艺术</a>
-                            <a class="dropdown-item" href="#">卡通</a>
-                            <a class="dropdown-item" href="#">教育</a>
-                            <a class="dropdown-item" href="#">历史</a>
-                            <a class="dropdown-item" href="#">科技</a>
+                            <div class="search-option dropdown-item">小说</div>
+                            <div class="search-option dropdown-item">文学</div>
+                            <div class="search-option dropdown-item">艺术</div>
+                            <div class="search-option dropdown-item">卡通</div>
+                            <div class="search-option dropdown-item">教育</div>
+                            <div class="search-option dropdown-item">历史</div>
+                            <div class="search-option dropdown-item">科技</div>
+                            <hr>
+                            <div class="search-option dropdown-item">所有分类</div>
                         </div>
                     </li>
                     <li class="nav-item ml-3 text-center">
                         <!--搜索框-->
                         <form class="form-inline mt-2 mt-md-0 ">
                             <input class="form-control mr-sm-2" type="text" placeholder="">
-                            <input type="button" class="btn btn-secondary  my-2 my-sm-0" value="搜索"></input>
+                            <div class="btn btn-secondary  my-2 my-sm-0" value="搜索">搜索</div>
                         </form>
                     </li>
-
                 </ul>
                 <div id="login-links" class="text-center">
                     <ul class="nav navbar-nav ml-auto">
@@ -129,7 +131,8 @@
                                         <a class="dropdown-item" href="#">我的订单</a>
                                         <a class="dropdown-item" href="#">商品收藏</a>
                                         <a class="dropdown-item" href="#">店铺收藏</a>
-                                        <a class="dropdown-item" href="#">个人信息</a>
+                                        <a class="dropdown-item"
+                                           href="./personal-center.html?target-panel=personal-info">个人信息</a>
                                         <a class="dropdown-item" href="#">地址管理</a>
                                     </div>
                                 </div>
@@ -139,8 +142,6 @@
                             <div class="nav-link btn" onclick="logout()">退出</div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
@@ -163,11 +164,12 @@
                             <a href="#" id="store-info"
                                class="panel-link list-group-item list-group-item-light border-0"
                                data-target-panel="store-info-panel"> 店铺信息 </a>
-                            <a href="#" id="product-manage"
+                            <a href="#" id="product-manage" data-target-panel="product-manage-panel"
                                class=" panel-link list-group-item list-group-item-light border-0"> 商品管理 </a>
                             <a href="#" id="add-product"
                                class=" panel-link list-group-item list-group-item-light border-0"
                                data-target-panel="add-product-panel"> 添加商品 </a>
+
                             <a href="#" id="order-manage"
                                class="panel-link list-group-item list-group-item-light border-0"> 订单管理 </a>
                         </div>
@@ -649,6 +651,137 @@
                     </div>
                 </div>
             </div>
+            <!--补充商品详情-->
+            <div id="add-product-detail-panel" class="panel collapse w-100 border border-info rounded mt-2">
+                <input type="hidden" id="bookId">
+                <input type="hidden" id="bookDetailId">
+                <div class="row pt-1 pl-3 pr-3 pb-3">
+                    <div class="col w-100 order-md-1 ">
+                        <input type="hidden" id="action">
+                        <h5 class="mb-3" id="product-detail-panel-title">添加商品详情信息</h5>
+                        <hr class="mb-4">
+                        <form class="needs-validation was-validated" novalidate="">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 mb-3">
+                                    <label for="bookName">书籍名称 *</label>
+                                    <input type="text" class="form-control border-0 " id="bookDetail-bookName" disabled>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-2 mb-3">
+                                    <label for="authorName">版本号 *</label>
+                                    <input type="number" class="form-control" id="edition" required>
+                                    <div class="invalid-feedback">
+                                        请输入有效的版本号 ！
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-2 mb-3">
+                                    <label for="authorName">总字数 </label>
+                                    <input type="number" class="form-control" id="words" value="0">
+                                </div>
+                                <div class="col-sm-12 col-md-2 mb-3">
+                                    <label for="authorName">总页数 </label>
+                                    <input type="number" class="form-control" id="pages" value="0">
+                                </div>
+                                <div class="col-sm-12 col-md-4 mb-3">
+                                    <label for="paperType">纸张类型 *</label>
+                                    <div class="form-group">
+                                        <select class="form-control w-50" id="paperType" required>
+                                            <option>胶版纸</option>
+                                            <option>牛皮纸</option>
+                                            <option>白卡纸</option>
+                                            <option>印刷纸</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            请选择纸张类型！
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-4 mb-3">
+                                    <label for="publishDate">印刷日期 *</label>
+                                    <input type="date" class="form-control " id="printDate" placeholder="" value=""
+                                           required="">
+                                    <div class="invalid-feedback">
+                                        印刷日期不能为空 ！
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-10 mb-3">
+                                    <div class="form-group">
+                                        <label for="authorIntro">作者简介 *</label>
+                                        <textarea class="form-control" id="authorIntro" rows="2" required></textarea>
+                                        <div class="invalid-feedback">
+                                            作者简介不能为空 ！
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-10 mb-3">
+                                    <div class="form-group">
+                                        <label for="briefIntro">书籍简介 *</label>
+                                        <textarea class="form-control" id="briefIntro" rows="3" required></textarea>
+                                        <div class="invalid-feedback">
+                                            书籍简介不能为空 ！
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12 col-md-10 mb-3">
+                                    <div class="form-group">
+                                        <label for="foreword">前言/序章 </label>
+                                        <textarea class="form-control" id="foreword" rows="5"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--商品详情图-->
+                            <div class="row">
+                                <input type="hidden" id="images" value="">
+                                <div class="col-12 mb-3">
+                                    <div class="file-loading">
+                                        <input id="detail-img-input" name="image-file" type="file" multiple
+                                               accept="image">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row pl-3">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" checked class="custom-control-input"
+                                           id="product-protocol-dump">
+                                    <label class="custom-control-label" for="user-protocol">我已阅读并同意lan-商品协议</label>
+                                </div>
+                            </div>
+
+                            <hr class="mb-4">
+                            <div class="row">
+                                <div class="col-9">
+                                    <div class="btn btn-primary btn-block" id="detail-submit-btn"
+                                         onclick="operateProductDetail()"></div>
+                                </div>
+                                <div class="col-3">
+                                    <input type="reset" class="btn btn-danger btn-block" value="重置">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--商品管理-->
+            <div id="product-manage-panel" class="panel collapse w-100 border border-info rounded mt-2  " style="overflow: auto;max-height: 80rem;overflow-x: hidden">
+                <div class="row row pt-1 pl-3 pr-3 pb-3">
+                    <div class="col w-100 order-md-1 ">
+                        <h5 class="mb-3 text-left">商品管理</h5>
+                        <hr>
+                        <div id="product-container" style="cursor: pointer;">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -658,8 +791,6 @@
 </div>
 </body>
 <script>
-
-
     $(function () {
         //  bind
         $("[data-toggle='tooltip']").tooltip();
@@ -674,6 +805,10 @@
             $(".panel-link").removeClass("text-primary");
             $currentElement.addClass("text-primary");
             updateAndShowPanel(this.id);
+        });
+        $(document).on("click", ".search-option", function () {
+            var $this = $(this);
+            $("#searchOption").text($this.text());
         });
         // fileinput
         $("#fileInputBtn").fileinput({
@@ -690,6 +825,21 @@
             elErrorContainer: '#kartik-file-errors',
             allowedFileExtensions: ["jpg", "png", "gif"],
             maxFileCount: 1
+        });
+        $("#detail-img-input").fileinput({
+            uploadUrl: "http://localhost/book-store/image/upload",
+            language: "zh",
+            allowedFileExtensions: ['jpg', 'png', 'gif'],
+            overwriteInitial: true,
+            initialPreviewAsData: true
+        });
+        $("#detail-img-input").on('fileuploaded', function (event, data, previewId, index) {
+            response = data.response;
+            var $imges = $("#images");
+            var value = $imges.val();
+            value += ";" + response.data;
+            $imges.val(value);
+            console.log(value);
         });
         $('#fileInputBtn').on('fileuploaded', function (event, data, previewId, index) {
             response = data.response;
@@ -791,9 +941,11 @@
                     switch (value) {
 //                        todo
                         case "add":
-                            swal("去添加！");
+                            switchPanel("add-product-detail-panel");
+                            updateAddBookDetailPanel("add", response.data.data);
                             break;
                         default:
+                            window.location.href = "./personal-center.html?target-panel=product-manage";
                             swal("不添加！");
                     }
                 });
@@ -870,6 +1022,92 @@
         });
     }
 
+    /**
+     *
+     * @param option add or update
+     * @param data bookEntity or bookDeatailEntity
+     */
+    function updateAddBookDetailPanel(option, data) {
+        if (option == "add") {
+            // 添加商品详情
+            $("#action").val("add");
+            $("#bookId").val(data.id);
+            $("#bookDetail-bookName").val(data.bookName);
+            $("#product-detail-panel-title").text("完善商品详情信息 ")
+            $("#detail-submit-btn").text("提交商品详情信息");
+
+        }
+        else {
+            // 修改商品详情
+            // todo
+            $("#action").val("update");
+            $("#product-detail-panel-title").text("修改商品详情信息 ")
+            $("detail-submit-btn").text("确认修改 ");
+        }
+    }
+
+    /**
+     * 新增或修改商品详情信息
+     */
+    function operateProductDetail() {
+
+        var id = $("#bookDetailId").val();
+        var bookId = $("#bookId").val();
+        var edition = $("#edition").val();
+        var words = $("#words").val();
+        var pages = $("#pages").val();
+        var paperType = $("#paperType").val();
+        var printDate = $("#printDate").val();
+        var authorIntro = $("#authorIntro").val();
+        var briefIntro = $("#briefIntro").val();
+        var foreword = $("#foreword").val();
+        var images = $("#images").val();
+        const params = new URLSearchParams();
+        params.append("id", id);
+        params.append("bookId", bookId);
+        params.append("edition", edition);
+        params.append("words", words);
+        params.append("pages", pages);
+        params.append("paperType", paperType);
+        params.append("printDate", printDate);
+        params.append("authorIntro", authorIntro);
+        params.append("briefIntro", briefIntro);
+        params.append("foreword", foreword);
+        params.append("images", images);
+        if ($("#action").val() == "add") {
+            instance.post("/book/addDetail", params).then(function (response) {
+                console.log(response.data.desc);
+                if (response.data.code == 0) {
+                    simpleSuccessInfo("添加商品详情成功 ！");
+                    setTimeout(function () {
+                        // todo
+                        window.location.href = "./personal-center.html?target-panel=product-manage-panel";
+                    }, MIDDLE_DELAY);
+                } else {
+                    simpleErrorInfo(response.data.desc);
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+        } else {
+            instance.post("/book/updateDetail", params).then(function (response) {
+                console.log(response.data.desc);
+                if (response.data.code == 0) {
+                    simpleSuccessInfo("修改商品详情成功 ！");
+                    setTimeout(function () {
+                        // todo
+                        window.location.href = "./personal-center.html";
+                    }, MIDDLE_DELAY);
+                } else {
+                    simpleErrorInfo(response.data.desc);
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+    };
+
+
     // 更新面板信息
     function updateAndShowPanel(targetPanelLinkId) {
         if (targetPanelLinkId != null) {
@@ -891,9 +1129,83 @@
                     updateStoreInfoPanel();
                     break;
                 }
-
+                case "#product-manage-panel" : {
+                    updateProductManagePanel();
+                    break;
+                }
             }
         }
     }
+
+    /**
+     * 切换面板不更新数据
+     * @param panelName
+     */
+    function switchPanel(panelName) {
+        $(".panel").slideUp(MICRO_DELAY);
+        $(".panel-link").removeClass("text-primary");
+        $("#" + panelName).slideDown(MIDDLE_DELAY);
+    }
+
+    /**
+     * 更新商品管理面板
+     */
+    function updateProductManagePanel() {
+        var books;
+        instance.get('/book/all')
+            .then(function (response) {
+                books = response.data.data;
+                console.log(" num of books  :" + books.length);
+                if (books.length != 0) {
+                    var $productContainer = $("#product-container");
+                    $productContainer.html("");
+                    books.forEach(function (currentValue) {
+                        console.log(currentValue);
+                        // generate dom
+                        var productsString = " <div class='row' href='' >\n" +
+                            "                        <div class='col-12'>\n" +
+                            "                            <div class='card flex-md-row mb-4 box-shadow h-md-180'>\n" +
+                            "                                <img class=' d-none d-md-block small-cover-img'\n" +
+                            "                                     src='" + currentValue.coverImg + "' data-holder-rendered='true'>\n" +
+                            "                                <div class='card-body align-items-start text-nowrap text-justify'>\n" +
+                            "                                    <strong> " + currentValue.bookName + "</strong>\n" +
+                            "                                    <div class='badge badge-info d-inline-block'>" + currentValue.category + "</div>\n" +
+                            "                                    <hr>\n" +
+                            "                                    <div class='h6 d-inline-block pr-2'>" + currentValue.authorName + "</div>\n" +
+                            "                                    <span class='badge badge-primary ml-2'>" + currentValue.publishDate + "</span>\n" +
+                            "                                    <div>\n" +
+                            "                                        <price class='text-danger'>\n" +
+                            "                                            ￥<h5 class='font-weight-bold d-inline-block pr-2 '>" + currentValue.currentPrice + "</h5>\n" +
+                            "                                        </price>\n" +
+                            "                                        <del>￥" + currentValue.pricing + "</del>\n" +
+                            "                                        <h6 class='d-inline-block pl-2'>" + currentValue.publisher + "</h6>\n" +
+                            "                                    </div>\n" +
+                            "                                    <div>\n" +
+                            "                                        <h6 class='h6 d-inline-block pr-2'> 已售: " + currentValue.sales + "</h6>\n" +
+                            "                                        <h6 class='h6 d-inline-block pr-2'> 库存: " + currentValue.stock + "</h6>\n" +
+                            "                                    </div>\n" +
+                            "                                </div>\n" +
+                            "                                <div class='card-footer flex-md-row align-middle btn-light'>\n" +
+                            "                                    <img src='../img/common/modify.png' class='icon m-auto d-block align-middle'" +
+                            "                                         data-toggle='tooltip' data-placement='top' data-product-id=''\n" +
+                            "                                         data-original-title='修改商品信息'>\n" +
+                            "                                    </img>\n" +
+                            "                                </div>\n" +
+                            "                            </div>\n" +
+                            "                        </div>\n" +
+                            "                    </div>";
+                        var $book = $(productsString);
+                        $book.appendTo($productContainer);
+
+                    });
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+
+    }
+
 </script>
 </html>

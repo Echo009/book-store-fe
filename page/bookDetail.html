@@ -4,10 +4,10 @@
     <!--
 * Author : Ech0
 * Email  : ech0.extreme@foxmail.com
-* Time   : 04/22/2018 12:55 AM
+* Time   : 04/25/2018 09:02 PM
 *-->
     <meta charset="UTF-8">
-    <title>L-Store</title>
+    <title>商品详情</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!--lib-->
     <script src="../lib/jquery/jquery.js"></script>
@@ -20,45 +20,11 @@
     <script src="https://cdn.bootcss.com/axios/0.18.0/axios.js"></script>
     <script src="../js/constant.js"></script>
     <script src="../js/common.js"></script>
-    <!--distpicker-->
-    <script src="../lib/distpicker/distpicker.common.js"></script>
-    <script src="../lib/distpicker/distpicker.esm.js"></script>
-    <script src="../lib/distpicker/distpicker.js"></script>
-    <!--awesome-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
-          integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
-    <!--file-input-->
-    <link rel="stylesheet" href="../lib/fileinput/fileinput.css">
-    <link rel="stylesheet" href="../lib/fileinput/theme.css">
-    <script src="../lib/fileinput/piexif.js"></script>
-    <script src="../lib/fileinput/fileinput.js"></script>
-    <script src="../lib/fileinput/zh.js"></script>
-    <script src="../lib/fileinput/theme.js"></script>
-
-
     <!--todo modify-->
     <link rel="stylesheet" href="../css/custom.css">
-    <style>
-        #logo {
-            position: fixed;
-            right: 0.75rem;
-            bottom: 0.65rem;
-            cursor: pointer;
-            text-decoration: none;
-            color: #5DAC81;
-            font-size: 2rem;
-            z-index: 9999;
-            letter-spacing: 0.025em;
-        }
-        #logoDot {
-            color: #d74580;
-        }
-    </style>
 </head>
 <body>
-
-
-<div class="container text-center  ">
+<div class="container">
     <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary ">
         <div class="container">
             <a href="index.html" class="navbar-brand">L-store</a>
@@ -97,7 +63,6 @@
                             <div class="btn btn-secondary  my-2 my-sm-0" value="搜索">搜索</div>
                         </form>
                     </li>
-
                 </ul>
                 <div id="login-links" class="text-center">
                     <ul class="nav navbar-nav ml-auto">
@@ -140,21 +105,18 @@
                             <div class="nav-link btn" onclick="logout()">退出</div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
     </div>
-    <!--商品详情-->
 </div>
-<a id="logo" href="http://echo0.cn">Echo0<span id="logoDot">.</span>cn</a>
 </body>
 <script>
-    $("[data-toggle='tooltip']").tooltip();
-
-
-
+    $(function () {
+        $(document).on("click", ".search-option", function () {
+            var $this = $(this);
+            $("#searchOption").text($this.text());
+        });
+    });
 </script>
-
 </html>

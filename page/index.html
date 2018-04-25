@@ -43,17 +43,18 @@
                     </li>
                     <!--分类下拉框-->
                     <li class="nav-item dropdown ">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download">所有分类 <span
-                                class="caret"></span></a>
-                        <div class="dropdown-menu " aria-labelledby="download">
+                        <div class="nav-link dropdown-toggle btn btn-primary" data-toggle="dropdown"> <span id="searchOption" class="pl-2">所有分类</span> <span class="caret"></span></div>
+                        <div class="dropdown-menu " >
                             <!--fixed category -->
-                            <a class="dropdown-item" href="#">小说</a>
-                            <a class="dropdown-item" href="#">文学</a>
-                            <a class="dropdown-item" href="#">艺术</a>
-                            <a class="dropdown-item" href="#">卡通</a>
-                            <a class="dropdown-item" href="#">教育</a>
-                            <a class="dropdown-item" href="#">历史</a>
-                            <a class="dropdown-item" href="#">科技</a>
+                            <div class="search-option dropdown-item" >小说</div>
+                            <div class="search-option dropdown-item" >文学</div>
+                            <div class="search-option dropdown-item" >艺术</div>
+                            <div class="search-option dropdown-item" >卡通</div>
+                            <div class="search-option dropdown-item" >教育</div>
+                            <div class="search-option dropdown-item" >历史</div>
+                            <div class="search-option dropdown-item" >科技</div>
+                            <hr>
+                            <div class="search-option dropdown-item" >所有分类</div>
                         </div>
                     </li>
                     <li class="nav-item ml-3 text-center">
@@ -95,7 +96,7 @@
                                         <a class="dropdown-item" href="#">我的订单</a>
                                         <a class="dropdown-item" href="#">商品收藏</a>
                                         <a class="dropdown-item" href="#">店铺收藏</a>
-                                        <a class="dropdown-item" href="#">个人信息</a>
+                                        <a class="dropdown-item" href="./personal-center.html?target-panel=personal-info">个人信息</a>
                                         <a class="dropdown-item" href="#">地址管理</a>
                                     </div>
                                 </div>
@@ -105,8 +106,6 @@
                             <div class="nav-link btn" onclick="logout()">退出</div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
@@ -429,6 +428,11 @@
         } catch (e) {
             console.log("not login !");
         }
+
+        $(document).on("click", ".search-option", function () {
+            var $this = $(this);
+            $("#searchOption").text($this.text());
+        });
     });
 
 
