@@ -128,6 +128,11 @@
             <div>
                 <h5 id="detail-bookName" class="text-danger font-weight-bold d-inline-block">刺杀骑士团长</h5>
                 <span id="detail-category" class="badge badge-primary d-inline-block"> 小说 </span>
+                <i id="favorite-btn " class="h5 font-weight-light mr-3 float-right far fa-star ml-2 text-dark" style="cursor: pointer"
+                   data-toggle="tooltip"
+                   data-placement="right"
+                   title="" data-original-title="收藏商品"
+                ></i>
             </div>
             <hr>
             <div>
@@ -156,8 +161,9 @@
             <hr>
             <div>
                 <div class="btn-group w-100" role="group" aria-label="Basic example">
-                    <button class="btn btn-secondary w-50"><i class="fas fa-cart-arrow-down mr-3"></i> 加入购物车</button>
+                    <button class="btn btn-secondary w-50" onclick="addToCart()"><i class="fas fa-cart-arrow-down mr-3"></i> 加入购物车</button>
                     <button class="btn btn-success w-50"><i class="fas fa-yen-sign mr-3"></i>立即购买</button>
+
                 </div>
             </div>
         </div>
@@ -284,6 +290,9 @@
 </div>
 </body>
 <script>
+
+
+    
     $(function () {
 
         var currentUser = store.get(CURRENT_USER);
@@ -298,7 +307,6 @@
         }
 
 
-
         var bookId = getQueryVariable("bookId");
         if (bookId == false) {
             simpleErrorInfo("bookId is empty !");
@@ -311,6 +319,7 @@
             fillStoreInfo(bookId);
         }
     });
+
     function fillBookDetailInfo(bookId) {
         const params = new URLSearchParams();
         params.append("bookId", bookId);
@@ -385,6 +394,40 @@
             .catch(function (error) {
                 console.log(error);
             });
+    }
+    
+    function addToCart() {
+        var bookId = $("#bookId").val();
+        const params = new URLSearchParams();
+        params.append("bookId", bookId);
+        instance.post("/cart/add", params).then(function (response) {
+            console.log(response.data.desc);
+            if (response.data.code == 0) {
+                simpleSuccessInfo("添加成功 ！");
+            } else {
+                swal({
+                    text: "请登录 ！",
+                    icon: "warning",
+                    buttons: {
+                        cancel: "人家不要 ！",
+                        add: {
+                            text: "好的，ヽ(￣▽￣)و",
+                            value: "login",
+                        }
+                    },
+                }).then((value) => {
+                    switch (value) {
+                        case "login":
+                            window.location.href = "./login.html#1";
+                            break;
+                        default:
+
+                    }
+                });
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 </script>
 </html>

@@ -406,3 +406,20 @@ i{
 .product {
     cursor: pointer!important;
 }
+td{
+    vertical-align: middle !important;
+}
+
+.vcenter {
+    display: inline-block !important;
+    vertical-align: middle !important;
+    float: none !important;
+}
+
+.cart-container {
+}
+/**
+ 店铺checkbox
+ */
+.store-selector {
+}

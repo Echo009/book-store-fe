@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <!--
+* Author : Ech0
+* Email  : ech0.extreme@foxmail.com
+* Time   : 04/26/2018 09:47 PM
+*-->
+    <meta charset='UTF-8'>
+    <title>Op</title>
+</head>
+<body>
+<div class='store-container text-center' id='carts-store-xx'>
+    <div id='store-title' class='text-left pl-4 font-weight-bold h6'>
+        <input type='checkbox' class='store-selector mr-2' data-target-store-id='XXX'> L-store
+    </div>
+    <hr>
+</div>
+
+<div class='cart-container row' data-target-book-id='XXX'>
+    <div class='col-md-1 d-flex align-items-center text-left'>
+        <div class='w-100 pl-4'>
+            <input class='store-X' data-target-book-id='XXX' type='checkbox'>
+        </div>
+    </div>
+    <div class='col-md-3 d-flex align-items-center text-center'>
+        <img class=' d-none d-md-block img-thumbnail mr-auto' style='max-height: 10rem'
+             src='XXX' data-holder-rendered='true'>
+    </div>
+    <div class='col-md-3 text-center vcenter align-items-center'>
+        <div>
+            <strong> 刺杀骑士团长</strong>
+            <div class='badge badge-info d-inline-block'>小说</div>
+            <hr>
+            <div class='h6 d-inline-block pr-2 vcenter'>村上春树 著，林少华 译</div>
+            <span class='badge badge-primary ml-2'>2017-09-11</span>
+            <div>
+                <price class='text-danger'>
+                    ￥<h5 class='font-weight-bold d-inline-block pr-2 '>94</h5>
+                </price>
+                <del>￥98</del>
+                <h6 class='d-inline-block pl-2'>上海译文出版社</h6>
+            </div>
+        </div>
+
+    </div>
+    <div class='col-md-1 text-center   d-flex align-items-center'>
+        <div class='mr-auto w-100' >
+            <span class='h5 text-danger' id='book-XXX-total-price'>376</span>
+        </div>
+    </div>
+    <div class='col-md-3 text-center d-flex align-items-center'>
+        <div class='btn-group w-100 pr-5 pl-5 ' role='group' >
+            <button class='btn btn-info w-25 cart-btn-minus' data-target-book-id='XXX'>-</button>
+            <button class='btn btn-outline-primary w-50 disabled cart-amount'
+                    data-target-book-id='XXX' id='book-6-amount'>1
+            </button>
+            <button class='btn btn-info w-25 cart-btn-plus' data-target-book-id='XXX'>+</button>
+        </div>
+    </div>
+    <div class='col-md-1 d-md-flex align-items-center text-center d-none '>
+        <div class='w-100'>
+            <div class='btn-group-vertical w-100 ' role='group'>
+                <button class='btn btn-danger h-50 cart-del-btn'
+                        data-toggle='tooltip'
+                        data-placement='top'
+                        data-original-title='删除'
+                        data-target-book-id='XXX'>
+                    <i class='fas fa-trash-alt mr-0'></i>
+                </button>
+                <button class='btn btn-primary h-50 cart-to-favorite-btn'
+                        data-toggle='tooltip'
+                        data-placement='bottom'
+                        data-original-title='移入收藏夹'
+                        data-target-book-id='XXX'>
+                    <i class='fas fa-random  mr-0'></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class='row text-center align-items-center d-md-none d-sm-flex'>
+    <div class='col-12 pt-4 '>
+        <div class='btn-group w-100 pl-5 pr-5' role='group'>
+            <button class='btn btn-danger w-50 cart-del-btn'
+                    data-toggle='tooltip'
+                    data-placement='top'
+                    data-original-title='删除'
+                    data-target-book-id='x'>
+                <i class='fas fa-trash-alt mr-0'></i>
+            </button>
+            <button class='btn btn-primary w-50 cart-to-favorite-btn'
+                    data-toggle='tooltip'
+                    data-placement='bottom'
+                    data-original-title='移入收藏夹'
+                    data-target-book-id='x'>
+                <i class='fas fa-random  mr-0'></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

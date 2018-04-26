@@ -81,6 +81,7 @@ $(function () {
     $(document).on("click", ".product", function () {
         var $this = $(this);
         var bookId = $this.attr("data-product-id");
+        console.log("bookId is : " + bookId);
         window.location.href = "./bookDetail.html?bookId="+bookId;
     });
     $("[data-toggle='tooltip']").tooltip();

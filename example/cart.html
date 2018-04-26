@@ -147,46 +147,66 @@
             </div>
         </div>
     </div>
-    <!--商品管理-->
-    <div id="product-manage-panel" class="panel  w-100 border border-info rounded mt-2  " style="overflow: auto;max-height: 80rem;overflow-x: hidden">
+    <!--购物车-->
+    <div id="product-manage-panel" class="panel  w-100 border border-info rounded mt-2  "
+         style="overflow: auto;max-height: 80rem;overflow-x: hidden">
         <div class="row row pt-1 pl-3 pr-3 pb-3">
             <div class="col w-100 order-md-1 ">
-                <h5 class="mb-3 text-left">商品管理</h5>
+                <h5 class="mb-3 text-left"><i class="fas fa-shopping-cart"></i>我的购物车</h5>
                 <hr>
-                <div id="product-container" style="cursor: pointer;">
-                    <div class='row' href=''>
-                        <div class='col-12'>
-                            <div class='card flex-md-row mb-4 box-shadow h-md-180'>
-                                <img class=' d-none d-md-block small-cover-img'
-                                     src='http://img3m3.ddimg.cn/9/15/25254513-1_l_5.jpg' data-holder-rendered='true'>
-                                <div class='card-body align-items-start text-nowrap text-justify'>
-                                    <strong> 刺杀骑士团长</strong>
-                                    <div class='badge badge-info d-inline-block'>小说</div>
-                                    <hr>
-                                    <div class='h6 d-inline-block pr-2'>村上春树 著，林少华 译</div>
-                                    <span class='badge badge-primary ml-2'>2017-09-11</span>
-                                    <div>
-                                        <price class='text-danger'>
-                                            ￥<h5 class='font-weight-bold d-inline-block pr-2 '>94</h5>
-                                        </price>
-                                        <del>￥98</del>
-                                        <h6 class='d-inline-block pl-2'>上海译文出版社</h6>
-                                    </div>
-                                    <div>
-                                        <h6 class='h6 d-inline-block pr-2'> 已售: 8</h6>
-                                        <h6 class='h6 d-inline-block pr-2'> 库存: 100</h6>
-                                    </div>
-                                </div>
-                                <div class='card-footer flex-md-row align-middle btn-light'>
-                                    <img src='../img/common/modify.png' class='icon m-auto d-block align-middle'
-                                         data-toggle='tooltip' data-placement='top' data-product-id=''
-                                         data-original-title='修改商品信息'>
-                                    </img>
-                                </div>
+                <table class="table table-hover ">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="text-left pl-3"><input type="checkbox"> 全选</th>
+                        <th scope="col">商品信息</th>
+                        <th scope="col">单价</th>
+                        <th scope="col">数量</th>
+                        <th scope="col">金额</th>
+                        <th scope="col">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="text-muted  text-left pl-4"><input type="checkbox" class="mr-1"> L-store</td>
+                        <td class="text-muted  " colspan="5"></td>
+                    </tr>
+                    <tr>
+                        <td scope="col" class="text-left pl-4">
+                            <input type="checkbox">
+                            <!--cover-img-->
+                            <img src="http://img3m8.ddimg.cn/42/10/25228608-1_l_20.jpg"
+                                 class="img-thumbnail d-md-inline-block d-none">
+                        </td>
+                        <td scope="col">
+                            <span class="text-dark">
+                                刺杀骑士团长
+                            </span>
+                        </td>
+                        <td scope="col" class="text-success">94</td>
+                        <td scope="col" class="text-dark">
+                            <div class="btn-group w-75" role="group" aria-label="Basic example">
+                                <button class="btn btn-info w-25 card-btn-minus">-</button>
+                                <button class="btn btn-outline-primary w-50 disabled">1</button>
+                                <button class="btn btn-info w-25 cart-btn-plus">+</button>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        </td>
+                        <td scope="col" class="text-danger">188</td>
+                        <td scope="col">
+                            <i class="fas fa-trash-alt"
+                               data-toggle="tooltip"
+                               data-placement="top"
+                               title="" data-original-title="删除">
+                            </i>
+                            <div></div>
+                            <i class="fas fa-random"
+                               data-toggle="tooltip"
+                               data-placement="bottom"
+                               title="" data-original-title="移入收藏夹">
+                            </i>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -198,67 +218,6 @@
 </body>
 
 <script>
-    $("[data-toggle='tooltip']").tooltip();
-
-    /**
-     * 更新商品管理面板
-     */
-    function updateProductManagePanel() {
-        var books;
-        instance.get('/book/all')
-            .then(function (response) {
-                books = response.data.data;
-                console.log(" num of books  :" + books.length);
-                if (books.length != 0) {
-                    var $productContainer = $("#product-container");
-                    $productContainer.html("");
-                    books.forEach(function (currentValue) {
-                        console.log(currentValue);
-                        // generate dom
-                        var productsString = " <div class='row' href='' >\n" +
-                            "                        <div class='col-12'>\n" +
-                            "                            <div class='card flex-md-row mb-4 box-shadow h-md-180'>\n" +
-                            "                                <img class=' d-none d-md-block small-cover-img'\n" +
-                            "                                     src='" + currentValue.coverImg + "' data-holder-rendered='true'>\n" +
-                            "                                <div class='card-body align-items-start text-nowrap text-justify'>\n" +
-                            "                                    <strong> " + currentValue.bookName + "</strong>\n" +
-                            "                                    <div class='badge badge-info d-inline-block'>" + currentValue.category + "</div>\n" +
-                            "                                    <hr>\n" +
-                            "                                    <div class='h6 d-inline-block pr-2'>" + currentValue.authorName + "</div>\n" +
-                            "                                    <span class='badge badge-primary ml-2'>" + currentValue.publishDate + "</span>\n" +
-                            "                                    <div>\n" +
-                            "                                        <price class='text-danger'>\n" +
-                            "                                            ￥<h5 class='font-weight-bold d-inline-block pr-2 '>" + currentValue.currentPrice + "</h5>\n" +
-                            "                                        </price>\n" +
-                            "                                        <del>￥" + currentValue.pricing + "</del>\n" +
-                            "                                        <h6 class='d-inline-block pl-2'>" + currentValue.publisher + "</h6>\n" +
-                            "                                    </div>\n" +
-                            "                                    <div>\n" +
-                            "                                        <h6 class='h6 d-inline-block pr-2'> 已售: " + currentValue.sales + "</h6>\n" +
-                            "                                        <h6 class='h6 d-inline-block pr-2'> 库存: " + currentValue.stock + "</h6>\n" +
-                            "                                    </div>\n" +
-                            "                                </div>\n" +
-                            "                                <div class='card-footer flex-md-row align-middle btn-light'>\n" +
-                            "                                    <img src='../img/common/modify.png' class='icon m-auto d-block align-middle'" +
-                            "                                         data-toggle='tooltip' data-placement='top' data-product-id=''\n" +
-                            "                                         data-original-title='修改商品信息'>\n" +
-                            "                                    </img>\n" +
-                            "                                </div>\n" +
-                            "                            </div>\n" +
-                            "                        </div>\n" +
-                            "                    </div>";
-                        var $book = $(productsString);
-                        $book.appendTo($productContainer);
-
-                    });
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
-
-    }
 
 
 </script>

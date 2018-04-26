@@ -34,8 +34,8 @@
     <script src="../lib/fileinput/fileinput.js"></script>
     <script src="../lib/fileinput/zh.js"></script>
     <script src="../lib/fileinput/theme.js"></script>
-
-
+    <!--cart-->
+    <script src="../js/cart.js"></script>
     <!--todo modify-->
     <link rel="stylesheet" href="../css/custom.css">
 </head>
@@ -180,7 +180,7 @@
                     <div id="personal-options" class=" show">
                         <a id="personal-info" href="#" data-target-panel="personal-info-panel"
                            class="list-group-item list-group-item-light border-0 panel-link "> 个人信息 </a>
-                        <a id="cart-info" href="#"
+                        <a id="cart-info" href="#" data-target-panel="cart-info-panel"
                            class="list-group-item list-group-item-light border-0 panel-link"> 我的购物车 </a>
                         <a id="addr" href="#" class="panel-link list-group-item list-group-item-light border-0">
                             收货地址 </a>
@@ -230,7 +230,8 @@
                 <div class="row border border-success rounded">
                     <!--头像-->
                     <div class="col-4 col-lg-2 pl-2 mt-2 pr-1 border border-info rounded">
-                        <img id="personal-info-head-img" class="head-img-l img-thumbnail rounded-circle  border border-success"
+                        <img id="personal-info-head-img"
+                             class="head-img-l img-thumbnail rounded-circle  border border-success"
                              src="http://p7f7rr200.bkt.clouddn.com/b6463e9a-e8e2-44a6-909b-332887e5d995" alt="">
                     </div>
                     <!--简要信息-->
@@ -772,7 +773,8 @@
                 </div>
             </div>
             <!--商品管理-->
-            <div id="product-manage-panel" class="panel collapse w-100 border border-info rounded mt-2  " style="overflow: auto;max-height: 80rem;overflow-x: hidden">
+            <div id="product-manage-panel" class="panel collapse w-100 border border-info rounded mt-2"
+                 style="overflow: auto;max-height: 80rem;overflow-x: hidden">
                 <div class="row row pt-1 pl-3 pr-3 pb-3">
                     <div class="col w-100 order-md-1 ">
                         <h5 class="mb-3 text-left">商品管理</h5>
@@ -781,6 +783,19 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <!--购物车-->
+            <div id="cart-info-panel" class="panel  w-100 border border-info rounded mt-2  ">
+                <h5 class="mb-3 text-left mt-3 ml-2"><i class="fas fa-shopping-cart"></i>我的购物车</h5>
+                <hr>
+                <div class="row pt-1 pl-3 pr-3 pb-3">
+                    <div class="col w-100 " id="carts">
+                    </div>
+                </div>
+                <div class="col text-center align-items-center w-100">
+                    <div class="btn btn-primary  mt-3 w-75"><i class="fas fa-credit-card"></i> 购买</div>
+                </div>
+                <hr>
             </div>
         </div>
     </div>
@@ -941,7 +956,6 @@
                             break;
                         default:
                             window.location.href = "./personal-center.html?target-panel=product-manage";
-                            swal("不添加！");
                     }
                 });
             } else {
@@ -1102,6 +1116,21 @@
         }
     };
 
+    function updateCartInfoPanel() {
+        $(".arrow").remove();
+        $(".tooltip-inner").remove();
+        $("#carts").html("");
+        instance.get('/cart/all')
+            .then(function (response) {
+                console.log("update cartInfo ..." + response.data.data.userName);
+                response.data.data.forEach(function (cartWrapperData) {
+                    addCart(cartWrapperData);
+                })
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
 
     // 更新面板信息
     function updateAndShowPanel(targetPanelLinkId) {
@@ -1128,6 +1157,10 @@
                 }
                 case "#product-manage-panel" : {
                     updateProductManagePanel();
+                    break;
+                }
+                case "#cart-info-panel" : {
+                    updateCartInfoPanel();
                     break;
                 }
             }
@@ -1159,7 +1192,7 @@
                     books.forEach(function (currentValue) {
                         console.log(currentValue);
                         // generate dom
-                        var productsString = " <div data-product-id='"+currentValue.id+"' class='row product'  >\n" +
+                        var productsString = " <div data-product-id='" + currentValue.id + "' class='row product'  >\n" +
                             "                        <div class='col-12'>\n" +
                             "                            <div class='card flex-md-row mb-4 box-shadow h-md-180'>\n" +
                             "                                <img class=' d-none d-md-block  small-cover-img img-thumbnail '\n" +
