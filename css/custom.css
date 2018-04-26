@@ -269,8 +269,7 @@ pre {
 
 /*modify by echo009*/
 .small-cover-img {
-    max-width: 200px !important;
-    max-height: 150px !important;
+    max-width: 10rem !important;
     margin: auto;
 }
 
@@ -361,8 +360,7 @@ pre {
 
 /*大头像*/
 .head-img-l {
-    width: 6rem;
-    height: 6rem;
+    margin: auto;
 }
 
 /*大象动画*/
@@ -373,7 +371,7 @@ pre {
 }
 
 .badge {
-    margin-left: 0.2rem !important;
+    margin-left: 0.3rem !important;
 }
 
 /**
@@ -382,8 +380,29 @@ pre {
 .search-option {
 }
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
     .h-md-180 {
         height: 180px;
     }
+}
+
+.big-cover-img {
+    margin: auto;
+}
+
+.detail-store-cover-img {
+    width: 6.3rem;
+    height: 6.3rem;
+}
+item {
+    margin-right:4rem;
+}
+i{
+    margin-right:0.5rem !important;
+}
+/**
+商品
+ */
+.product {
+    cursor: pointer!important;
 }

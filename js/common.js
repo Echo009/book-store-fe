@@ -74,5 +74,14 @@ function updateUserInfo() {
 };
 
 $(function () {
-
+    $(document).on("click", ".search-option", function () {
+        var $this = $(this);
+        $("#searchOption").text($this.text());
+    });
+    $(document).on("click", ".product", function () {
+        var $this = $(this);
+        var bookId = $this.attr("data-product-id");
+        window.location.href = "./bookDetail.html?bookId="+bookId;
+    });
+    $("[data-toggle='tooltip']").tooltip();
 });

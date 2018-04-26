@@ -229,12 +229,12 @@
                 <!--base-info-->
                 <div class="row border border-success rounded">
                     <!--头像-->
-                    <div class="col-2 pl-2 mt-2 pr-1 border border-info rounded">
-                        <img id="personal-info-head-img" class="head-img-l rounded-circle  border border-success"
+                    <div class="col-4 col-lg-2 pl-2 mt-2 pr-1 border border-info rounded">
+                        <img id="personal-info-head-img" class="head-img-l img-thumbnail rounded-circle  border border-success"
                              src="http://p7f7rr200.bkt.clouddn.com/b6463e9a-e8e2-44a6-909b-332887e5d995" alt="">
                     </div>
                     <!--简要信息-->
-                    <div class="col-7 mt-2 border border-warning rounded">
+                    <div class="col-6 col-lg-8 mt-2 border border-warning rounded">
                         <!--username-->
                         <div id="personal-info-username" class=" badge badge-pill badge-primary"> Echo009</div>
                         <div></div>
@@ -251,7 +251,7 @@
                         </div>
                     </div>
                     <!--修改按钮-->
-                    <div class="col-3 mt-2 pl-4 border  border-success rounded text-right  ">
+                    <div class="col-2 col-lg-2 mt-2 pl-4 border  border-success rounded text-right  ">
                         <img src="../img/common/modify.png" class="icon" data-toggle="tooltip" data-placement="top"
                              title="" data-original-title="修改个人信息">
                         </img>
@@ -792,8 +792,8 @@
 </body>
 <script>
     $(function () {
-        //  bind
-        $("[data-toggle='tooltip']").tooltip();
+
+
         // bind click event
         $(document).on("click", ".panel-link", function () {
             var $currentElement = $(this);
@@ -802,14 +802,9 @@
             if ($currentElement.hasClass("text-primary")) {
                 return false;
             }
-            $(".panel-link").removeClass("text-primary");
-            $currentElement.addClass("text-primary");
             updateAndShowPanel(this.id);
         });
-        $(document).on("click", ".search-option", function () {
-            var $this = $(this);
-            $("#searchOption").text($this.text());
-        });
+
         // fileinput
         $("#fileInputBtn").fileinput({
             theme: "explorer-fas",
@@ -928,7 +923,7 @@
                 console.log(response.data.data);
                 swal({
                     title: "添加商品成功！",
-                    text: "是否继续补充商品详情信息 ?",
+                    text: "请务必补充商品详情信息 ！",
                     icon: "success",
                     buttons: {
                         cancel: "暂时不添加",
@@ -1111,9 +1106,11 @@
     // 更新面板信息
     function updateAndShowPanel(targetPanelLinkId) {
         if (targetPanelLinkId != null) {
+//            store-info
             var $currentElement = $("#" + targetPanelLinkId);
             $(".panel-link").removeClass("text-primary");
             $currentElement.addClass("text-primary");
+
             var targetPanelSelector = "#" + $currentElement.attr("data-target-panel");
             console.log("target panel is " + targetPanelSelector);
             // hidden all panel
@@ -1162,10 +1159,10 @@
                     books.forEach(function (currentValue) {
                         console.log(currentValue);
                         // generate dom
-                        var productsString = " <div class='row' href='' >\n" +
+                        var productsString = " <div data-product-id='"+currentValue.id+"' class='row product'  >\n" +
                             "                        <div class='col-12'>\n" +
                             "                            <div class='card flex-md-row mb-4 box-shadow h-md-180'>\n" +
-                            "                                <img class=' d-none d-md-block small-cover-img'\n" +
+                            "                                <img class=' d-none d-md-block  small-cover-img img-thumbnail '\n" +
                             "                                     src='" + currentValue.coverImg + "' data-holder-rendered='true'>\n" +
                             "                                <div class='card-body align-items-start text-nowrap text-justify'>\n" +
                             "                                    <strong> " + currentValue.bookName + "</strong>\n" +

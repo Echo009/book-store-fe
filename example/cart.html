@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+* Author : Ech0
+* Email  : ech0.extreme@foxmail.com
+* Time   : 04/22/2018 12:55 AM
+*-->
+    <meta charset="UTF-8">
+    <title>L-Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--lib-->
+    <script src="../lib/jquery/jquery.js"></script>
+    <link rel="stylesheet" href="../lib/bootstrap/bootstrap.css">
+    <script src="../lib/bootstrap/popper.js"></script>
+    <script src="../lib/bootstrap/bootstrap.js"></script>
+    <!--sweetalert-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.bootcss.com/store.js/1.3.20/store.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.18.0/axios.js"></script>
+    <script src="../js/constant.js"></script>
+    <script src="../js/common.js"></script>
+    <!--distpicker-->
+    <script src="../lib/distpicker/distpicker.common.js"></script>
+    <script src="../lib/distpicker/distpicker.esm.js"></script>
+    <script src="../lib/distpicker/distpicker.js"></script>
+    <!--awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+          integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <!--file-input-->
+    <link rel="stylesheet" href="../lib/fileinput/fileinput.css">
+    <link rel="stylesheet" href="../lib/fileinput/theme.css">
+    <script src="../lib/fileinput/piexif.js"></script>
+    <script src="../lib/fileinput/fileinput.js"></script>
+    <script src="../lib/fileinput/zh.js"></script>
+    <script src="../lib/fileinput/theme.js"></script>
+
+
+    <!--todo modify-->
+    <link rel="stylesheet" href="../css/custom.css">
+    <style>
+        #logo {
+            position: fixed;
+            right: 0.75rem;
+            bottom: 0.65rem;
+            cursor: pointer;
+            text-decoration: none;
+            color: #5DAC81;
+            font-size: 2rem;
+            z-index: 9999;
+            letter-spacing: 0.025em;
+        }
+
+        #logoDot {
+            color: #d74580;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="container text-center  ">
+    <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary ">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">L-store</a>
+            <!--菜单按钮-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="" navbarResponsive aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!--菜单-->
+            <div class="collapse navbar-collapse text-center" id="navbarResponsive">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">帮助</a>
+                    </li>
+                    <!--分类下拉框-->
+                    <li class="nav-item dropdown ">
+                        <div class="nav-link dropdown-toggle btn btn-primary" data-toggle="dropdown"><span
+                                id="searchOption" class="pl-2">所有分类</span> <span class="caret"></span></div>
+                        <div class="dropdown-menu ">
+                            <!--fixed category -->
+                            <div class="search-option dropdown-item">小说</div>
+                            <div class="search-option dropdown-item">文学</div>
+                            <div class="search-option dropdown-item">艺术</div>
+                            <div class="search-option dropdown-item">卡通</div>
+                            <div class="search-option dropdown-item">教育</div>
+                            <div class="search-option dropdown-item">历史</div>
+                            <div class="search-option dropdown-item">科技</div>
+                            <hr>
+                            <div class="search-option dropdown-item">所有分类</div>
+                        </div>
+                    </li>
+                    <li class="nav-item ml-3 text-center">
+                        <!--搜索框-->
+                        <form class="form-inline mt-2 mt-md-0 ">
+                            <input class="form-control mr-sm-2" type="text" placeholder="">
+                            <div class="btn btn-secondary  my-2 my-sm-0" value="搜索">搜索</div>
+                        </form>
+                    </li>
+
+                </ul>
+                <div id="login-links" class="text-center">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="./login.html#1" target="_top">登录</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./login.html#2" target="_top">注册</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--已经登录-->
+                <div id="personal-links" class="d-none text-center">
+                    <div class="nav navbar-nav mr-auto ">
+                        <div class="nav-item mr-3">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-primary"
+                                        onclick="window.location.href='./personal-center.html?target-panel=cart-info'">
+                                    购物车
+                                </button>
+                                <button type="button" class="btn btn-primary"
+                                        onclick="window.location.href='./personal-center.html?target-panel=personal-info'">
+                                    个人中心
+                                </button>
+                                <div class="btn-group" role="group">
+                                    <button id="btnGroupDrop2" type="button" class="btn btn-success dropdown-toggle"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop2">
+                                        <a class="dropdown-item" href="#">我的订单</a>
+                                        <a class="dropdown-item" href="#">商品收藏</a>
+                                        <a class="dropdown-item" href="#">店铺收藏</a>
+                                        <a class="dropdown-item"
+                                           href="./personal-center.html?target-panel=personal-info">个人信息</a>
+                                        <a class="dropdown-item" href="#">地址管理</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-link btn" onclick="logout()">退出</div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--商品管理-->
+    <div id="product-manage-panel" class="panel  w-100 border border-info rounded mt-2  " style="overflow: auto;max-height: 80rem;overflow-x: hidden">
+        <div class="row row pt-1 pl-3 pr-3 pb-3">
+            <div class="col w-100 order-md-1 ">
+                <h5 class="mb-3 text-left">商品管理</h5>
+                <hr>
+                <div id="product-container" style="cursor: pointer;">
+                    <div class='row' href=''>
+                        <div class='col-12'>
+                            <div class='card flex-md-row mb-4 box-shadow h-md-180'>
+                                <img class=' d-none d-md-block small-cover-img'
+                                     src='http://img3m3.ddimg.cn/9/15/25254513-1_l_5.jpg' data-holder-rendered='true'>
+                                <div class='card-body align-items-start text-nowrap text-justify'>
+                                    <strong> 刺杀骑士团长</strong>
+                                    <div class='badge badge-info d-inline-block'>小说</div>
+                                    <hr>
+                                    <div class='h6 d-inline-block pr-2'>村上春树 著，林少华 译</div>
+                                    <span class='badge badge-primary ml-2'>2017-09-11</span>
+                                    <div>
+                                        <price class='text-danger'>
+                                            ￥<h5 class='font-weight-bold d-inline-block pr-2 '>94</h5>
+                                        </price>
+                                        <del>￥98</del>
+                                        <h6 class='d-inline-block pl-2'>上海译文出版社</h6>
+                                    </div>
+                                    <div>
+                                        <h6 class='h6 d-inline-block pr-2'> 已售: 8</h6>
+                                        <h6 class='h6 d-inline-block pr-2'> 库存: 100</h6>
+                                    </div>
+                                </div>
+                                <div class='card-footer flex-md-row align-middle btn-light'>
+                                    <img src='../img/common/modify.png' class='icon m-auto d-block align-middle'
+                                         data-toggle='tooltip' data-placement='top' data-product-id=''
+                                         data-original-title='修改商品信息'>
+                                    </img>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<a id="logo" href="http://echo0.cn">Echo0<span id="logoDot">.</span>cn</a>
+
+</body>
+
+<script>
+    $("[data-toggle='tooltip']").tooltip();
+
+    /**
+     * 更新商品管理面板
+     */
+    function updateProductManagePanel() {
+        var books;
+        instance.get('/book/all')
+            .then(function (response) {
+                books = response.data.data;
+                console.log(" num of books  :" + books.length);
+                if (books.length != 0) {
+                    var $productContainer = $("#product-container");
+                    $productContainer.html("");
+                    books.forEach(function (currentValue) {
+                        console.log(currentValue);
+                        // generate dom
+                        var productsString = " <div class='row' href='' >\n" +
+                            "                        <div class='col-12'>\n" +
+                            "                            <div class='card flex-md-row mb-4 box-shadow h-md-180'>\n" +
+                            "                                <img class=' d-none d-md-block small-cover-img'\n" +
+                            "                                     src='" + currentValue.coverImg + "' data-holder-rendered='true'>\n" +
+                            "                                <div class='card-body align-items-start text-nowrap text-justify'>\n" +
+                            "                                    <strong> " + currentValue.bookName + "</strong>\n" +
+                            "                                    <div class='badge badge-info d-inline-block'>" + currentValue.category + "</div>\n" +
+                            "                                    <hr>\n" +
+                            "                                    <div class='h6 d-inline-block pr-2'>" + currentValue.authorName + "</div>\n" +
+                            "                                    <span class='badge badge-primary ml-2'>" + currentValue.publishDate + "</span>\n" +
+                            "                                    <div>\n" +
+                            "                                        <price class='text-danger'>\n" +
+                            "                                            ￥<h5 class='font-weight-bold d-inline-block pr-2 '>" + currentValue.currentPrice + "</h5>\n" +
+                            "                                        </price>\n" +
+                            "                                        <del>￥" + currentValue.pricing + "</del>\n" +
+                            "                                        <h6 class='d-inline-block pl-2'>" + currentValue.publisher + "</h6>\n" +
+                            "                                    </div>\n" +
+                            "                                    <div>\n" +
+                            "                                        <h6 class='h6 d-inline-block pr-2'> 已售: " + currentValue.sales + "</h6>\n" +
+                            "                                        <h6 class='h6 d-inline-block pr-2'> 库存: " + currentValue.stock + "</h6>\n" +
+                            "                                    </div>\n" +
+                            "                                </div>\n" +
+                            "                                <div class='card-footer flex-md-row align-middle btn-light'>\n" +
+                            "                                    <img src='../img/common/modify.png' class='icon m-auto d-block align-middle'" +
+                            "                                         data-toggle='tooltip' data-placement='top' data-product-id=''\n" +
+                            "                                         data-original-title='修改商品信息'>\n" +
+                            "                                    </img>\n" +
+                            "                                </div>\n" +
+                            "                            </div>\n" +
+                            "                        </div>\n" +
+                            "                    </div>";
+                        var $book = $(productsString);
+                        $book.appendTo($productContainer);
+
+                    });
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+
+    }
+
+
+</script>
+
+</html>
