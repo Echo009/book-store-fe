@@ -4,6 +4,7 @@
  * Time   : 04/27/2018 12:47 AM
  */
 
+// 购物车相关
 
 $(function () {
 
@@ -119,6 +120,10 @@ function removeCart() {
     });
 }
 
+/**
+ * add carts to cart panel , classify them by store
+ * @param cartWrapperData
+ */
 function addCart(cartWrapperData) {
     var storeModule = "<div class='store-container text-center' id='carts-store-" + cartWrapperData.storeId + "'>\n" +
         "    <div  class='text-left pl-4 font-weight-bold h6 text-secondary'>\n" +
@@ -145,8 +150,8 @@ function addCart(cartWrapperData) {
             "        </div>\n" +
             "    </div>\n" +
             "    <div class='col-md-3 d-flex align-items-center text-center'>\n" +
-            "        <img class=' d-none d-md-block img-thumbnail mr-auto' style='max-height: 10rem'\n" +
-            "             src='" + cart.coverImg + "' data-holder-rendered='true'>\n" +
+            "        <img class=' d-none d-md-block img-thumbnail mr-auto' style='max-height: 10rem ; cursor:pointer;'\n" +
+            "             src='" + cart.coverImg + "' data-holder-rendered='true' onclick=\"window.location.href='./bookDetail.html?bookId="+cart.bookId+"'\">\n" +
             "    </div>\n" +
             "    <div class='col-md-3 text-center vcenter align-items-center'>\n" +
             "        <div>\n" +

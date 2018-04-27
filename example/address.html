@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+* Author : Ech0
+* Email  : ech0.extreme@foxmail.com
+* Time   : 04/22/2018 12:55 AM
+*-->
+    <meta charset="UTF-8">
+    <title>L-Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--lib-->
+    <script src="../lib/jquery/jquery.js"></script>
+    <link rel="stylesheet" href="../lib/bootstrap/bootstrap.css">
+    <script src="../lib/bootstrap/popper.js"></script>
+    <script src="../lib/bootstrap/bootstrap.js"></script>
+    <!--sweetalert-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.bootcss.com/store.js/1.3.20/store.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.18.0/axios.js"></script>
+    <script src="../js/constant.js"></script>
+    <script src="../js/common.js"></script>
+    <!--distpicker-->
+    <script src="../lib/distpicker/distpicker.common.js"></script>
+    <script src="../lib/distpicker/distpicker.esm.js"></script>
+    <script src="../lib/distpicker/distpicker.js"></script>
+    <!--awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+          integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <!--file-input-->
+    <link rel="stylesheet" href="../lib/fileinput/fileinput.css">
+    <link rel="stylesheet" href="../lib/fileinput/theme.css">
+    <script src="../lib/fileinput/piexif.js"></script>
+    <script src="../lib/fileinput/fileinput.js"></script>
+    <script src="../lib/fileinput/zh.js"></script>
+    <script src="../lib/fileinput/theme.js"></script>
+
+    <!--todo modify-->
+    <link rel="stylesheet" href="../css/custom.css">
+    <style>
+        #logo {
+            position: fixed;
+            right: 0.75rem;
+            bottom: 0.65rem;
+            cursor: pointer;
+            text-decoration: none;
+            color: #5DAC81;
+            font-size: 2rem;
+            z-index: 9999;
+            letter-spacing: 0.025em;
+        }
+
+        #logoDot {
+            color: #d74580;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="container text-center  ">
+    <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary ">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">L-store</a>
+            <!--菜单按钮-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="" navbarResponsive aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!--菜单-->
+            <div class="collapse navbar-collapse text-center" id="navbarResponsive">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">帮助</a>
+                    </li>
+                    <!--分类下拉框-->
+                    <li class="nav-item dropdown ">
+                        <div class="nav-link dropdown-toggle btn btn-primary" data-toggle="dropdown"><span
+                                id="searchOption" class="pl-2">所有分类</span> <span class="caret"></span></div>
+                        <div class="dropdown-menu ">
+                            <!--fixed category -->
+                            <div class="search-option dropdown-item">小说</div>
+                            <div class="search-option dropdown-item">文学</div>
+                            <div class="search-option dropdown-item">艺术</div>
+                            <div class="search-option dropdown-item">卡通</div>
+                            <div class="search-option dropdown-item">教育</div>
+                            <div class="search-option dropdown-item">历史</div>
+                            <div class="search-option dropdown-item">科技</div>
+                            <hr>
+                            <div class="search-option dropdown-item">所有分类</div>
+                        </div>
+                    </li>
+                    <li class="nav-item ml-3 text-center">
+                        <!--搜索框-->
+                        <form class="form-inline mt-2 mt-md-0 ">
+                            <input class="form-control mr-sm-2" type="text" placeholder="">
+                            <div class="btn btn-secondary  my-2 my-sm-0" value="搜索">搜索</div>
+                        </form>
+                    </li>
+
+                </ul>
+                <div id="login-links" class="text-center">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="./login.html#1" target="_top">登录</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./login.html#2" target="_top">注册</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--已经登录-->
+                <div id="personal-links" class="d-none text-center">
+                    <div class="nav navbar-nav mr-auto ">
+                        <div class="nav-item mr-3">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-primary"
+                                        onclick="window.location.href='./personal-center.html?target-panel=cart-info'">
+                                    购物车
+                                </button>
+                                <button type="button" class="btn btn-primary"
+                                        onclick="window.location.href='./personal-center.html?target-panel=personal-info'">
+                                    个人中心
+                                </button>
+                                <div class="btn-group" role="group">
+                                    <button id="btnGroupDrop2" type="button" class="btn btn-success dropdown-toggle"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop2">
+                                        <a class="dropdown-item" href="#">我的订单</a>
+                                        <a class="dropdown-item" href="#">商品收藏</a>
+                                        <a class="dropdown-item" href="#">店铺收藏</a>
+                                        <a class="dropdown-item"
+                                           href="./personal-center.html?target-panel=personal-info">个人信息</a>
+                                        <a class="dropdown-item" href="#">地址管理</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-link btn" onclick="logout()">退出</div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--地址-->
+    <div id="addr-manage-panel" class="panel  w-100 border border-info rounded mt-2  ">
+        <div class="row pt-1 pl-3 pr-3 pb-3">
+            <div class="col w-100 " id="carts">
+                <h5 class="mb-3 text-left"><i class="fas fa-shopping-cart"></i>我的收货地址</h5>
+                <hr>
+                <div id="addr-container">
+                    <div id="addr-item-XX" class=" border border-primary rounded ">
+                        <div class="row">
+                            <div class=" col-md-2  mt-2  text-left  font-weight-bold  align-items-center d-flex">
+                                <button class="btn btn-outline-light btn-block w-100">
+                                    <i class="h4 fas fa-address-card vcenter "></i>
+                                </button>
+                            </div>
+                            <div class="col-12 col-md-3 mt-2 text-left ">
+                                <div>
+                                    姓名：
+                                    <input id="address-info-name-XX"
+                                           class="form-control d-inline-block w-50 text-dark border-0"
+                                           value="嘻嘻嘻"
+                                           disabled>
+                                    <!--sex-->
+                                    <div id="address-info-sex-XX" class=" badge badge-pill badge-secondary ">♀</div>
+                                </div>
+                                <div>
+                                    电话：
+                                    <input id="address-info-phone-XX" type="number" disabled
+                                           class="h6 d-inline-block pr-2 mt-2 form-control w-50 border-0 text-dark"
+                                           value="17673207341">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6  mt-2 pt-1  text-left  ">
+                                <div id="dist-selector" data-toggle="distpicker" class="d-inline-block vcenter "
+                                     disabled>
+                                    <select id="province-selector-XX" data-province="湖南省"
+                                            class="custom-select d-inline-block w-25" disabled='disabled'></select>
+                                    <select id="city-selector-XX" data-city="湘潭市"
+                                            class="custom-select  d-inline-block w-25"></select>
+                                    <select id="district-selector-XX" data-district="雨湖区"
+                                            class="custom-select d-inline-block w-25"></select>
+                                </div>
+                                <div class="mt-2 ml-2">
+                                    街道信息： <input id="address-info-detail-XX" type="text"
+                                                 class="form-control d-inline-block w-75 border-0" disabled
+                                                 value="和平街湖南科技大学南校">
+                                </div>
+                            </div>
+                            <!--修改按钮-->
+                            <div class="col-md-1 col-12 mt-2  text-center text-right  d-flex align-items-center">
+                                <button class="btn btn-outline-light btn-block w-100 " data-target-addr-id="XX">
+                                    <img src="../img/common/modify.png" class="icon btn-img vcenter"
+                                         data-toggle="tooltip"
+                                         data-placement="top"
+                                         title="" data-original-title="修改个人信息">
+                                    </img>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div id="add-address-btn" class="btn btn-block btn-primary" onclick="showAddressModal()">
+                    <i class="fas fa-user-plus"></i> 添加地址
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+    <div id="add-address-modal" class="modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">添加地址</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-left">
+                    <form class="needs-validation was-validated">
+                        <div class="mb-2">
+                            <label for="add-address-name">收件人：</label>
+                            <input id="add-address-name" type="text" class="form-control w-50 d-inline-block  mr-2"
+                                   required>
+                            <div class="invalid-feedback d-inline-block w-25">
+                                收件人不能为空 ！
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="add-address-phone">手机号：</label>
+                            <input id="add-address-phone" type="number" class="form-control w-50 d-inline-block  mr-2"
+                                   required>
+                            <div class="invalid-feedback d-inline-block w-25">
+                                手机号不能为空 ！
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="add-address-dist-selector">请选择地址：</label>
+                            <div id="add-address-dist-selector" data-toggle="distpicker" class="d-inline-block  ">
+                                <select id="add-address-province-selector" data-province="省"
+                                        class="custom-select d-inline-block w-25"></select>
+                                <select id="add-address-city-selector" data-city="市"
+                                        class="custom-select d-inline-block w-25"></select>
+                                <select id="add-address-district-selector" data-district="区"
+                                        class="custom-select d-inline-block w-25"></select>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="add-address-detail">街道信息：</label>
+                            <input id="add-address-detail" type="text" class="form-control w-100   mr-2" required>
+                            <div class="invalid-feedback  ">
+                                街道信息不能为空 ！
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="addAddress()">添加</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">放弃</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<a id="logo" href="http://echo0.cn">Echo0<span id="logoDot">.</span>cn</a>
+
+</body>
+
+<script>
+
+    updateAddrManagePanel();
+
+    function updateAddrManagePanel() {
+        var $addrContainer = $("#addr-container");
+        instance.get("/address/all").then(function (response) {
+            console.log(response.data.desc);
+            if (response.data.code == 0) {
+                $addrContainer.html("");
+                response.data.data.forEach(function (addrItem) {
+                    var addrItem = "<div id='addr-item-" + addrItem.id + "' class=' border  rounded '>\n" +
+                        "    <div class='row'>\n" +
+                        "        <div class=' col-md-2  mt-2  text-left  font-weight-bold  align-items-center d-flex'>\n" +
+                        "            <button class='btn btn-outline-light btn-block w-100'>\n" +
+                        "                <i class='h4 fas fa-address-card vcenter '></i>\n" +
+                        "            </button>\n" +
+                        "        </div>\n" +
+                        "        <div class='col-12 col-md-3 mt-2 text-left '>\n" +
+                        "            <div>\n" +
+                        "                姓名：\n" +
+                        "                <input id='address-info-name-" + addrItem.id + "'\n" +
+                        "                       class='form-control d-inline-block w-50 text-dark border-0'\n" +
+                        "                       value='" + addrItem.name + "'\n" +
+                        "                       disabled>\n" +
+                        "                <!--sex-->\n" +
+                        "                <div id='address-info-sex-" + addrItem.id + "' class=' badge badge-pill badge-secondary '>♀</div>\n" +
+                        "            </div>\n" +
+                        "            <div>\n" +
+                        "                电话：\n" +
+                        "                <input id='address-info-phone-" + addrItem.id + "' type='number' disabled\n" +
+                        "                       class='h6 d-inline-block pr-2 mt-2 form-control w-50 border-0 text-dark'\n" +
+                        "                       value='" + addrItem.phone + "'>\n" +
+                        "            </div>\n" +
+                        "        </div>\n" +
+                        "        <div class='col-12 col-md-6  mt-2 pt-1  text-left  '>\n" +
+                        "            <div id='dist-selector' data-toggle='distpicker' class='d-inline-block vcenter '>\n" +
+                        "                <select id='province-selector-" + addrItem.id + "' data-province='" + addrItem.province + "'\n" +
+                        "                        class='custom-select d-inline-block w-25' disabled='disabled'></select>\n" +
+                        "                <select id='city-selector-" + addrItem.id + "' data-city='" + addrItem.city + "'\n" +
+                        "                        class='custom-select d-inline-block w-25' disabled='disabled'></select>\n" +
+                        "                <select id='district-selector-" + addrItem.id + "' data-district='" + addrItem.area + "'\n" +
+                        "                        class='custom-select d-inline-block w-25' disabled='disabled'></select>\n" +
+                        "            </div>\n" +
+                        "            <div class='mt-2 ml-2'>\n" +
+                        "                街道信息： <input id='address-info-detail-" + addrItem.id + "' type='text' class='form-control d-inline-block w-75 border-0' disabled\n" +
+                        "                             value='" + addrItem.detail + "'>\n" +
+                        "            </div>\n" +
+                        "        </div>\n" +
+                        "        <!--修改按钮-->\n" +
+                        "        <div class='col-md-1 col-12 mt-2  text-center text-right  d-flex align-items-center'>\n" +
+                        "            <button class='edit-addr-btn btn btn-outline-light btn-block w-100 ' data-target-addr-id='" + addrItem.id + "'>\n" +
+                        "                <img src='../img/common/modify.png' class='icon btn-img vcenter'\n" +
+                        "                     data-toggle='tooltip'\n" +
+                        "                     data-placement='top'\n" +
+                        "                     title='' data-original-title='修改地址'>\n" +
+                        "                </img>\n" +
+                        "            </button>\n" +
+                        "        </div>\n" +
+                        "    </div>\n" +
+                        "</div><hr>";
+                    $(addrItem).appendTo($addrContainer);
+                    $('[data-toggle="' + NAMESPACE + '"]').distpicker();
+                    $("[data-toggle='tooltip']").tooltip();
+                });
+            } else {
+                simpleErrorInfo(response.data.desc);
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+    }
+
+    $(function () {
+        $(document).on("click", ".edit-addr-btn", function () {
+            var $this = $(this);
+            var itemId = $this.attr("data-target-addr-id");
+            var targetSelector = "#addr-item-" + itemId + " :input";
+
+            if ($this.hasClass(".editing")) {
+                // update addr
+                $(targetSelector).each(function (index, ele) {
+                        console.log(index);
+                        console.log(ele);
+                        $(ele).attr("disabled", "disabled");
+                });
+                $this.removeClass(".editing");
+                $this.children("img").attr("src", "../img/common/modify.png");
+                $this.children("img").attr("data-original-title", "修改地址");
+            } else {
+                $this.addClass(".editing");
+                $(targetSelector).each(function (index, ele) {
+                    console.log(index);
+                    console.log(ele);
+                    $(ele).removeAttr("disabled");
+                });
+                $this.children("img").attr("src", "../img/common/save.png");
+                $this.children("img").attr("data-original-title", "保存地址");
+
+            }
+            $this.removeAttr("disabled");
+        })
+    })
+
+    function addAddress() {
+
+        var name = $("#add-address-name").val();
+        var phone = $("#add-address-phone").val();
+        var province = $("#add-address-province-selector").val();
+        var city = $("#add-address-city-selector").val();
+        var area = $("#add-address-district-selector").val();
+        var detail = $("#add-address-detail").val();
+        const params = new URLSearchParams();
+        params.append("name", name);
+        params.append("phone", phone);
+        params.append("province", province);
+        params.append("city", city);
+        params.append("area", area);
+        params.append("detail", detail);
+        instance.post("/address/add", params).then(function (response) {
+            console.log(response.data.desc);
+            if (response.data.code == 0) {
+                updateUserInfo();
+                simpleSuccessInfo("添加成功 ！");
+                $("#add-address-modal").modal('hide');
+                updateAddrManagePanel();
+            } else {
+                simpleErrorInfo(response.data.desc);
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+
+
+    function showAddressModal() {
+        $("#add-address-modal").modal('show');
+    }
+
+</script>
+
+</html>

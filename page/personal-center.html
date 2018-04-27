@@ -36,11 +36,69 @@
     <script src="../lib/fileinput/theme.js"></script>
     <!--cart-->
     <script src="../js/cart.js"></script>
+    <script src="../js/address.js"></script>
     <!--todo modify-->
     <link rel="stylesheet" href="../css/custom.css">
 </head>
 <body>
 <div class="container">
+
+    <div id="add-address-modal" class="modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">添加地址</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-left">
+                    <form class="needs-validation was-validated">
+                        <div class="mb-2">
+                            <label for="add-address-name">收件人：</label>
+                            <input id="add-address-name" type="text" class="form-control w-50 d-inline-block  mr-2"
+                                   required>
+                            <div class="invalid-feedback d-inline-block w-25">
+                                收件人不能为空 ！
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="add-address-phone">手机号：</label>
+                            <input id="add-address-phone" type="number" class="form-control w-50 d-inline-block  mr-2"
+                                   required>
+                            <div class="invalid-feedback d-inline-block w-25">
+                                手机号不能为空 ！
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="add-address-dist-selector">请选择地址：</label>
+                            <div id="add-address-dist-selector" data-toggle="distpicker" class="d-inline-block  ">
+                                <select id="add-address-province-selector" data-province="省"
+                                        class="custom-select d-inline-block w-25"></select>
+                                <select id="add-address-city-selector" data-city="市"
+                                        class="custom-select d-inline-block w-25"></select>
+                                <select id="add-address-district-selector" data-district="区"
+                                        class="custom-select d-inline-block w-25"></select>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="add-address-detail">街道信息：</label>
+                            <input id="add-address-detail" type="text" class="form-control w-100   mr-2" required>
+                            <div class="invalid-feedback  ">
+                                街道信息不能为空 ！
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="addAddress()">添加</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">放弃</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!--upload-img-modal-->
     <div class="modal fade" id="uploadImgModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
@@ -182,7 +240,8 @@
                            class="list-group-item list-group-item-light border-0 panel-link "> 个人信息 </a>
                         <a id="cart-info" href="#" data-target-panel="cart-info-panel"
                            class="list-group-item list-group-item-light border-0 panel-link"> 我的购物车 </a>
-                        <a id="addr" href="#" class="panel-link list-group-item list-group-item-light border-0">
+                        <a id="addr-manage" href="#" class="panel-link list-group-item list-group-item-light border-0"
+                            data-target-panel="addr-manage-panel">
                             收货地址 </a>
                         <a id="apply-store" href="#" data-target-panel="apply-store-panel"
                            class="buyer-module list-group-item list-group-item-light border-0 panel-link d-none">我要开店</a>
@@ -225,7 +284,7 @@
         </div>
         <div class="col-sm-12 col-md-9">
             <!--个人信息-->
-            <div id="personal-info-panel" class="panel collapse w-100 border border-warning rounded mt-2">
+            <div id="personal-info-panel" class="panel collapse w-100 border  rounded mt-2">
                 <!--base-info-->
                 <div class="row border border-success rounded">
                     <!--头像-->
@@ -323,7 +382,7 @@
                 </div>
             </div>
             <!--申请成为卖家-->
-            <div id="apply-store-panel" class="panel collapse w-100 border border-info rounded mt-2">
+            <div id="apply-store-panel" class="panel collapse w-100 border  rounded mt-2">
                 <div lass="row pt-1 pl-3 pr-3 pb-3">
                     <div class="col w-100 order-md-1 ">
                         <h5 class="mb-3">完善店铺信息</h5>
@@ -346,7 +405,7 @@
                                     <input id="storeCoverImg" type="hidden">
                                     <div class="row align-items-end">
                                         <div class="col-4 mr-0">
-                                            <img id="preview-store-cover-img"
+                                            <img id="preview-store-cover-img" style="max-width: 10rem"
                                                  class="d-inline-block head-img-l mr-3 rounded-circle border border-light"
                                                  src="http://p7f7rr200.bkt.clouddn.com/f660f8df-2adc-4310-ba02-cb302bbbc8ca"
                                                  alt="">
@@ -439,7 +498,7 @@
                 </div>
             </div>
             <!--店铺信息-->
-            <div id="store-info-panel" class="panel collapse w-100 border border-info rounded mt-2">
+            <div id="store-info-panel" class="panel collapse w-100 border  rounded mt-2">
                 <div class="row pt-1 pl-3 pr-3 pb-3">
                     <div class="col w-100 order-md-1 ">
                         <div class="row">
@@ -521,7 +580,7 @@
                 </div>
             </div>
             <!--添加商品-->
-            <div id="add-product-panel" class="panel collapse w-100 border border-info rounded mt-2">
+            <div id="add-product-panel" class="panel collapse w-100 border  rounded mt-2">
                 <div class="row pt-1 pl-3 pr-3 pb-3">
                     <div class="col w-100 order-md-1 ">
                         <h5 class="mb-3">完善商品信息</h5>
@@ -532,7 +591,7 @@
                                     <label for="bookName">书籍名称 *</label>
                                     <input type="text" class="form-control" id="bookName" name="name" required>
                                     <div class="invalid-feedback">
-                                        店铺名称不能为空 ！
+                                        书籍名称不能为空 ！
                                     </div>
                                 </div>
                             </div>
@@ -653,7 +712,7 @@
                 </div>
             </div>
             <!--补充商品详情-->
-            <div id="add-product-detail-panel" class="panel collapse w-100 border border-info rounded mt-2">
+            <div id="add-product-detail-panel" class="panel collapse w-100 border  rounded mt-2">
                 <input type="hidden" id="bookId">
                 <input type="hidden" id="bookDetailId">
                 <div class="row pt-1 pl-3 pr-3 pb-3">
@@ -773,7 +832,7 @@
                 </div>
             </div>
             <!--商品管理-->
-            <div id="product-manage-panel" class="panel collapse w-100 border border-info rounded mt-2"
+            <div id="product-manage-panel" class="panel collapse w-100 border  rounded mt-2"
                  style="overflow: auto;max-height: 80rem;overflow-x: hidden">
                 <div class="row row pt-1 pl-3 pr-3 pb-3">
                     <div class="col w-100 order-md-1 ">
@@ -785,7 +844,7 @@
                 </div>
             </div>
             <!--购物车-->
-            <div id="cart-info-panel" class="panel  w-100 border border-info rounded mt-2  ">
+            <div id="cart-info-panel" class="panel collapse  w-100 border  rounded mt-2  ">
                 <h5 class="mb-3 text-left mt-3 ml-2"><i class="fas fa-shopping-cart"></i>我的购物车</h5>
                 <hr>
                 <div class="row pt-1 pl-3 pr-3 pb-3">
@@ -797,6 +856,23 @@
                 </div>
                 <hr>
             </div>
+            <!--地址管理-->
+            <div id="addr-manage-panel" class="panel collapse w-100 border rounded mt-2  ">
+                <div class="row pt-1 pl-3 pr-3 pb-3">
+                    <div class="col w-100 ">
+                        <h5 class="mb-3 text-left"><i class="fas fa-shopping-cart"></i>我的收货地址</h5>
+                        <hr>
+                        <div id="addr-container">
+                        </div>
+                        <hr>
+                        <div id="add-address-btn" class="btn btn-block btn-primary" onclick="showAddressModal()">
+                            <i class="fas fa-user-plus"></i> 添加地址
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+
         </div>
     </div>
 </div>
@@ -1161,6 +1237,10 @@
                 }
                 case "#cart-info-panel" : {
                     updateCartInfoPanel();
+                    break;
+                }
+                case "#addr-manage-panel" :{
+                    updateAddrManagePanel();
                     break;
                 }
             }

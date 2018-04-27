@@ -10,91 +10,54 @@
     <title>Op</title>
 </head>
 <body>
-<div class='store-container text-center' id='carts-store-xx'>
-    <div id='store-title' class='text-left pl-4 font-weight-bold h6'>
-        <input type='checkbox' class='store-selector mr-2' data-target-store-id='XXX'> L-store
-    </div>
-    <hr>
-</div>
 
-<div class='cart-container row' data-target-book-id='XXX'>
-    <div class='col-md-1 d-flex align-items-center text-left'>
-        <div class='w-100 pl-4'>
-            <input class='store-X' data-target-book-id='XXX' type='checkbox'>
+
+<div id='addr-item-XX' class=' border border-primary rounded '>
+    <div class='row'>
+        <div class=' col-md-2  mt-2  text-left  font-weight-bold  align-items-center d-flex'>
+            <button class='btn btn-outline-light btn-block w-100'>
+                <i class='h4 fas fa-address-card vcenter '></i>
+            </button>
         </div>
-    </div>
-    <div class='col-md-3 d-flex align-items-center text-center'>
-        <img class=' d-none d-md-block img-thumbnail mr-auto' style='max-height: 10rem'
-             src='XXX' data-holder-rendered='true'>
-    </div>
-    <div class='col-md-3 text-center vcenter align-items-center'>
-        <div>
-            <strong> 刺杀骑士团长</strong>
-            <div class='badge badge-info d-inline-block'>小说</div>
-            <hr>
-            <div class='h6 d-inline-block pr-2 vcenter'>村上春树 著，林少华 译</div>
-            <span class='badge badge-primary ml-2'>2017-09-11</span>
+        <div class='col-12 col-md-3 mt-2 text-left '>
             <div>
-                <price class='text-danger'>
-                    ￥<h5 class='font-weight-bold d-inline-block pr-2 '>94</h5>
-                </price>
-                <del>￥98</del>
-                <h6 class='d-inline-block pl-2'>上海译文出版社</h6>
+                姓名：
+                <input id='address-info-name-XX'
+                       class='form-control d-inline-block w-25 text-dark border-0'
+                       value='甄帅'
+                       disabled>
+                <!--sex-->
+                <div id='address-info-sex-XX' class=' badge badge-pill badge-secondary '>♀</div>
+            </div>
+            <div>
+                电话：
+                <input id='address-info-phone-XX' type='number' disabled
+                       class='h6 d-inline-block pr-2 mt-2 form-control w-50 border-0 text-dark'
+                       value='17673207341'>
             </div>
         </div>
-
-    </div>
-    <div class='col-md-1 text-center   d-flex align-items-center'>
-        <div class='mr-auto w-100' >
-            <span class='h5 text-danger' id='book-XXX-total-price'>376</span>
-        </div>
-    </div>
-    <div class='col-md-3 text-center d-flex align-items-center'>
-        <div class='btn-group w-100 pr-5 pl-5 ' role='group' >
-            <button class='btn btn-info w-25 cart-btn-minus' data-target-book-id='XXX'>-</button>
-            <button class='btn btn-outline-primary w-50 disabled cart-amount'
-                    data-target-book-id='XXX' id='book-6-amount'>1
-            </button>
-            <button class='btn btn-info w-25 cart-btn-plus' data-target-book-id='XXX'>+</button>
-        </div>
-    </div>
-    <div class='col-md-1 d-md-flex align-items-center text-center d-none '>
-        <div class='w-100'>
-            <div class='btn-group-vertical w-100 ' role='group'>
-                <button class='btn btn-danger h-50 cart-del-btn'
-                        data-toggle='tooltip'
-                        data-placement='top'
-                        data-original-title='删除'
-                        data-target-book-id='XXX'>
-                    <i class='fas fa-trash-alt mr-0'></i>
-                </button>
-                <button class='btn btn-primary h-50 cart-to-favorite-btn'
-                        data-toggle='tooltip'
-                        data-placement='bottom'
-                        data-original-title='移入收藏夹'
-                        data-target-book-id='XXX'>
-                    <i class='fas fa-random  mr-0'></i>
-                </button>
+        <div class='col-12 col-md-6  mt-2 pt-1  text-left  '>
+            <div id='dist-selector' data-toggle='distpicker' class='d-inline-block vcenter '>
+                <select id='province-selector-XX' data-province='湖南省'
+                        class='custom-select d-inline-block w-25'></select>
+                <select id='city-selector-XX' data-city='湘潭市'
+                        class='custom-select d-inline-block w-25'></select>
+                <select id='district-selector-XX' data-district='雨湖区'
+                        class='custom-select d-inline-block w-25'></select>
+            </div>
+            <div class='mt-2 ml-2'>
+                街道信息： <input id='address-info-detail-XX' type='text' class='form-control d-inline-block w-75 border-0' disabled
+                             value='和平街湖南科技大学南校'>
             </div>
         </div>
-    </div>
-</div>
-<div class='row text-center align-items-center d-md-none d-sm-flex'>
-    <div class='col-12 pt-4 '>
-        <div class='btn-group w-100 pl-5 pr-5' role='group'>
-            <button class='btn btn-danger w-50 cart-del-btn'
-                    data-toggle='tooltip'
-                    data-placement='top'
-                    data-original-title='删除'
-                    data-target-book-id='x'>
-                <i class='fas fa-trash-alt mr-0'></i>
-            </button>
-            <button class='btn btn-primary w-50 cart-to-favorite-btn'
-                    data-toggle='tooltip'
-                    data-placement='bottom'
-                    data-original-title='移入收藏夹'
-                    data-target-book-id='x'>
-                <i class='fas fa-random  mr-0'></i>
+        <!--修改按钮-->
+        <div class='col-md-1 col-12 mt-2  text-center text-right  d-flex align-items-center'>
+            <button class='btn btn-outline-light btn-block w-100 ' data-target-addr-id='XX'>
+                <img src='../img/common/modify.png' class='icon btn-img vcenter'
+                     data-toggle='tooltip'
+                     data-placement='top'
+                     title='' data-original-title='修改个人信息'>
+                </img>
             </button>
         </div>
     </div>

@@ -329,6 +329,7 @@ pre {
 .btn-img {
     width: 32px;
     height: 27px;
+    cursor: pointer;
 }
 
 .icon {
