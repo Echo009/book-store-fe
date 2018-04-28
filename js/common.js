@@ -79,7 +79,7 @@ function initProductContainer(targetContainerSelector,books) {
     $container.html("");
     books.forEach(function (book) {
         var product = "<div class='col-6 col-lg-3 m-auto product ' data-product-id='"+book.id+"'>\n" +
-            "    <div class='card mb-3 box-shadow border border-info rounded bg-light'>\n" +
+            "    <div class='card mb-3 box-shadow border border-primary rounded bg-light'>\n" +
             "        <div class='card-header mb-2 font-weight-bold text-dark'>"+book.bookName+"</div>\n" +
             "        <a href='#'>\n" +
             "            <img class='card-img-top img-thumbnail rounded m-auto small-cover-img'\n" +
