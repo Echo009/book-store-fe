@@ -409,6 +409,7 @@
                     $("#detail-authorIntro").text(data.authorIntro);
                     $("#detail-foreword").text(data.foreword);
                     var imgsContainer = $("#detail-imges");
+                    imgsContainer.html("");
                     var imgs = data.images.split(";");
                     imgs.forEach(function (currentValue) {
                         var img = " <img src='" + currentValue + "' class='img-thumbnail d-block mt-3'>"

@@ -34,9 +34,10 @@
     <script src="../lib/fileinput/fileinput.js"></script>
     <script src="../lib/fileinput/zh.js"></script>
     <script src="../lib/fileinput/theme.js"></script>
-    <!--cart-->
+    <!--functions-->
     <script src="../js/cart.js"></script>
     <script src="../js/address.js"></script>
+    <script src="../js/product.js"></script>
     <!--todo modify-->
     <link rel="stylesheet" href="../css/custom.css">
 </head>
@@ -154,8 +155,8 @@
                     <li class="nav-item ml-3 text-center">
                         <!--搜索框-->
                         <form class="form-inline mt-2 mt-md-0 ">
-                            <input class="form-control mr-sm-2" type="text" placeholder="">
-                            <div class="btn btn-secondary  my-2 my-sm-0" value="搜索">搜索</div>
+                            <input id="search-keyword" class="form-control mr-sm-2" type="text" placeholder="">
+                            <div id="search-btn" class="btn btn-secondary  my-2 my-sm-0">搜索</div>
                         </form>
                     </li>
                 </ul>
@@ -191,7 +192,7 @@
                                         <a class="dropdown-item" href="#">店铺收藏</a>
                                         <a class="dropdown-item"
                                            href="./personal-center.html?target-panel=personal-info">个人信息</a>
-                                        <a class="dropdown-item" href="#">地址管理</a>
+                                        <a class="dropdown-item" href="./personal-center.html/target-panel=addr-manage">地址管理</a>
                                     </div>
                                 </div>
                             </div>
@@ -286,15 +287,15 @@
             <!--个人信息-->
             <div id="personal-info-panel" class="panel collapse w-100 border  rounded mt-2">
                 <!--base-info-->
-                <div class="row border border-success rounded">
+                <div class="row border  rounded">
                     <!--头像-->
-                    <div class="col-4 col-lg-2 pl-2 mt-2 pr-1 border border-info rounded">
+                    <div class="col-4 col-lg-2 pl-2 mt-2 pr-1 border  rounded">
                         <img id="personal-info-head-img"
                              class="head-img-l img-thumbnail rounded-circle  border border-success"
                              src="http://p7f7rr200.bkt.clouddn.com/b6463e9a-e8e2-44a6-909b-332887e5d995" alt="">
                     </div>
                     <!--简要信息-->
-                    <div class="col-6 col-lg-8 mt-2 border border-warning rounded">
+                    <div class="col-6 col-lg-8 mt-2   rounded">
                         <!--username-->
                         <div id="personal-info-username" class=" badge badge-pill badge-primary"> Echo009</div>
                         <div></div>
@@ -311,75 +312,52 @@
                         </div>
                     </div>
                     <!--修改按钮-->
-                    <div class="col-2 col-lg-2 mt-2 pl-4 border  border-success rounded text-right  ">
+                    <div class="col-2 col-lg-2 mt-2 pl-4    rounded text-right  ">
                         <img src="../img/common/modify.png" class="icon" data-toggle="tooltip" data-placement="top"
                              title="" data-original-title="修改个人信息">
                         </img>
                     </div>
                 </div>
                 <!--order-->
-                <div class="row border border-success rounded mt-1">
-                    <div class="w-100 col">
+                <div class="row border  rounded mt-1">
+                    <div class="w-100 col ">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs nav-justified" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#home">全部订单</a>
+                                <a class="nav-link active" data-toggle="tab" href="#all">全部订单</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#menu1">待付款</a>
+                                <a class="nav-link" data-toggle="tab" href="#wait-for-pay">待付款</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#menu2">待收货</a>
+                                <a class="nav-link" data-toggle="tab" href="#wait-for-sign">待收货</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#menu3">待评价</a>
+                                <a class="nav-link" data-toggle="tab" href="#wait-for-comment">待评价</a>
                             </li>
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div id="home" class="container tab-pane active"><br>
-                                <h3>HOME</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua.</p>
+                            <div id="all" class="container tab-pane active"><br>
+                                <h3 class="w-100 "> (｡í _ ì｡)   <small class="pl-4">这里什么都没有 ~ </small></h3>
+                                <p></p>
                             </div>
-                            <div id="menu1" class="container tab-pane fade"><br>
-                                <h3>Menu 1</h3>
-                                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-                                    ea commodo consequat.</p>
+                            <div id="wait-for-pay" class="container tab-pane fade"><br>
+                                <h3 class="w-100 "> ( 。ớ ₃ờ)ھ   <small class="pl-4">这里也是什么都没有 ~ </small></h3>
+                                <p></p>
                             </div>
-                            <div id="menu2" class="container tab-pane fade"><br>
-                                <h3>Menu 2</h3>
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                    laudantium, totam rem aperiam.</p>
+                            <div id="wait-for-sign" class="container tab-pane fade"><br>
+                                <h3 class="w-100 "> ( •̥́ ˍ •̀ू )  <small class="pl-4">这里还是什么都没有 ~ </small></h3>
+                                <p></p>
                             </div>
-                            <div id="menu3" class="container tab-pane fade"><br>
-                                <h3>Menu 2</h3>
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                    laudantium, totam rem aperiam.</p>
+                            <div id="wait-for-comment" class="container tab-pane fade"><br>
+                                <h3 class="w-100 "> ˚‧º·(˚ ˃̣̣̥᷄⌓˂̣̣̥᷅ )‧º·˚  <small class="pl-4">这里真的什么都没有 ~ </small></h3>
+                                <p></p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--cart-->
-                <div class="row border border-success rounded mt-1">
-                    <div class="w-100 col">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs " role="tablist">
-                            <li class="nav-item w-25 text-center">
-                                <a class="nav-link active" data-toggle="tab" href="#cart">我的购物车</a>
-                            </li>
 
-                        </ul>
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div id="cart" class="container tab-pane active"><br>
-                                <h3>HOME</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <!--申请成为卖家-->
             <div id="apply-store-panel" class="panel collapse w-100 border  rounded mt-2">
@@ -985,62 +963,6 @@
         $("#storeCoverImg").val(DEFALUT_STORE_COVER_IMG);
     });
 
-    // 添加商品
-    function addProduct() {
-        var bookName = $("#bookName").val();
-        var authorName = $("#authorName").val();
-        var category = $("#category").val();
-        var recommendation = $("#recommendation").val();
-        var publisher = $("#publisher").val();
-        var publishDate = $("#publishDate").val();
-        var pricing = $("#pricing").val();
-        var currentPrice = $("#currentPrice").val();
-        var stock = $("#stock").val();
-        var coverImg = $("#coverImg").val();
-        const params = new URLSearchParams();
-        params.append("bookName", bookName);
-        params.append("authorName", authorName);
-        params.append("category", category);
-        params.append("recommendation", recommendation);
-        params.append("publisher", publisher);
-        params.append("publishDate", publishDate);
-        params.append("pricing", pricing);
-        params.append("currentPrice", currentPrice);
-        params.append("stock", stock);
-        params.append("coverImg", coverImg);
-        instance.post("/book/add", params).then(function (response) {
-            console.log(response.data.desc);
-            if (response.data.code == 0) {
-                console.log(response.data.data);
-                swal({
-                    title: "添加商品成功！",
-                    text: "请务必补充商品详情信息 ！",
-                    icon: "success",
-                    buttons: {
-                        cancel: "暂时不添加",
-                        add: {
-                            text: "现在去补充",
-                            value: "add",
-                        }
-                    },
-                }).then((value) => {
-                    switch (value) {
-//                        todo
-                        case "add":
-                            switchPanel("add-product-detail-panel");
-                            updateAddBookDetailPanel("add", response.data.data);
-                            break;
-                        default:
-                            window.location.href = "./personal-center.html?target-panel=product-manage";
-                    }
-                });
-            } else {
-                simpleErrorInfo(response.data.desc);
-            }
-        }).catch(function (error) {
-            console.log(error);
-        });
-    }
 
     // 申请店铺
     function applyStore() {
@@ -1107,90 +1029,8 @@
         });
     }
 
-    /**
-     *
-     * @param option add or update
-     * @param data bookEntity or bookDeatailEntity
-     */
-    function updateAddBookDetailPanel(option, data) {
-        if (option == "add") {
-            // 添加商品详情
-            $("#action").val("add");
-            $("#bookId").val(data.id);
-            $("#bookDetail-bookName").val(data.bookName);
-            $("#product-detail-panel-title").text("完善商品详情信息 ")
-            $("#detail-submit-btn").text("提交商品详情信息");
 
-        }
-        else {
-            // 修改商品详情
-            // todo
-            $("#action").val("update");
-            $("#product-detail-panel-title").text("修改商品详情信息 ")
-            $("detail-submit-btn").text("确认修改 ");
-        }
-    }
 
-    /**
-     * 新增或修改商品详情信息
-     */
-    function operateProductDetail() {
-
-        var id = $("#bookDetailId").val();
-        var bookId = $("#bookId").val();
-        var edition = $("#edition").val();
-        var words = $("#words").val();
-        var pages = $("#pages").val();
-        var paperType = $("#paperType").val();
-        var printDate = $("#printDate").val();
-        var authorIntro = $("#authorIntro").val();
-        var briefIntro = $("#briefIntro").val();
-        var foreword = $("#foreword").val();
-        var images = $("#images").val();
-        const params = new URLSearchParams();
-        params.append("id", id);
-        params.append("bookId", bookId);
-        params.append("edition", edition);
-        params.append("words", words);
-        params.append("pages", pages);
-        params.append("paperType", paperType);
-        params.append("printDate", printDate);
-        params.append("authorIntro", authorIntro);
-        params.append("briefIntro", briefIntro);
-        params.append("foreword", foreword);
-        params.append("images", images);
-        if ($("#action").val() == "add") {
-            instance.post("/book/addDetail", params).then(function (response) {
-                console.log(response.data.desc);
-                if (response.data.code == 0) {
-                    simpleSuccessInfo("添加商品详情成功 ！");
-                    setTimeout(function () {
-                        // todo
-                        window.location.href = "./personal-center.html?target-panel=product-manage-panel";
-                    }, MIDDLE_DELAY);
-                } else {
-                    simpleErrorInfo(response.data.desc);
-                }
-            }).catch(function (error) {
-                console.log(error);
-            });
-        } else {
-            instance.post("/book/updateDetail", params).then(function (response) {
-                console.log(response.data.desc);
-                if (response.data.code == 0) {
-                    simpleSuccessInfo("修改商品详情成功 ！");
-                    setTimeout(function () {
-                        // todo
-                        window.location.href = "./personal-center.html";
-                    }, MIDDLE_DELAY);
-                } else {
-                    simpleErrorInfo(response.data.desc);
-                }
-            }).catch(function (error) {
-                console.log(error);
-            });
-        }
-    };
 
     function updateCartInfoPanel() {
         $(".arrow").remove();

@@ -73,6 +73,69 @@ function updateUserInfo() {
         });
 };
 
+
+function initProductContainer(targetContainerSelector,books) {
+    var $container = $(targetContainerSelector);
+    $container.html("");
+    books.forEach(function (book) {
+        var product = "<div class='col-6 col-lg-3 m-auto product ' data-product-id='"+book.id+"'>\n" +
+            "    <div class='card mb-3 box-shadow border border-info rounded bg-light'>\n" +
+            "        <div class='card-header mb-2 font-weight-bold text-dark'>"+book.bookName+"</div>\n" +
+            "        <a href='#'>\n" +
+            "            <img class='card-img-top img-thumbnail rounded m-auto small-cover-img'\n" +
+            "                 src='"+book.coverImg+"' alt=' image '>\n" +
+            "        </a>\n" +
+            "        <div class='card-body '>\n" +
+            "            <h7 class='text-info'>"+book.authorName+"</h7>\n" +
+            "            <h5 class='card-title pricing-card-title font-weight-bold pt-2 text-secondary'>￥"+book.currentPrice+"\n" +
+            "                <del class='text-muted d-inline '>\n" +
+            "                    <small>￥"+book.pricing+"</small>\n" +
+            "                </del>\n" +
+            "            </h5>\n" +
+            "        </div>\n" +
+            "    </div>\n" +
+            "</div>";
+        $(product).appendTo($container);
+    })
+}
+
+function initPaginationContainer(currentPage , totalPages ,bookName,category,baseLink ) {
+    var $paginationContainer = $("#pagination-container");
+    $paginationContainer.html("");
+    if("undefined" == typeof baseLink) {
+        baseLink = "./search.html?bookName="+bookName+"&category="+category+"&pageNum=";
+    }
+    for(i = 0 ; i <= totalPages+1 ;i++) {
+        console.log(i);
+        var pageItem = "<li class='page-item'>" +
+            "<a class='page-link' href=''></a>" +
+            "</li>";
+        var $pageItem = $(pageItem);
+        if(i==currentPage) {
+            $pageItem.addClass("active");
+            $pageItem.children("a").text(i);
+        }else if(i==0){
+            var index = currentPage-1;
+            $pageItem.children("a").html("&laquo;");
+            if(index<1) {
+                $pageItem.addClass("disabled");
+            }
+            $pageItem.children("a").attr("href", baseLink + index);
+        }else if(i==totalPages+1) {
+            var index = currentPage +1;
+            $pageItem.children("a").html("&raquo;");
+            if (index>totalPages) {
+                $pageItem.addClass("disabled");
+            }
+            $pageItem.children("a").attr("href", baseLink + index);
+        }else {
+            $pageItem.children("a").text(i);
+            $pageItem.children("a").attr("href", baseLink + i);
+        }
+        $pageItem.appendTo($paginationContainer);
+        console.log($pageItem);
+    }
+}
 $(function () {
     $(document).on("click", ".search-option", function () {
         var $this = $(this);
@@ -85,4 +148,15 @@ $(function () {
         window.location.href = "./bookDetail.html?bookId="+bookId;
     });
     $("[data-toggle='tooltip']").tooltip();
+
+    $("#search-btn").on("click", function () {
+        var category = $.trim($("#searchOption").text());
+        var keyword = $.trim($("#search-keyword").val());
+        var targetLink = "./search.html?bookName=" + keyword;
+        if (category != "所有分类") {
+            targetLink += "&category=" + category;
+        }
+        console.log(targetLink);
+        window.location.href = targetLink;
+    })
 });

@@ -29,7 +29,7 @@
     <!--顶部固定导航 -->
     <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary ">
         <div class="container">
-            <a href="#" class="navbar-brand">L-store</a>
+            <a href="index.html" class="navbar-brand">L-store</a>
             <!--菜单按钮-->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                     aria-controls="" navbarResponsive aria-expanded="false" aria-label="Toggle navigation">
@@ -43,28 +43,28 @@
                     </li>
                     <!--分类下拉框-->
                     <li class="nav-item dropdown ">
-                        <div class="nav-link dropdown-toggle btn btn-primary" data-toggle="dropdown"> <span id="searchOption" class="pl-2">所有分类</span> <span class="caret"></span></div>
-                        <div class="dropdown-menu " >
+                        <div class="nav-link dropdown-toggle btn btn-primary" data-toggle="dropdown"><span
+                                id="searchOption" class="pl-2">所有分类</span> <span class="caret"></span></div>
+                        <div class="dropdown-menu ">
                             <!--fixed category -->
-                            <div class="search-option dropdown-item" >小说</div>
-                            <div class="search-option dropdown-item" >文学</div>
-                            <div class="search-option dropdown-item" >艺术</div>
-                            <div class="search-option dropdown-item" >卡通</div>
-                            <div class="search-option dropdown-item" >教育</div>
-                            <div class="search-option dropdown-item" >历史</div>
-                            <div class="search-option dropdown-item" >科技</div>
+                            <div class="search-option dropdown-item">小说</div>
+                            <div class="search-option dropdown-item">文学</div>
+                            <div class="search-option dropdown-item">艺术</div>
+                            <div class="search-option dropdown-item">卡通</div>
+                            <div class="search-option dropdown-item">教育</div>
+                            <div class="search-option dropdown-item">历史</div>
+                            <div class="search-option dropdown-item">科技</div>
                             <hr>
-                            <div class="search-option dropdown-item" >所有分类</div>
+                            <div class="search-option dropdown-item">所有分类</div>
                         </div>
                     </li>
                     <li class="nav-item ml-3 text-center">
                         <!--搜索框-->
                         <form class="form-inline mt-2 mt-md-0 ">
-                            <input class="form-control mr-sm-2" type="text" placeholder="">
-                            <input type="button" class="btn btn-secondary  my-2 my-sm-0" value="搜索"></input>
+                            <input id="search-keyword" class="form-control mr-sm-2" type="text" placeholder="">
+                            <div id="search-btn" class="btn btn-secondary  my-2 my-sm-0">搜索</div>
                         </form>
                     </li>
-
                 </ul>
                 <div id="login-links" class="text-center">
                     <ul class="nav navbar-nav ml-auto">
@@ -96,8 +96,9 @@
                                         <a class="dropdown-item" href="#">我的订单</a>
                                         <a class="dropdown-item" href="#">商品收藏</a>
                                         <a class="dropdown-item" href="#">店铺收藏</a>
-                                        <a class="dropdown-item" href="./personal-center.html?target-panel=personal-info">个人信息</a>
-                                        <a class="dropdown-item" href="#">地址管理</a>
+                                        <a class="dropdown-item"
+                                           href="./personal-center.html?target-panel=personal-info">个人信息</a>
+                                        <a class="dropdown-item" href="./personal-center.html/target-panel=addr-manage">地址管理</a>
                                     </div>
                                 </div>
                             </div>
@@ -152,7 +153,7 @@
             </div>
         </div>
         <!--广告，简单列表+小号轮播图-->
-        <div class="col-lg-4 ">
+        <div class="col-lg-4 d-none d-md-block ">
             <div class="row  ">
                 <div class="card w-100 ">
                     <div class="card-header">最新动态</div>
@@ -208,31 +209,39 @@
         <div class="col-sm-12 col-md-9">
             <!--导航栏  分类-->
             <ul class="nav nav-tabs pt-2 w-100">
-                <!--todo-->
-                <li class="nav-item dropdown show ">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                       aria-haspopup="true"
-                       aria-expanded="true">所有分类</a>
-                    <div class="dropdown-menu" x-placement="bottom-start"
-                         style="position: absolute; transform: translate3d(0px, 42px, 0px); top: 0px; left: 0px; will-change: transform;">
-                        <a class="dropdown-item" href="#">小说</a>
-                        <a class="dropdown-item" href="#">文学</a>
-                        <a class="dropdown-item" href="#">艺术</a>
-                        <a class="dropdown-item" href="#">卡通</a>
-                        <a class="dropdown-item" href="#">教育</a>
-                        <a class="dropdown-item" href="#">科学</a>
-                        <a class="dropdown-item" href="#">历史</a>
-                        <a class="dropdown-item" href="#">科技</a>
-                    </div>
+                <li class="nav-item">
+                    <a class="category-option nav-link active" data-toggle="tab">小说</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#home">小说</a>
+                    <a class="category-option nav-link" data-toggle="tab">文学</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#profile">文学</a>
+                    <a class="category-option nav-link" data-toggle="tab">艺术</a>
+                </li>
+                <li class="nav-item">
+                    <a class="category-option nav-link" data-toggle="tab">卡通</a>
+                </li>
+                <li class="nav-item">
+                    <a class="category-option nav-link" data-toggle="tab">教育</a>
+                </li>
+                <li class="nav-item">
+                    <a class="category-option nav-link" data-toggle="tab">科技</a>
+                </li>
+                <li class="nav-item">
+                    <a class="category-option nav-link" data-toggle="tab">历史</a>
                 </li>
             </ul>
-            <div class="row">
+            <div id="empty-tip" class="row w-100  d-none ">
+                <h6 id="" class="col-12 h5  text-center  w-100 h-100 font-weight-bold text-dark ">抱歉， (｡í _
+                    ì｡) ，人家暂时找不到 <span></span>相关的书籍 。 。 。
+                </h6>
+                <h7 class="col-12 text-center w-100">
+                    不妨看看下面这些书籍吧 ！
+                </h7>
+                <hr class="col">
+            </div>
+
+            <div class="row" id="books-container">
                 <!-- 书籍列表-->
                 <!--todo-->
                 <div class="col-6 col-lg-3 m-auto product">
@@ -305,82 +314,18 @@
                 </div>
             </div>
             <div class="row">
-                <!-- 书籍列表-->
-                <!--todo-->
-                <div class="col-6 col-lg-3 m-auto product">
-                    <div class="card mb-4 box-shadow ">
-                        <a href="#">
-                            <img class="card-img-top img-thumbnail rounded m-auto small-cover-img"
-                                 src="http://img3m8.ddimg.cn/42/10/25228608-1_l_20.jpg" alt=" image ">
-                        </a>
-                        <div class="card-body">
-                            <p class="pl-1 mb-0">刺杀骑士团长</p>
-                            <small class="pl-1">春山春树</small>
-                            <h5 class="card-title pricing-card-title font-weight-bold pt-2">￥93.20
-                                <del class="text-muted d-inline ">
-                                    <small>￥98.20</small>
-                                </del>
-                            </h5>
-                        </div>
-                    </div>
+                <div class="col-12  ">
+                    <ul id="pagination-container" class="pagination float-right ">
+
+                    </ul>
                 </div>
-                <div class="col-6 col-lg-3 m-auto product">
-                    <div class="card mb-4 box-shadow ">
-                        <a href="#">
-                            <img class="card-img-top img-thumbnail rounded m-auto small-cover-img"
-                                 src="http://img3m8.ddimg.cn/42/10/25228608-1_l_20.jpg" alt=" image ">
-                        </a>
-                        <div class="card-body">
-                            <p class="pl-1 mb-0">刺杀骑士团长</p>
-                            <small class="pl-1">春山春树</small>
-                            <h5 class="card-title pricing-card-title font-weight-bold pt-2">￥93.20
-                                <del class="text-muted d-inline ">
-                                    <small>￥98.20</small>
-                                </del>
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3 m-auto product">
-                    <div class="card mb-4 box-shadow ">
-                        <a href="#">
-                            <img class="card-img-top img-thumbnail rounded m-auto small-cover-img"
-                                 src="http://img3m8.ddimg.cn/42/10/25228608-1_l_20.jpg" alt=" image ">
-                        </a>
-                        <div class="card-body">
-                            <p class="pl-1 mb-0">刺杀骑士团长</p>
-                            <small class="pl-1">春山春树</small>
-                            <h5 class="card-title pricing-card-title font-weight-bold pt-2">￥93.20
-                                <del class="text-muted d-inline ">
-                                    <small>￥98.20</small>
-                                </del>
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3 m-auto product">
-                    <div class="card mb-4 box-shadow ">
-                        <a href="#">
-                            <img class="card-img-top img-thumbnail rounded m-auto small-cover-img"
-                                 src="http://img3m8.ddimg.cn/42/10/25228608-1_l_20.jpg" alt=" image ">
-                        </a>
-                        <div class="card-body">
-                            <p class="pl-1 mb-0">刺杀骑士团长</p>
-                            <small class="pl-1">春山春树</small>
-                            <h5 class="card-title pricing-card-title font-weight-bold pt-2">￥93.20
-                                <del class="text-muted d-inline ">
-                                    <small>￥98.20</small>
-                                </del>
-                            </h5>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
 
         <!--todo-->
         <!--畅销排行榜-->
-        <div class="col-md-3 pt-2  pr-0">
+        <div class="col-md-3 pt-2  pr-0 d-none d-md-block">
             <div class="card mb-3">
                 <h3 id="ranking-list" class="card-header ranking-title pb-1 pt-1">
                     <img src="../img/common/ranking.png" alt="">
@@ -416,6 +361,7 @@
 <script>
 
     $(function () {
+        initBooksContainer("小说");
         // 检查登录状态
         var currentUser = store.get(CURRENT_USER);
         try {
@@ -427,9 +373,76 @@
         } catch (e) {
             console.log("not login !");
         }
+        $(document).on("click", ".category-option", function () {
+            var $this = $(this);
+            initBooksContainer($this.text());
+        });
 
     });
+    function initBooksContainer(category,pageNum) {
+        console.log("category :" + category);
+        console.log("pageNum :" + pageNum);
+        if("undefined" == typeof pageNum){
+            pageNum=1;
+        }
+        const params = new URLSearchParams();
+        params.append("category", category);
+        params.append("pageNum", pageNum);
+        instance.post('/bookInfo/search', params)
+            .then(function (response) {
+                var totalPages = response.data.data.totalPages;
+                var totalElements = response.data.data.totalElements;
+                var currentPage = response.data.data.currentPage;
+                if (totalElements > 0) {
+                    $("#empty-tip").addClass("d-none");
+                    initProductContainer("#books-container", response.data.data.content);
+                    initPaginationContainer(currentPage, totalPages, "", "");
+                    fixPaginagtion();
+                } else {
+                    $("#empty-tip").removeClass("d-none");
+                    const params = new URLSearchParams();
+                    params.append("pageNum", 1);
+                    instance.post('/bookInfo/search', params)
+                        .then(function (response) {
+                            var totalPages = response.data.data.totalPages;
+                            var totalElements = response.data.data.totalElements;
+                            initProductContainer("#books-container", response.data.data.content);
+                            initPaginationContainer(currentPage, totalPages, "", "");
+                            fixPaginagtion();
+                            console.log("total pages   :" + response.data.data.totalPages);
+                            console.log("total element  :" + response.data.data.totalElements);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
 
+                }
+
+                console.log("total pages   :" + response.data.data.totalPages);
+                console.log("total element  :" + response.data.data.totalElements);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+    }
+    function fixPaginagtion() {
+
+        $("#pagination-container").children().each(function (index , ele) {
+            $(ele).children("a").attr("href", "#");
+        })
+        $(".page-link").on("click",function () {
+            
+            var category;
+            $(".category-option").each(function (index,ele) {
+                if($(ele).hasClass("active")){
+                    category = $(ele).text();
+                }
+            });
+            initBooksContainer(category,$(this).text());
+        })
+
+    }
 
 </script>
 </html>
