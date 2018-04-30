@@ -100,6 +100,7 @@ function initProductContainer(targetContainerSelector,books) {
 }
 
 function initPaginationContainer(currentPage , totalPages ,bookName,category,baseLink ) {
+    console.log("currentPage is " + currentPage);
     var $paginationContainer = $("#pagination-container");
     $paginationContainer.html("");
     if("undefined" == typeof baseLink) {
@@ -108,8 +109,8 @@ function initPaginationContainer(currentPage , totalPages ,bookName,category,bas
     for(i = 0 ; i <= totalPages+1 ;i++) {
         console.log(i);
         var pageItem = "<li class='page-item'>" +
-            "<a class='page-link' href=''></a>" +
-            "</li>";
+        "<a class='page-link' href=''></a>" +
+        "</li>";
         var $pageItem = $(pageItem);
         if(i==currentPage) {
             $pageItem.addClass("active");
@@ -122,7 +123,11 @@ function initPaginationContainer(currentPage , totalPages ,bookName,category,bas
             }
             $pageItem.children("a").attr("href", baseLink + index);
         }else if(i==totalPages+1) {
-            var index = currentPage +1;
+            console.log("currentPage is " + currentPage);
+            console.log("type of currentPage is " + typeof currentPage);
+            // emmmm , currentPage is string . . . ,so , the method of fix bug is sub a value 
+            var index = currentPage-1+2;
+            console.log("index is " + index);
             $pageItem.children("a").html("&raquo;");
             if (index>totalPages) {
                 $pageItem.addClass("disabled");
