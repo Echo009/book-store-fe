@@ -34,7 +34,6 @@
     <script src="../js/address.js"></script>
     <!--todo modify-->
     <link rel="stylesheet" href="../css/custom.css">
-    <script src="../js/p-information.js"></script>
 </head>
 <body>
 <div class="container">
@@ -126,55 +125,36 @@
 </div>
 <script>
 
-    $(document).on("click", ".edit-addr-btn", function () {
-        var $this = $(this);
-        var itemId = $this.attr("data-target-addr-id");
-        var targetSelector = "#addr-item-" + itemId + " :input";
+    $(function () {
+        $(document).on("click", "#edit-info-btn", function () {
+            var $this = $(this);
+            //var itemId = $this.attr("data-target-addr-id");
+            var targetSelector = "#store-info-form :input"
 
-        if ($this.hasClass(".editing")) {
-            // update addr
-            $(targetSelector).each(function (index, ele) {
-                console.log(index);
-                console.log(ele);
-                $(ele).attr("disabled", "disabled");
-            });
-            $this.removeClass(".editing");
-            $this.children("img").attr("src", "../img/common/modify.png");
-            $this.children("img").attr("data-original-title", "修改地址");
-        } else {
-            $this.addClass(".editing");
-            $(targetSelector).each(function (index, ele) {
-                console.log(index);
-                console.log(ele);
-                $(ele).removeAttr("disabled");
-            });
-            $this.children("img").attr("src", "../img/common/save.png");
-            $this.children("img").attr("data-original-title", "保存地址");
+            if ($this.hasClass(".editing")) {
+                // update addr
+                $(targetSelector).each(function (index, ele) {
+                    console.log(index);
+                    console.log(ele);
+                    $(ele).attr("disabled", "disabled");
+                });
+                $this.removeClass(".editing");
+                $this.attr("src", "../img/common/modify.png");
+                $this.attr("data-original-title", "update information");
+            } else {
+                $this.addClass(".editing");
+                $(targetSelector).each(function (index, ele) {
+                    console.log(index);
+                    console.log(ele);
+                    // important
+                    $(ele).removeAttr("disabled");
+                });
+                $this.attr("src", "../img/common/save.png");
+                $this.attr("data-original-title", "save information");
 
-        }
-        $this.removeAttr("disabled");
-    })
-
-
-
-    $(document).on("click", "#edit-info-btn", function (){
-        var $this = $(this);
-        //console.log("current dom id is  : " + this.id);
-        var targetSelector = "#store-info-form :input";
-        var $targetInputs = $(targetSelector);
-        if ($this.hasClass(".editing")) {
-            $targetInputs.each(function (index, ele) {
-               $(ele).attr('disabled', 'disabled')
-            });
-            $this.removeClass(".editing");
-        }
-        else {
-            $this.addClass(".editing");
-            $targetInputs.each(function (index, ele) {
-                $(ele).removeAttr('disabled')
-            });
-        }
-        $this.removeAttr("disabled");
+            }
+            $this.removeAttr("disabled");
+        })
     })
 
 

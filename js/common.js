@@ -4,6 +4,7 @@
  * Time   : 04/18/2018 08:59 AM
  */
 // it depends on jQuery , sweetalert.js , axios.js
+
 function simpleSuccessInfo(content) {
     swal({
         icon:"success",
@@ -141,7 +142,15 @@ function initPaginationContainer(currentPage , totalPages ,bookName,category,bas
         console.log($pageItem);
     }
 }
+
+
 $(function () {
+
+    $("#search-keyword").on('keypress',function(e) {
+        if ( e.keyCode== 13)
+            e.preventDefault();
+        $("#search-btn").click();
+    });
     $(document).on("click", ".search-option", function () {
         var $this = $(this);
         $("#searchOption").text($this.text());

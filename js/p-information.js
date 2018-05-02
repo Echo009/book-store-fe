@@ -2,7 +2,7 @@ $(function () {
     $(document).on("click", ".edit-info-btn", function () {
         var $this = $(this);
         //var itemId = $this.attr("data-target-addr-id");
-        var targetSelector = "#store-info-form:input"
+        var targetSelector = "#store-info-form :input"
 
         if ($this.hasClass(".editing")) {
             // update addr
@@ -12,8 +12,8 @@ $(function () {
                 $(ele).attr("disabled", "disabled");
             });
             $this.removeClass(".editing");
-            $this.children("img").attr("src", "../img/common/modify.png");
-            $this.children("img").attr("data-original-title", "修改information");
+            $this.attr("src", "../img/common/modify.png");
+            $this.attr("data-original-title", "update information");
         } else {
             $this.addClass(".editing");
             $(targetSelector).each(function (index, ele) {
@@ -22,8 +22,8 @@ $(function () {
                 // important
                 $(ele).removeAttr("disabled");
             });
-            $this.children("img").attr("src", "../img/common/save.png");
-            $this.children("img").attr("data-original-title", "保存information");
+            $this.attr("src", "../img/common/save.png");
+            $this.attr("data-original-title", "save information");
 
         }
         $this.removeAttr("disabled");
