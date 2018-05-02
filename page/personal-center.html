@@ -484,14 +484,14 @@
                         <div class="row">
                             <div class="col mt-2 pt-2">
                                 <h5 class="mb-3 d-inline-block">我的店铺信息</h5>
-                                <img src="../img/common/modify.png" class="icon d-inline-block float-right"
+                                <img id="edit-info-btn" src="../img/common/modify.png" class="icon d-inline-block float-right"
                                      data-toggle="tooltip" data-placement="top"
                                      data-original-title="修改店铺信息">
                                 </img>
                             </div>
                         </div>
                         <hr class="mb-4">
-                        <form>
+                        <form id="store-info-form">
                             <div class="row">
                                 <div class="col-sm-12 col-md-6 mb-3">
                                     <label for="storeName">店铺名称</label>
@@ -852,7 +852,6 @@
                 </div>
                 <hr>
             </div>
-
         </div>
     </div>
 </div>
@@ -863,7 +862,6 @@
 </body>
 <script>
     $(function () {
-
 
         // bind click event
         $(document).on("click", ".panel-link", function () {
@@ -1158,6 +1156,37 @@
 
 
     }
+    $(function () {
+        $(document).on("click", "#edit-info-btn", function () {
+            var $this = $(this);
+            //var itemId = $this.attr("data-target-addr-id");
+            var targetSelector = "#store-info-form :input"
+
+            if ($this.hasClass(".editing")) {
+                // update addr
+                $(targetSelector).each(function (index, ele) {
+                    console.log(index);
+                    console.log(ele);
+                    $(ele).attr("disabled", "disabled");
+                });
+                $this.removeClass(".editing");
+                $this.attr("src", "../img/common/modify.png");
+                $this.attr("data-original-title", "update information");
+            } else {
+                $this.addClass(".editing");
+                $(targetSelector).each(function (index, ele) {
+                    console.log(index);
+                    console.log(ele);
+                    // important
+                    $(ele).removeAttr("disabled");
+                });
+                $this.attr("src", "../img/common/save.png");
+                $this.attr("data-original-title", "save information");
+
+            }
+            $this.removeAttr("disabled");
+        })
+    })
 
 </script>
 </html>
