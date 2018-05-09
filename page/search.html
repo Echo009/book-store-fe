@@ -147,6 +147,21 @@
 <script>
 
     $(function () {
+
+        var currentUser = store.get(CURRENT_USER);
+        try {
+            if (currentUser.userName) {
+                console.log("current user : " + currentUser.userName);
+                $("#login-links").addClass("d-none");
+                $("#personal-links").removeClass("d-none");
+            }
+        } catch (e) {
+            console.log("not login !");
+        }
+        $(document).on("click", ".category-option", function () {
+            var $this = $(this);
+            initBooksContainer($this.text());
+        });
         // init
         var bookName = getQueryVariable("bookName");
         var temp;
@@ -196,6 +211,7 @@
             .catch(function (error) {
                 console.log(error);
             });
+
     });
 
 </script>

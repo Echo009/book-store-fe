@@ -55,3 +55,24 @@ function removeFavorite(isBook,contentId,id) {
     });
 
 }
+
+var instance = axios.create({
+    baseURL: 'http://localhost/book-store/',
+    timeout: 500,
+    withCredentials:true,
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+});
+var params = new URLSearchParams();
+params.append("isBook", true);
+instance.post("/favorite/all", params).then(function (response) {
+    console.log(response.data.data);
+    if (response.data.code == 0) {
+        simpleSuccessInfo("success!");
+        return true;
+    } else {
+        simpleErrorInfo(response.data.desc);
+        return false;
+    }
+}).catch(function (error) {
+    console.log(error);
+});
