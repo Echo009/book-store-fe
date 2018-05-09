@@ -147,10 +147,13 @@ function initPaginationContainer(currentPage , totalPages ,bookName,category,bas
 $(function () {
 
     $("#search-keyword").on('keypress',function(e) {
-        if ( e.keyCode== 13)
+        if ( e.keyCode == 13){
             e.preventDefault();
-        $("#search-btn").click();
+            $("#search-btn").click();
+        }
+
     });
+
     $(document).on("click", ".search-option", function () {
         var $this = $(this);
         $("#searchOption").text($this.text());
