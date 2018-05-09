@@ -33,7 +33,7 @@ function simpleWarningInfo(content) {
 }
 // xhr config
 var instance = axios.create({
-    baseURL: 'http://localhost/book-store/',
+    baseURL: 'http://localhost:899/book-store/',
     timeout: 500,
     withCredentials:true,
     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
