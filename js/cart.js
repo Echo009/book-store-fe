@@ -143,10 +143,10 @@ function addCart(cartWrapperData) {
     console.log("currentStoreContainer is :" + "#carts-store-" + cartWrapperData.storeId);
     var carts = cartWrapperData.cartEntityList;
     carts.forEach(function (cart) {
-        var cartModule = "<div class='cart-container row' data-target-book-id='" + cart.bookId + "'>\n" +
+        var cartModule = "<div class='cart-container row' data-target-cart-id='" + cart.id + "'>\n" +
             "    <div class='col-md-1 d-flex align-items-center text-left'>\n" +
             "        <div class='w-100 pl-4'>\n" +
-            "            <input class='store-" + cart.storeId + "' data-target-book-id='" + cart.bookId + "' type='checkbox'>\n" +
+            "            <input class='store-" + cart.storeId + "' data-target-cart-id='" + cart.id + "' type='checkbox'>\n" +
             "        </div>\n" +
             "    </div>\n" +
             "    <div class='col-md-3 d-flex align-items-center text-center'>\n" +

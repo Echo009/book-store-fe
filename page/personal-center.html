@@ -38,6 +38,7 @@
     <script src="../js/cart.js"></script>
     <script src="../js/address.js"></script>
     <script src="../js/product.js"></script>
+    <script src="../js/order.js"></script>
     <!--todo modify-->
     <link rel="stylesheet" href="../css/custom.css">
 </head>
@@ -120,6 +121,36 @@
             </div>
         </div>
     </div>
+    <div id="select-address-modal" class="modal" >
+        <div class="modal-dialog " style="min-width: 77rem" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">选择地址</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-left">
+                    <div class="  w-100 border border-info rounded mt-2  ">
+                        <div class="row pt-1 pl-3 pr-3 pb-3">
+                            <div class="col w-100 ">
+                                <hr>
+                                <div id="select-addr-container">
+
+
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!--顶部导航-->
     <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary ">
         <div class="container">
@@ -189,12 +220,16 @@
                                     <button id="btnGroupDrop2" type="button" class="btn btn-success dropdown-toggle"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop2">
-                                        <a  class="dropdown-item" href="#"><i class="far fa-file-alt"></i>我的订单</a>
-                                        <a class="dropdown-item" href="#"><i class="fas fa-heart"></i>商品收藏</a>
+                                        <a class="dropdown-item" href="#"><i class="far fa-file-alt"></i>我的订单</a>
+                                        <a class="dropdown-item"
+                                           href="./personal-center.html?target-panel=favorite-product"><i
+                                                class="fas fa-heart"></i>商品收藏</a>
                                         <a class="dropdown-item" href="#"><i class="far fa-thumbs-up"></i>店铺收藏</a>
                                         <a class="dropdown-item"
-                                           href="./personal-center.html?target-panel=personal-info"><i class="far fa-user"></i>个人信息</a>
-                                        <a class="dropdown-item" href="./personal-center.html/target-panel=addr-manage"><i class="far fa-paper-plane"></i>地址管理</a>
+                                           href="./personal-center.html?target-panel=personal-info"><i
+                                                class="far fa-user"></i>个人信息</a>
+                                        <a class="dropdown-item" href="./personal-center.html?target-panel=addr-manage"><i
+                                                class="far fa-paper-plane"></i>地址管理</a>
                                     </div>
                                 </div>
                             </div>
@@ -244,7 +279,7 @@
                         <a id="cart-info" href="#" data-target-panel="cart-info-panel"
                            class="list-group-item list-group-item-light border-0 panel-link"> 我的购物车 </a>
                         <a id="addr-manage" href="#" class="panel-link list-group-item list-group-item-light border-0"
-                            data-target-panel="addr-manage-panel">
+                           data-target-panel="addr-manage-panel">
                             收货地址 </a>
                         <a id="apply-store" href="#" data-target-panel="apply-store-panel"
                            class="buyer-module list-group-item list-group-item-light border-0 panel-link d-none">我要开店</a>
@@ -262,26 +297,27 @@
                         class="list-group-item list-group-item-light text-left"><b>• &nbsp;</b> 我的收藏
                     </li>
                     <div id="favorite-options" class=" show">
-                        <a href="#" id="product-favorite"
-                           class="panel-link list-group-item list-group-item-light border-0"> 商品收藏 </a>
+                        <a id="favorite-product" href="#" id="product-favorite"
+                           class="panel-link list-group-item list-group-item-light border-0"
+                           data-target-panel="favorite-product-panel"> 商品收藏 </a>
                         <a href="#" id="store-favorite"
                            class="panel-link list-group-item list-group-item-light border-0"> 店铺收藏 </a>
                     </div>
-                    <li data-target="#gift-options" data-toggle="collapse"
-                        class="list-group-item list-group-item-light text-left"><b>• &nbsp;</b> 我的钱包
-                    </li>
-                    <div id="gift-options" class="collapse">
-                        <a href="#" class="list-group-item list-group-item-light border-0"> 我的礼券 </a>
-                        <a href="#" class="list-group-item list-group-item-light border-0"> 我的账单 </a>
-                        <a href="#" class="list-group-item list-group-item-light border-0"> 我的余额 </a>
-                    </div>
-                    <li data-target="#after-sell-options" data-toggle="collapse"
-                        class="list-group-item list-group-item-light text-left"><b>• &nbsp;</b> 售后服务
-                    </li>
-                    <div class="collapse" id="after-sell-options">
-                        <a href="#" class="list-group-item list-group-item-light border-0"> 申请/查询退货 </a>
-                        <a href="#" class="list-group-item list-group-item-light border-0"> 补开发票 </a>
-                    </div>
+                    <!--<li data-target="#gift-options" data-toggle="collapse"-->
+                    <!--class="list-group-item list-group-item-light text-left"><b>• &nbsp;</b> 我的钱包-->
+                    <!--</li>-->
+                    <!--<div id="gift-options" class="collapse">-->
+                    <!--<a href="#" class="list-group-item list-group-item-light border-0"> 我的礼券 </a>-->
+                    <!--<a href="#" class="list-group-item list-group-item-light border-0"> 我的账单 </a>-->
+                    <!--<a href="#" class="list-group-item list-group-item-light border-0"> 我的余额 </a>-->
+                    <!--</div>-->
+                    <!--<li data-target="#after-sell-options" data-toggle="collapse"-->
+                    <!--class="list-group-item list-group-item-light text-left"><b>• &nbsp;</b> 售后服务-->
+                    <!--</li>-->
+                    <!--<div class="collapse" id="after-sell-options">-->
+                    <!--<a href="#" class="list-group-item list-group-item-light border-0"> 申请/查询退货 </a>-->
+                    <!--<a href="#" class="list-group-item list-group-item-light border-0"> 补开发票 </a>-->
+                    <!--</div>-->
                 </ul>
             </div>
         </div>
@@ -341,19 +377,27 @@
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div id="all" class="container tab-pane active"><br>
-                                <h3 class="w-100 "> (｡í _ ì｡)   <small class="pl-4">这里什么都没有 ~ </small></h3>
+                                <h3 class="w-100 "> (｡í _ ì｡)
+                                    <small class="pl-4">这里什么都没有 ~</small>
+                                </h3>
                                 <p></p>
                             </div>
                             <div id="wait-for-pay" class="container tab-pane fade"><br>
-                                <h3 class="w-100 "> ( 。ớ ₃ờ)ھ   <small class="pl-4">这里也是什么都没有 ~ </small></h3>
+                                <h3 class="w-100 "> ( 。ớ ₃ờ)ھ
+                                    <small class="pl-4">这里也是什么都没有 ~</small>
+                                </h3>
                                 <p></p>
                             </div>
                             <div id="wait-for-sign" class="container tab-pane fade"><br>
-                                <h3 class="w-100 "> ( •̥́ ˍ •̀ू )  <small class="pl-4">这里还是什么都没有 ~ </small></h3>
+                                <h3 class="w-100 "> ( •̥́ ˍ •̀ू )
+                                    <small class="pl-4">这里还是什么都没有 ~</small>
+                                </h3>
                                 <p></p>
                             </div>
                             <div id="wait-for-comment" class="container tab-pane fade"><br>
-                                <h3 class="w-100 "> ˚‧º·(˚ ˃̣̣̥᷄⌓˂̣̣̥᷅ )‧º·˚  <small class="pl-4">这里真的什么都没有 ~ </small></h3>
+                                <h3 class="w-100 "> ˚‧º·(˚ ˃̣̣̥᷄⌓˂̣̣̥᷅ )‧º·˚
+                                    <small class="pl-4">这里真的什么都没有 ~</small>
+                                </h3>
                                 <p></p>
                             </div>
                         </div>
@@ -484,7 +528,8 @@
                         <div class="row">
                             <div class="col mt-2 pt-2">
                                 <h5 class="mb-3 d-inline-block">我的店铺信息</h5>
-                                <img id="edit-info-btn" src="../img/common/modify.png" class="icon d-inline-block float-right"
+                                <img id="edit-info-btn" src="../img/common/modify.png"
+                                     class="icon d-inline-block float-right"
                                      data-toggle="tooltip" data-placement="top"
                                      data-original-title="修改店铺信息">
                                 </img>
@@ -823,6 +868,18 @@
                     </div>
                 </div>
             </div>
+            <!--商品收藏列表-->
+            <div id="favorite-product-panel" class="panel collapse w-100 border  rounded mt-2"
+                 style="overflow: auto;max-height: 80rem;overflow-x: hidden">
+                <div class="row row pt-1 pl-3 pr-3 pb-3">
+                    <div class="col w-100 order-md-1 ">
+                        <h5 class="mb-3 text-left">商品收藏</h5>
+                        <hr>
+                        <div id="favorite-product-container" style="cursor: pointer;">
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!--购物车-->
             <div id="cart-info-panel" class="panel collapse  w-100 border  rounded mt-2  ">
                 <h5 class="mb-3 text-left mt-3 ml-2"><i class="fas fa-shopping-cart"></i>我的购物车</h5>
@@ -831,8 +888,8 @@
                     <div class="col w-100 " id="carts">
                     </div>
                 </div>
-                <div class="col text-center align-items-center w-100">
-                    <div class="btn btn-primary  mt-3 w-75"><i class="fas fa-credit-card"></i> 购买</div>
+                <div class="col text-center align-items-center w-100" >
+                    <div class="btn btn-primary  mt-3 w-75" onclick="showSelectAddressModal()"><i class="fas fa-credit-card" ></i> 购买</div>
                 </div>
                 <hr>
             </div>
@@ -1030,8 +1087,6 @@
     }
 
 
-
-
     function updateCartInfoPanel() {
         $(".arrow").remove();
         $(".tooltip-inner").remove();
@@ -1079,9 +1134,14 @@
                     updateCartInfoPanel();
                     break;
                 }
-                case "#addr-manage-panel" :{
+                case "#addr-manage-panel" : {
                     updateAddrManagePanel();
                     break;
+                }
+                case "#favorite-product-panel" : {
+                    updateFavoriteProductPanel();
+                    break;
+
                 }
             }
         }
@@ -1156,6 +1216,84 @@
 
 
     }
+
+    /**
+     * 更新收藏的商品
+     */
+    function updateFavoriteProductPanel() {
+        var books;
+        instance.get('/favorite/all')
+            .then(function (response) {
+                books = response.data.data;
+                console.log(" num of books  :" + books.length);
+                if (books.length != 0) {
+                    var $productContainer = $("#favorite-product-container");
+                    $productContainer.html("");
+                    books.forEach(function (currentValue) {
+                        console.log(currentValue);
+                        // generate dom
+                        var productsString = " <div  class='row '  >\n" +
+                            "                        <div class='col-12'>\n" +
+                            "                            <div class='card flex-md-row mb-4 box-shadow h-md-180'>\n" +
+                            "                                <img data-product-id='" + currentValue.id + "' class='product d-none d-md-block  small-cover-img img-thumbnail '\n" +
+                            "                                     src='" + currentValue.coverImg + "' data-holder-rendered='true'>\n" +
+                            "                                <div data-product-id='" + currentValue.id + "' class='product card-body align-items-start text-nowrap text-justify'>\n" +
+                            "                                    <strong> " + currentValue.bookName + "</strong>\n" +
+                            "                                    <div class='badge badge-info d-inline-block'>" + currentValue.category + "</div>\n" +
+                            "                                    <hr>\n" +
+                            "                                    <div class='h6 d-inline-block pr-2'>" + currentValue.authorName + "</div>\n" +
+                            "                                    <span class='badge badge-primary ml-2'>" + currentValue.publishDate + "</span>\n" +
+                            "                                    <div>\n" +
+                            "                                        <price class='text-danger'>\n" +
+                            "                                            ￥<h5 class='font-weight-bold d-inline-block pr-2 '>" + currentValue.currentPrice + "</h5>\n" +
+                            "                                        </price>\n" +
+                            "                                        <del>￥" + currentValue.pricing + "</del>\n" +
+                            "                                        <h6 class='d-inline-block pl-2'>" + currentValue.publisher + "</h6>\n" +
+                            "                                    </div>\n" +
+                            "                                    <div>\n" +
+                            "                                        <h6 class='h6 d-inline-block pr-2'> 已售: " + currentValue.sales + "</h6>\n" +
+                            "                                        <h6 class='h6 d-inline-block pr-2'> 库存: " + currentValue.stock + "</h6>\n" +
+                            "                                    </div>\n" +
+                            "                                </div>\n" +
+                            "                                <div class='card-footer flex-md-row align-middle btn-light'>\n" +
+                            "                                    <img src='../img/common/delete.png' class='icon m-auto d-block align-middle'" +
+                            "                                         data-toggle='tooltip' data-placement='top' data-product-id='" + currentValue.id + "'" +
+                            "                                         data-original-title='删除' onclick='deleteFavorite("+currentValue.id+")'>" +
+                            "                                    </img>" +
+                            "                                </div>\n" +
+                            "                            </div>\n" +
+                            "                        </div>\n" +
+                            "                    </div>";
+                        var $book = $(productsString);
+                        $book.appendTo($productContainer);
+
+                    });
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+
+    }
+    function deleteFavorite(contentId) {
+        console.log(contentId);
+        const params = new URLSearchParams();
+        params.append("contentId", contentId);
+        instance.post("/favorite/remove", params).then(function (response) {
+            console.log(response.data.desc);
+            if (response.data.code == 0) {
+                simpleSuccessInfo(" 已取消收藏 !");
+                updateFavoriteProductPanel();
+                return true;
+            } else {
+                simpleErrorInfo(response.data.desc);
+                return false;
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
     $(function () {
         $(document).on("click", "#edit-info-btn", function () {
             var $this = $(this);
@@ -1187,6 +1325,7 @@
             $this.removeAttr("disabled");
         })
     })
+
 
 </script>
 </html>
