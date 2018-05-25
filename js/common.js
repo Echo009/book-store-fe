@@ -35,7 +35,7 @@ function simpleWarningInfo(content) {
 // xhr config
 var instance = axios.create({
     baseURL: CONTEXT,
-    timeout: 1000,
+    timeout: 2000,
     withCredentials:true,
     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 });
