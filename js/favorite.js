@@ -5,7 +5,7 @@
  */
 // 收藏夹相关
 
-function addFavorite(isBook,contentId) {
+function addFavorite(isBook, contentId) {
 
     const params = new URLSearchParams();
     params.append("isBook", isBook);
@@ -31,12 +31,12 @@ function addFavorite(isBook,contentId) {
  * @param contentId
  * @param id
  */
-function removeFavorite(isBook,contentId,id) {
+function removeFavorite(isBook, contentId, id) {
 
     const params = new URLSearchParams();
-    if("undefined" != typeof id){
+    if ("undefined" != typeof id) {
         params.append("id", id);
-    }else{
+    } else {
         params.append("isBook", isBook);
         params.append("contentId", contentId);
 
@@ -56,23 +56,6 @@ function removeFavorite(isBook,contentId,id) {
 
 }
 
-var instance = axios.create({
-    baseURL: 'http://localhost/book-store/',
-    timeout: 500,
-    withCredentials:true,
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-});
-var params = new URLSearchParams();
-params.append("isBook", true);
-instance.post("/favorite/all", params).then(function (response) {
-    console.log(response.data.data);
-    if (response.data.code == 0) {
-        simpleSuccessInfo("success!");
-        return true;
-    } else {
-        simpleErrorInfo(response.data.desc);
-        return false;
-    }
-}).catch(function (error) {
-    console.log(error);
-});
+
+
+

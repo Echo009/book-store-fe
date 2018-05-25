@@ -34,8 +34,8 @@ function simpleWarningInfo(content) {
 }
 // xhr config
 var instance = axios.create({
-    baseURL: 'http://echo0.cn:899/book-store/',
-    timeout: 500,
+    baseURL: CONTEXT,
+    timeout: 1000,
     withCredentials:true,
     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 });
